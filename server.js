@@ -1,11 +1,7 @@
 var ejs = require('ejs');
 app.set('view engine', 'ejs');
 
-var mongoose = require("mongoose");
-var myschema = new mongoose.Schema({ username:String,psd:String});
-var users = mongoose.model("users",myschema);
-var url = "localhost:8000/users";
-mongoose.connect(url);
+var myschema = new mongoose.Schema({account:String,pwd:String,name:String});
 
 
 app.listen(80)
