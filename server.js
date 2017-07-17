@@ -5,16 +5,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var main = require('./routes/main');
-
 var ejs = require('ejs');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 var router = express.Router();
+var route = require('./route');
 
-
-app.use('/main', main);
+app.use('/', route);
 
 
 app.listen(8080, function(){
