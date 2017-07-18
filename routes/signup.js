@@ -7,7 +7,7 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 var apis = ("./apis");
 
-function postsingup(req,res){
+function postsignup(req,res){
     var users = {
         account : req.body.signupacc,
         pwd : req.body.pwd
@@ -17,7 +17,7 @@ function postsingup(req,res){
     if(acccheck){res.render('start',{loginerr:"account has been used",signuperr : ""})}
 
     res.render('start',{loginerr : "", signuperr : ""})
-}s
+}
 
 module.exports = {
     postsignup,
