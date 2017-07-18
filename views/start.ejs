@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login...</title>
+    </head>
+    <body>
+        
+        <div style = "border : solid 1px red">
+            <form action = "/login" method = "post">
+                <h1>LOGIN IN</h1>
+                <font class = "error" color = "red"></font>
+                </br>
+                <font>account:</font>
+                </br>
+                <input type = "text" name = "loginacc" placeholder = "account">
+                </br>
+                <font>password:</font>
+                </br>
+                <input type = "text" name = "loginpwd" placeholder = "password">
+                </br>
+                <input type = "submit" value = "LOGIN"/>
+            </form>
+        </div>
+
+        <!--login check-->
+        <script> 
+            var err = "<%= loginerr %>";
+            console.log(document.getElementsByClassName("error")[0].innerHTML)
+            if(!!err) document.getElementsByClassName("error")[0].innerHTML = err;
+                
+        </script>
+        <div style = "border : solid 1px red">
+            <form class = "submitform" action = "/signup" method = "post">
+                <h1>SIGN UP</h1>
+                <font class = "error" color = "red"></font>
+                </br>
+                <font>username:</font>
+                </br>
+                <input type = "text" name = "signupacc" placeholder = "your account"></input>
+                </br>
+                <font>password:</font>
+                </br>
+                <input type = "text" name = "pwd" placeholder = "your password"></input>
+                </br>
+                <font>confirm password:</font>
+                </br>
+                <input type = "text" name = "cpwd" placeholder = "your password again"></input>
+                </br>
+                
+                <input type = "button" id = "submit_btn"value = "SUBMIT"/>
+            </form>
+            
+            <script>
+                var err = "<%= signuperr %>";
+                console.log(document.getElementsByClassName("error")[0].innerHTML)
+                if(!!err) document.getElementsByClassName("error")[0].innerHTML = err;
+                
+                // check acc,pwd,cpwd is empty
+                $("#submit_btn").click(function(){
+                    var signupacc = document.getElementsByName("signupacc")[0].value
+                    var pwd = document.getElementsByName("pwd")[0].value
+                    if(signacc == ""){
+                        document.getElementsByClassName("error")[0].innerHTML = "account can not empty";
+                        return;
+                    }
+                    if(pwd == ""){ 
+                        document.getElementsByClassName("error")[0].innerHTML = "password can not empty";
+                        return;
+                    }
+
+                    document.getElementsByClassName("submitform")[0].submit();
+                })
+
+            </script>
+        </div>
+
+    </body>
+</html>

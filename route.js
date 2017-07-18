@@ -1,18 +1,34 @@
 var express = require('express');
 var router = express.Router();
 
-var main = require('./routes/home');
-var login = require('./routes/login');
+var main = require('./routes/main');
+var start = require('./routes/start');
+var login = require('./routes/login')
+var signup = require('./routes/signup')
+
 
 router.get('/', function(req, res) {
-    res.redirect('login');
+    res.redirect('start');
 });
 
-router.get('/login', function(req, res) {
-    login(req, res);
+router.get('/start', function(req, res) {
+    start.getstart(req, res);
 });
 
-router.get('/home', function(req, res) {
+router.post('/login',function(req,res){
+
+    res.render('start',{loginerr : "", signuperr : ""})
+})
+
+router.post('/signup',function(req,res){
+
+    postsignup(req,res)
+    
+})
+
+
+router.get('/main', function(req, res) {
+
     main(req ,res)
 });
 
