@@ -1,10 +1,10 @@
 var express = require('express');
 
-function main(req, res) {
+function home(req, res) {
     return res.render('home', {result, gridRowNum:5});
 }
 
-module.exports = main;
+module.exports = home;
 
 // test data
 var result = {

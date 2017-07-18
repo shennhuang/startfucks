@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var main = require('./routes/main');
+var home = require('./routes/home');
 var start = require('./routes/start');
 var login = require('./routes/login')
 var signup = require('./routes/signup')
@@ -22,14 +22,14 @@ router.post('/login',function(req,res){
 
 router.post('/signup',function(req,res){
 
-    postsignup(req,res)
+    postsignup(req,res);
     
 })
 
 
-router.get('/main', function(req, res) {
+router.get('/home', function(req, res) {
 
-    main(req ,res)
+    home(req ,res);
 });
 
 module.exports = router;
