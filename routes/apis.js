@@ -1,11 +1,4 @@
-var AWS = require("aws-sdk");
-
-AWS.config.update({region:"us-west-2"});
-AWS.config.paramValidation = false;
-var dynamodb = new AWS.DynamoDB();
-var docClient = new AWS.DynamoDB.DocumentClient();
-
-function logincheck(req,res){
+function accountcheck(req,res){
     var account = req.body.loginacc;
     var params = {
         TableName: "startfucks",
@@ -26,5 +19,5 @@ function logincheck(req,res){
 }
 
 module.exports = {
-    logincheck,
+    accountcheck,
 }

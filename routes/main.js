@@ -1,7 +1,7 @@
 var express = require('express');
 
-function main(req, res) {
-    res.render('main');
+function home(req, res) {
+    res.render('home');
 }
 
-module.exports = main;
+module.exports = home;
