@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="/css/home.css">
+        <script>document.documentElement.style.setProperty("--gridRowNum", 5);</script>
+    </head>
+    <body>
+        <header>
+            <p class="name">Hi! <%=result.name %></p>
+        </header>
+        <main>
+            <% for(var v of result.setting) { %>
+                <div style="grid-column:span <%= v.grid_size.width %>; grid-row:span <%= v.grid_size.height %>;" class="gridItem" >
+                    <p><%= v.title + "-" + v.subtitle %></p>
+                    <p><%= v.info %></p>
+                </div>
+            <% } %>
+
+        </main>
+
+    </body>
+</html>

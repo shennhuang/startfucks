@@ -1,0 +1,45 @@
+:root{
+    --gridColNum: 5;
+    --gridRowNum: 5;
+}
+body{
+    margin: 0px;
+}
+header{
+    font-size: 25px;
+    background-color: #33CCFF;
+    width: 100vw;
+    height: 50px;
+}
+.name{
+    margin: 0px 20px;
+    line-height: 50px;
+}
+main{
+    display: grid;
+    grid-template-columns: repeat(var(--gridColNum), 1fr);
+    grid-template-rows: repeat(var(--gridRowNum), 20vh);
+}
+.grid_1x1 {
+    background-color: #FFBB66;
+    grid-column: span 1;
+    grid-row: span 1;
+    margin: 2px;
+
+}
+.grid_2x1 {
+    background-color: #CCDDFF;
+    grid-column: span 2;
+    grid-row: span 1;
+    margin: 2px;
+}
+.grid_2x2 {
+    background-color: #DDFF77;
+    grid-column: span 2;
+    grid-row: span 2;
+    margin: 2px;
+}
+.gridItem{
+    background-color: #FFDDAA;
+    margin: 2px;
+}
