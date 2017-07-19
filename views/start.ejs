@@ -3,26 +3,27 @@
     <head>
         <title>Login...</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+        <link rel="stylesheet" type="text/css" href="/css/start.css">
     </head>
     <body>
         
-        <div style = "border : solid 1px red">
-            <form name = "loginForm" action = "/start" method = "post">
-                <input type = "hidden" name = "act" value = "login">
-                <h1>LOGIN</h1>
-                <font class = "loginErr" color = "red"></font>
-                </br>
-                <font>account:</font>
-                </br>
-                <input type = "text" name = "loginAcc" placeholder = "account">
-                </br>
-                <font>password:</font>
-                </br>
-                <input type = "text" name = "loginPwd" placeholder = "password">
-                </br>
-                <input type = "button" id = "btn_login" value = "LOGIN"/>
-            </form>
+        <div class = "bigContainer" >
+            <div class = "actContainer">
+                <form name = "loginForm" action = "/start" method = "post">
+                    <input type = "hidden" name = "act" value = "login">
+                    <font class = "loginErr" color = "red"></font>
+                    </br>
+                    <font>account:</font>
+                    </br>
+                    <input type = "text" name = "loginAcc" placeholder = "account">
+                    </br>
+                    <font>password:</font>
+                    </br>
+                    <input type = "text" name = "loginPwd" placeholder = "password">
+                    </br>
+                    <input type = "button" id = "btn_login" value = "LOGIN"/>
+                </form>
+            </div>
         </div>
 
         <!--login check-->
@@ -48,28 +49,29 @@
             })
                 
         </script>
-        <div style = "border : solid 1px red">
-            <form name = "signForm" action = "/start" method = "post">
-                <input type = "hidden" name = "act" value = "signup">
-                <h1>SIGN UP</h1>
-                <font class = "signupErr" color = "red"></font>
-                </br>
-                <font>account:</font>
-                </br>
-                <input type = "text" name = "signupAcc" placeholder = "your account"></input>
-                </br>
-                <font>password:</font>
-                </br>
-                <input type = "text" name = "signipPwd" placeholder = "your password"></input>
-                </br>
-                <font>confirm password:</font>
-                </br>
-                <input type = "text" name = "cpwd" placeholder = "your password again"></input>
-                </br>
-                
-                <input type = "button" id = "btn_signup"value = "SUBMIT and LOGIN"/>
-            </form>
-            
+        <div class = "bigContainer" >
+            <div class = "actContainer">
+                <form name = "signForm" action = "/start" method = "post">
+                    <input type = "hidden" name = "act" value = "signup">
+                    <font class = "signupErr" color = "red"></font>
+                    </br>
+                    <font>account:</font>
+                    </br>
+                    <input type = "text" name = "signupAcc" placeholder = "your account"></input>
+                    </br>
+                    <font>password:</font>
+                    </br>
+                    <input type = "text" name = "signipPwd" placeholder = "your password"></input>
+                    </br>
+                    <font>confirm password:</font>
+                    </br>
+                    <input type = "text" name = "cpwd" placeholder = "your password again"></input>
+                    </br>
+                    
+                    <input type = "button" id = "btn_signup"value = "SUBMIT and LOGIN"/>
+                </form>
+            </div>
+        </div> 
             <script>
                 var err = "<%= signupErr %>";
                 if(!!err) document.getElementsByClassName("signupErr")[0].innerHTML = err;
@@ -117,7 +119,5 @@
                 })
 
             </script>
-        </div>
-
     </body>
 </html>
