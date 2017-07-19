@@ -3,8 +3,9 @@ var router = express.Router();
 
 var home = require('./routes/home');
 var start = require('./routes/start');
-var login = require('./routes/login')
-var signup = require('./routes/signup')
+var login = require('./routes/login');
+var signup = require('./routes/signup');
+var apis = require('./routes/apis');
 
 
 router.get('/', function(req, res) {
@@ -28,6 +29,10 @@ router.post('/signup',function(req,res){
     signup(req,res);
     
 })
+
+router.post('/apis', function(req, res){
+    apis(req, res);
+});
 
 
 

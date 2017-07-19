@@ -1,7 +1,12 @@
 var express = require('express');
 
+
 function home(req, res) {
-    return res.render('home', {result, gridRowNum:5});
+    // if(!req.session || !req.session.account || !req.session.pwd){
+    //     return res.redirect('/start');
+    // }
+
+    return res.render('home', {result, gridRowNum:10});
 }
 
 module.exports = home;
@@ -19,15 +24,15 @@ var result = {
         },
         {
             title: "Weather",
-            subtitle: "Taipei City",
-            grid_size: {width: 2, height: 2},
+            subtitle: "Taipei",
+            grid_size: {width: 2, height: 1},
             grid_location: {x: 0, y: 0},
             info: "Small Rain , 28 C"
         },
         {
             title: "Pchome",
             subtitle: "3C",
-            grid_size: {width: 2, height: 2},
+            grid_size: {width: 2, height: 1},
             grid_location: {x: 0, y: 0},
             info: "Xbox720 - on sale $99999"
         },
@@ -40,36 +45,36 @@ var result = {
         },
         {
             title: "1x1",
-            subtitle: "1x1",
+            subtitle: "a",
             grid_size: {width: 1, height: 1},
             grid_location: {x: 0, y: 0},
             info: "Test Data"
         },
         {
             title: "1x1",
-            subtitle: "1x1",
+            subtitle: "b",
             grid_size: {width: 1, height: 1},
             grid_location: {x: 0, y: 0},
             info: "Test Data"
         },
         {
             title: "1x1",
-            subtitle: "1x1",
+            subtitle: "c",
             grid_size: {width: 1, height: 1},
             grid_location: {x: 0, y: 0},
             info: "Test Data"
         },
         {
             title: "2x1",
-            subtitle: "2x1",
+            subtitle: "a",
             grid_size: {width: 2, height: 1},
             grid_location: {x: 0, y: 0},
             info: "Test Data"
         },
         {
             title: "2x4",
-            subtitle: "2x4",
-            grid_size: {width: 2, height: 4},
+            subtitle: "a",
+            grid_size: {width: 2, height: 1},
             grid_location: {x: 0, y: 0},
             info: "Test Data"
         },

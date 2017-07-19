@@ -4,15 +4,16 @@
         <meta charset="utf-8">
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
-        <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", 5);</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", '<%= gridRowNum %>');</script>
     </head>
     <body>
         <header>
             <p class="name">Hi! <%=result.name %></p>
         </header>
-        <main>
+        <main ondrop="dropOnMain(event)" ondragover="allowDrop(event)" id="main">
             <% for(var v of result.setting) { %>
-                <div name="<%= v.title%>" draggable="true" style="grid-column:span <%= v.grid_size.width %>; grid-row:span <%= v.grid_size.height %>;" class="gridItem" >
+                <div ondrop="dropOnItem(event)" id="<%= v.title + "_" + v.subtitle %>" draggable="true" ondragstart="itemDrag(event)" style="grid-column:span <%= v.grid_size.width %>; grid-row:span <%= v.grid_size.height %>;" class="gridItem" >
                     <p name="<%= v.title%>"><%= v.title + "-" + v.subtitle %></p>
                     <p name="info"><%= v.info %></p>
                 </div>
@@ -20,6 +21,7 @@
 
         </main>
 
+        <script type="text/javascript" src="/js/gridItemDrag.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
 

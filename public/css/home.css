@@ -1,6 +1,10 @@
 :root{
-    --gridColNum: 5;
-    --gridRowNum: 5;
+    --gridColNum: 6;
+    --gridRowNum: 10;
+}
+html{
+    width: 100vw;
+    height: 100vh;
 }
 body{
     margin: 0px;
@@ -18,7 +22,7 @@ header{
 main{
     display: grid;
     grid-template-columns: repeat(var(--gridColNum), 1fr);
-    grid-template-rows: repeat(var(--gridRowNum), 20vh);
+    grid-template-rows: repeat(var(--gridRowNum), 25vh);
 }
 .grid_1x1 {
     background-color: #FFBB66;
@@ -40,6 +44,6 @@ main{
     margin: 2px;
 }
 .gridItem{
-    background-color: #FFDDAA;
+    background-color: #CCDDFF;
     margin: 2px;
 }
