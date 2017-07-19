@@ -1,10 +1,3 @@
-var AWS = require("aws-sdk");
-
-AWS.config.update({region:"us-west-2"});
-AWS.config.paramValidation = false;
-var dynamodb = new AWS.DynamoDB();
-var docClient = new AWS.DynamoDB.DocumentClient();
-
 var express = require('express');
 var app = express();
 
@@ -17,7 +10,7 @@ function signup(req,res){
     var usersTableName = "startfucks_users";
     var users = {
         account : req.body.signupAcc,
-        pwd : req.body.pwd,
+        pwd : req.body.signipPwd,
     }
 
     var getData = {

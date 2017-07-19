@@ -35,11 +35,12 @@ function login(req, res) {
             "account": req.body.loginAcc,
         }
     }
-    var pwd = req.body.pwd;
+    var pwd = req.body.loginPwd;
     console.log({pwd:pwd})
     db.dbget(getUsers,function(data){
         console.log({data : data})
         if(!data.Item || pwd != data.Item.pwd){
+            console.log("worng!!!")
             res.render('start',{loginErr : "account or password has wrong", signupErr : ""});
             return;
         }
