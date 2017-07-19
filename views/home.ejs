@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
-        <script>document.documentElement.style.setProperty("--gridRowNum", 5);</script>
+        <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", 5);</script>
     </head>
     <body>
         <header>
@@ -12,13 +12,17 @@
         </header>
         <main>
             <% for(var v of result.setting) { %>
-                <div style="grid-column:span <%= v.grid_size.width %>; grid-row:span <%= v.grid_size.height %>;" class="gridItem" >
-                    <p><%= v.title + "-" + v.subtitle %></p>
-                    <p><%= v.info %></p>
+                <div name="<%= v.title%>" draggable="true" style="grid-column:span <%= v.grid_size.width %>; grid-row:span <%= v.grid_size.height %>;" class="gridItem" >
+                    <p name="<%= v.title%>"><%= v.title + "-" + v.subtitle %></p>
+                    <p name="info"><%= v.info %></p>
                 </div>
             <% } %>
 
         </main>
+
+        <script type="text/javascript" src="/js/weather.js"></script>
+        <script type="text/javascript" src="/js/time.js"></script>
+
 
     </body>
 </html>

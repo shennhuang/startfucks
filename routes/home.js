@@ -20,7 +20,7 @@ var result = {
         {
             title: "Weather",
             subtitle: "Taipei City",
-            grid_size: {width: 2, height: 1},
+            grid_size: {width: 2, height: 2},
             grid_location: {x: 0, y: 0},
             info: "Small Rain , 28 C"
         },
@@ -34,7 +34,7 @@ var result = {
         {
             title: "Breakfast",
             subtitle: "麥當當",
-            grid_size: {width: 2, height: 1},
+            grid_size: {width: 1, height: 1},
             grid_location: {x: 0, y: 0},
             info: "超值早餐 - $49"
         },
@@ -67,9 +67,9 @@ var result = {
             info: "Test Data"
         },
         {
-            title: "2x1",
-            subtitle: "2x1",
-            grid_size: {width: 2, height: 1},
+            title: "2x4",
+            subtitle: "2x4",
+            grid_size: {width: 2, height: 4},
             grid_location: {x: 0, y: 0},
             info: "Test Data"
         },
