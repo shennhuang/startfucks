@@ -8,13 +8,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var ejs = require('ejs');
 app.set('view engine', 'ejs');
 
-function getstart(req, res) {
-    var loginerr = "";
-    var signuperr = "";
+function getStart(req, res) {
+    var loginErr = "";
+    var signupErr = "";
     
-    res.render('start',{loginerr,signuperr});
+    res.render('start',{loginErr,signupErr});
 }
 
 module.exports ={
-    getstart,
+    getStart,
 } 
