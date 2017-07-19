@@ -8,8 +8,9 @@
     <body>
         
         <div style = "border : solid 1px red">
-            <form action = "/login" method = "post">
-                <h1>LOGIN IN</h1>
+            <form name = "loginForm" action = "/start" method = "post">
+                <input type = "hidden" name = "act" value = "login">
+                <h1>LOGIN</h1>
                 <font class = "loginErr" color = "red"></font>
                 </br>
                 <font>account:</font>
@@ -18,48 +19,64 @@
                 </br>
                 <font>password:</font>
                 </br>
-                <input type = "text" name = "pwd" placeholder = "password">
+                <input type = "text" name = "loginPwd" placeholder = "password">
                 </br>
-                <input type = "submit" value = "LOGIN"/>
+                <input type = "button" id = "btn_login" value = "LOGIN"/>
             </form>
         </div>
 
         <!--login check-->
         <script> 
             var err = "<%= loginErr %>";
-            console.log(document.getElementsByClassName("loginErr")[0].innerHTML)
             if(!!err) document.getElementsByClassName("loginErr")[0].innerHTML = err;
+            $("#btn_login").click(function(){
+                var loginAcc = document.getElementsByName("loginAcc")[0].value
+                var loginPwd = document.getElementsByName("loginPwd")[0].value
+
+                // check acc,pwd,cpwd is empty
+                if(loginAcc == ""){
+                    err = "account can not empty";
+                    document.getElementsByClassName("loginErr")[0].innerHTML = err;
+                    return;
+                }
+                if(loginPwd == ""){ 
+                    err = "password can not empty"
+                    document.getElementsByClassName("loginErr")[0].innerHTML = err;
+                    return;
+                }
+                document.getElementsByName("loginForm")[0].submit();
+            })
                 
         </script>
         <div style = "border : solid 1px red">
-            <form class = "submitform" action = "/signup" method = "post">
+            <form name = "signForm" action = "/start" method = "post">
+                <input type = "hidden" name = "act" value = "signup">
                 <h1>SIGN UP</h1>
                 <font class = "signupErr" color = "red"></font>
                 </br>
-                <font>username:</font>
+                <font>account:</font>
                 </br>
                 <input type = "text" name = "signupAcc" placeholder = "your account"></input>
                 </br>
                 <font>password:</font>
                 </br>
-                <input type = "text" name = "pwd" placeholder = "your password"></input>
+                <input type = "text" name = "signipPwd" placeholder = "your password"></input>
                 </br>
                 <font>confirm password:</font>
                 </br>
                 <input type = "text" name = "cpwd" placeholder = "your password again"></input>
                 </br>
                 
-                <input type = "button" id = "btn_submit"value = "SUBMIT and LOGIN"/>
+                <input type = "button" id = "btn_signup"value = "SUBMIT and LOGIN"/>
             </form>
             
             <script>
                 var err = "<%= signupErr %>";
-                console.log(document.getElementsByClassName("signupErr")[0].innerHTML)
                 if(!!err) document.getElementsByClassName("signupErr")[0].innerHTML = err;
                 
-                $("#btn_submit").click(function(){
+                $("#btn_signup").click(function(){
                     var signupAcc = document.getElementsByName("signupAcc")[0].value
-                    var pwd = document.getElementsByName("pwd")[0].value
+                    var pwd = document.getElementsByName("signipPwd")[0].value
                     var cpwd = document.getElementsByName("cpwd")[0].value
                     var err = "";
 
@@ -83,8 +100,8 @@
                     }
                     //check pws legal
                     var reg = /^[a-z\d]+$/i;
-                    if(!reg.test(pwd)) {
-                        var err = "password is not legal(only a-z A-Z 0-9)"
+                    if(!reg.test(pwd) || !reg.test(signupAcc)) {
+                        var err = "account or password is not legal(only a-z A-Z 0-9)"
                         document.getElementsByClassName("signupErr")[0].innerHTML = err;
                         return;
                     }
@@ -96,7 +113,7 @@
                         return;
                     }  
                     
-                    document.getElementsByClassName("submitform")[0].submit();
+                    document.getElementsByName("signForm")[0].submit();
                 })
 
             </script>

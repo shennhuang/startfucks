@@ -1,10 +1,9 @@
 var express = require('express');
 
-
 function home(req, res) {
-    // if(!req.session || !req.session.account || !req.session.pwd){
-    //     return res.redirect('/start');
-    // }
+    if(!req.session || !req.session.account || !req.session.pwd){
+        return res.redirect('/start');
+    }
 
     return res.render('home', {result, gridRowNum:10});
 }

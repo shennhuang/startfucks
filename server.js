@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var session = require('express-session');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -11,6 +12,14 @@ app.use(express.static(__dirname + '/public'));
 
 var router = express.Router();
 var route = require('./route');
+
+app.use(session({
+    secret : 'key',
+    cookie: { maxAge: 12 * 60 * 60 * 1000 },
+    resave: false,
+    saveUninitialized: true
+    })
+);
 
 app.use('/', route);
 
