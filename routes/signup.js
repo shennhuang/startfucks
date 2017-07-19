@@ -5,20 +5,47 @@ AWS.config.paramValidation = false;
 var dynamodb = new AWS.DynamoDB();
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-var apis = ("./apis");
+var express = require('express');
+var app = express();
 
-function postsignup(req,res){
+var ejs = require('ejs');
+app.set('view engine', 'ejs');
+
+var db = require("./db");
+
+function signup(req,res){
+    var usersTableName = "startfucks_users";
     var users = {
-        account : req.body.signupacc,
-        pwd : req.body.pwd
+        account : req.body.signupAcc,
+        pwd : req.body.pwd,
     }
 
-    var acccheck = signup.accountcheck(req,res) //check account repeat
-    if(acccheck){res.render('start',{loginerr:"account has been used",signuperr : ""})}
+    var getData = {
+        TableName: usersTableName,
+        Key:{
+            account:users.account,
+        }
+    };  
+    db.dbget(getData,function(data){
 
-    res.render('start',{loginerr : "", signuperr : ""})
+        console.log({data : data})
+        if(!!data.Item){
+            res.render('start',{loginErr : "", signupErr : "account has been used"})
+            return;
+        }
+        var putData = {
+            TableName: usersTableName,
+            Item : {
+                account:users.account,
+                pwd:users.pwd,
+            }
+        }
+        db.dbput(putData)
+
+        res.redirect('/home')
+    }) 
+    
+    
 }
 
-module.exports = {
-    postsignup,
-}
+module.exports = signup

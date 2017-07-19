@@ -11,25 +11,24 @@ router.get('/', function(req, res) {
     res.redirect('start');
 });
 
+router.get('/home', function(req, res) {
+    home(req ,res);
+});
+
+
 router.get('/start', function(req, res) {
-    start.getstart(req, res);
+    start.getStart(req, res);
 });
 
 router.post('/login',function(req,res){
 
-    res.render('start',{loginerr : "", signuperr : ""})
+    login(req,res);
 })
-
 router.post('/signup',function(req,res){
-
-    postsignup(req,res);
+    signup(req,res);
     
 })
 
 
-router.get('/home', function(req, res) {
-
-    home(req ,res);
-});
 
 module.exports = router;

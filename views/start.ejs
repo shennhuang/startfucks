@@ -2,21 +2,23 @@
 <html>
     <head>
         <title>Login...</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     </head>
     <body>
         
         <div style = "border : solid 1px red">
             <form action = "/login" method = "post">
                 <h1>LOGIN IN</h1>
-                <font class = "error" color = "red"></font>
+                <font class = "loginErr" color = "red"></font>
                 </br>
                 <font>account:</font>
                 </br>
-                <input type = "text" name = "loginacc" placeholder = "account">
+                <input type = "text" name = "loginAcc" placeholder = "account">
                 </br>
                 <font>password:</font>
                 </br>
-                <input type = "text" name = "loginpwd" placeholder = "password">
+                <input type = "text" name = "pwd" placeholder = "password">
                 </br>
                 <input type = "submit" value = "LOGIN"/>
             </form>
@@ -24,19 +26,19 @@
 
         <!--login check-->
         <script> 
-            var err = "<%= loginerr %>";
-            console.log(document.getElementsByClassName("error")[0].innerHTML)
-            if(!!err) document.getElementsByClassName("error")[0].innerHTML = err;
+            var err = "<%= loginErr %>";
+            console.log(document.getElementsByClassName("loginErr")[0].innerHTML)
+            if(!!err) document.getElementsByClassName("loginErr")[0].innerHTML = err;
                 
         </script>
         <div style = "border : solid 1px red">
             <form class = "submitform" action = "/signup" method = "post">
                 <h1>SIGN UP</h1>
-                <font class = "error" color = "red"></font>
+                <font class = "signupErr" color = "red"></font>
                 </br>
                 <font>username:</font>
                 </br>
-                <input type = "text" name = "signupacc" placeholder = "your account"></input>
+                <input type = "text" name = "signupAcc" placeholder = "your account"></input>
                 </br>
                 <font>password:</font>
                 </br>
@@ -47,27 +49,53 @@
                 <input type = "text" name = "cpwd" placeholder = "your password again"></input>
                 </br>
                 
-                <input type = "button" id = "submit_btn"value = "SUBMIT"/>
+                <input type = "button" id = "btn_submit"value = "SUBMIT and LOGIN"/>
             </form>
             
             <script>
-                var err = "<%= signuperr %>";
-                console.log(document.getElementsByClassName("error")[0].innerHTML)
-                if(!!err) document.getElementsByClassName("error")[0].innerHTML = err;
+                var err = "<%= signupErr %>";
+                console.log(document.getElementsByClassName("signupErr")[0].innerHTML)
+                if(!!err) document.getElementsByClassName("signupErr")[0].innerHTML = err;
                 
-                // check acc,pwd,cpwd is empty
-                $("#submit_btn").click(function(){
-                    var signupacc = document.getElementsByName("signupacc")[0].value
+                $("#btn_submit").click(function(){
+                    var signupAcc = document.getElementsByName("signupAcc")[0].value
                     var pwd = document.getElementsByName("pwd")[0].value
-                    if(signacc == ""){
-                        document.getElementsByClassName("error")[0].innerHTML = "account can not empty";
+                    var cpwd = document.getElementsByName("cpwd")[0].value
+                    var err = "";
+
+                    // check acc,pwd,cpwd is empty
+                    if(signupAcc == ""){
+                        err = "account can not empty";
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
                         return;
                     }
                     if(pwd == ""){ 
-                        document.getElementsByClassName("error")[0].innerHTML = "password can not empty";
+                        err = "password can not empty"
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
                         return;
                     }
 
+                    //check pwd length 4-50
+                    if(pwd.length < 4 || pwd.length > 50) {
+                        err = "Password length is between 4 and 50 words"
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
+                        return;
+                    }
+                    //check pws legal
+                    var reg = /^[a-z\d]+$/i;
+                    if(!reg.test(pwd)) {
+                        var err = "password is not legal(only a-z A-Z 0-9)"
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
+                        return;
+                    }
+
+                    //check whether pwd and cpwd are the same
+                    if(pwd != cpwd){
+                        err = "confirm password is wrong";
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
+                        return;
+                    }  
+                    
                     document.getElementsByClassName("submitform")[0].submit();
                 })
 

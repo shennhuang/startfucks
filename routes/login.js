@@ -5,8 +5,12 @@ AWS.config.paramValidation = false;
 var dynamodb = new AWS.DynamoDB();
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-function logincheck(req,res){
-    var account = req.body.loginacc;
+var express = require('express');
+
+var db = require("./db");
+
+function loginCheck(req,res){
+    var account = req.body.loginAcc;
     var params = {
         TableName: "startfucks",
         Key:{
@@ -25,9 +29,22 @@ function logincheck(req,res){
 }
 
 function login(req, res) {
-    return res.render('login');
+    var getUsers = {
+        TableName: "startfucks_users",
+        Key:{
+            "account": req.body.loginAcc,
+        }
+    }
+    var pwd = req.body.pwd;
+    console.log({pwd:pwd})
+    db.dbget(getUsers,function(data){
+        console.log({data : data})
+        if(!data.Item || pwd != data.Item.pwd){
+            res.render('start',{loginErr : "account or password has wrong", signupErr : ""});
+            return;
+        }
+        return res.redirect('/home');
+    })
 }
 
-module.exports = {
-    logincheck,
-}
+module.exports = login
