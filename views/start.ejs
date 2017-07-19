@@ -8,8 +8,9 @@
     <body>
         
         <div style = "border : solid 1px red">
-            <form class = "loginForm" action = "/login" method = "post">
-                <h1>LOGIN IN</h1>
+            <form name = "loginForm" action = "/start" method = "post">
+                <input type = "hidden" name = "act" value = "login">
+                <h1>LOGIN</h1>
                 <font class = "loginErr" color = "red"></font>
                 </br>
                 <font>account:</font>
@@ -43,12 +44,13 @@
                     document.getElementsByClassName("loginErr")[0].innerHTML = err;
                     return;
                 }
-                document.getElementsByClassName("loginForm")[0].submit();
+                document.getElementsByName("loginForm")[0].submit();
             })
                 
         </script>
         <div style = "border : solid 1px red">
-            <form class = "signForm" action = "/signup" method = "post">
+            <form name = "signForm" action = "/start" method = "post">
+                <input type = "hidden" name = "act" value = "signup">
                 <h1>SIGN UP</h1>
                 <font class = "signupErr" color = "red"></font>
                 </br>
@@ -111,7 +113,7 @@
                         return;
                     }  
                     
-                    document.getElementsByClassName("signForm")[0].submit();
+                    document.getElementsByName("signForm")[0].submit();
                 })
 
             </script>

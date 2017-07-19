@@ -6,6 +6,8 @@ app.set('view engine', 'ejs');
 
 var db = require("./db");
 
+
+
 function signup(req,res){
     var usersTableName = "startfucks_users";
     var users = {
@@ -21,7 +23,6 @@ function signup(req,res){
     };  
     db.dbget(getData,function(data){
 
-        console.log({data : data})
         if(!!data.Item){
             res.render('start',{loginErr : "", signupErr : "account has been used"})
             return;
@@ -35,6 +36,9 @@ function signup(req,res){
         }
         db.dbput(putData)
 
+        console.log(req)
+        req.session.account = users.account;
+        req.session.pwd = users.pwd;
         res.redirect('/home')
     }) 
     
