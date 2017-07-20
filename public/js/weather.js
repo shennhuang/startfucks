@@ -5,8 +5,8 @@ let city = (document.getElementsByName('Weather')[0].getAttribute('id').split('_
 // document.getElementById('Weather_'+city).children[0].appendChild(newImg);
 
 function weather(city, country){
-    
-    let host = 'http://127.0.0.1:8080';
+
+    let host = 'http://localhost:8080';
 
     $.ajax({
         url: host + '/apis?q=weather',

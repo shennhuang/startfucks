@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var session = require('express-session');
+var cors = require('cors');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -20,6 +21,8 @@ app.use(session({
     saveUninitialized: true
     })
 );
+
+app.use(cors());
 
 app.use('/', route);
 
