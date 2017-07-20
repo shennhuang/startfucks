@@ -1,8 +1,23 @@
-.bigContainer{
-    border : solid 1px red;
+.div_header{
+    height:100px;
+    /*border:2px blue dashed;*/
 }
-.actContainer {
-    margin : 0px auto;
-    border : solid 1px blue;
-    
+.div_space{
+    height:50px;
+    text-align: center;
+    /*border:2px blue dashed;*/
+}
+table{
+    margin:0px auto;
+    background-color:#99BBFF;
+}
+.inputBox{
+    width:200px;
+}
+.td_font{
+    width :140px;
+    text-align:right;
+}
+.td_bottom{
+     text-align:right;
 }

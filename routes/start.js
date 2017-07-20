@@ -30,7 +30,7 @@ function start(req, res) {
             db.dbget(getUsers,function(data){
                 if(!data.Item || pwd != data.Item.pwd){
                     console.log("worng!!!")
-                    res.render('start',{loginErr : "account or password has wrong", signupErr : ""});
+                    res.render('start',{loginErr : "account or password is wrong", signupErr : ""});
                     return;
                 }
                 

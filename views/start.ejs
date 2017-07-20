@@ -6,72 +6,106 @@
         <link rel="stylesheet" type="text/css" href="/css/start.css">
     </head>
     <body>
-        
-        <div class = "bigContainer" >
-            <div class = "actContainer">
-                <form name = "loginForm" action = "/start" method = "post">
-                    <input type = "hidden" name = "act" value = "login">
-                    <font class = "loginErr" color = "red"></font>
-                    </br>
-                    <font>account:</font>
-                    </br>
-                    <input type = "text" name = "loginAcc" placeholder = "account">
-                    </br>
-                    <font>password:</font>
-                    </br>
-                    <input type = "text" name = "loginPwd" placeholder = "password">
-                    </br>
-                    <input type = "button" id = "btn_login" value = "LOGIN"/>
-                </form>
-            </div>
-        </div>
+        <div class = "div_header"></div>
+        <div class = "container">
+            <form name = "loginForm" action = "/start" method = "post">
+                <table>
+                    <tr>
+                        <td class = "td_top" colspan="2">
+                            <input type = "hidden" name = "act" value = "login">
+                            <font class = "loginErr" color = "red"></font>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  class = "td_font">
+                            <font>account:</font>
+                        </td>
+                        <td>
+                            <input type = "text" name = "loginAcc" class = "inputBox" placeholder = "account">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "td_font" >
+                            <font>password:</font>
+                        </td>
+                        <td>
+                            <input type = "text" name = "loginPwd" class = "inputBox" placeholder = "password"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "td_bottom" colspan="2">
+                            <button type = "button" id = "btn_login">LOGIN</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
-        <!--login check-->
-        <script> 
-            var err = "<%= loginErr %>";
-            if(!!err) document.getElementsByClassName("loginErr")[0].innerHTML = err;
-            $("#btn_login").click(function(){
-                var loginAcc = document.getElementsByName("loginAcc")[0].value
-                var loginPwd = document.getElementsByName("loginPwd")[0].value
+            <div class = "div_space">↑ LOGIN?  or  SIGNUP?↓ </div>
+            <!--login check-->
+            <script> 
+                var err = "<%= loginErr %>";
+                if(!!err) document.getElementsByClassName("loginErr")[0].innerHTML = err;
+                $("#btn_login").click(function(){
+                    var loginAcc = document.getElementsByName("loginAcc")[0].value
+                    var loginPwd = document.getElementsByName("loginPwd")[0].value
 
-                // check acc,pwd,cpwd is empty
-                if(loginAcc == ""){
-                    err = "account can not empty";
-                    document.getElementsByClassName("loginErr")[0].innerHTML = err;
-                    return;
-                }
-                if(loginPwd == ""){ 
-                    err = "password can not empty"
-                    document.getElementsByClassName("loginErr")[0].innerHTML = err;
-                    return;
-                }
-                document.getElementsByName("loginForm")[0].submit();
-            })
-                
-        </script>
-        <div class = "bigContainer" >
-            <div class = "actContainer">
-                <form name = "signForm" action = "/start" method = "post">
-                    <input type = "hidden" name = "act" value = "signup">
-                    <font class = "signupErr" color = "red"></font>
-                    </br>
-                    <font>account:</font>
-                    </br>
-                    <input type = "text" name = "signupAcc" placeholder = "your account"></input>
-                    </br>
-                    <font>password:</font>
-                    </br>
-                    <input type = "text" name = "signipPwd" placeholder = "your password"></input>
-                    </br>
-                    <font>confirm password:</font>
-                    </br>
-                    <input type = "text" name = "cpwd" placeholder = "your password again"></input>
-                    </br>
+                    // check acc,pwd,cpwd is empty
+                    if(loginAcc == ""){
+                        err = "account can not empty";
+                        document.getElementsByClassName("loginErr")[0].innerHTML = err;
+                        return;
+                    }
+                    if(loginPwd == ""){ 
+                        err = "password can not empty"
+                        document.getElementsByClassName("loginErr")[0].innerHTML = err;
+                        return;
+                    }
+                    document.getElementsByName("loginForm")[0].submit();
+                })
                     
-                    <input type = "button" id = "btn_signup"value = "SUBMIT and LOGIN"/>
-                </form>
-            </div>
-        </div> 
+            </script>
+            
+            <form name = "signForm" action = "/start" method = "post">
+                <table>
+                    <tr>
+                        <td class = "td_top" colspan="2">
+                            <input type = "hidden" name = "act" value = "signup">
+                            <font class = "signupErr" color = "red"></font>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  class = "td_font">
+                            <font>account:</font>
+                        </td>
+                        <td>
+                            <input type = "text" name = "signupAcc" class = "inputBox" placeholder = "your account"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "td_font" >
+                            <font>password:</font>
+                        </td>
+                        <td>
+                            <input type = "text" name = "signipPwd" class = "inputBox" placeholder = "your password"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "td_font">
+                            <font>confirm password:</font>
+                        </td>
+                        <td>
+                            <input type = "text" name = "cpwd" class = "inputBox" placeholder = "your password again"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "td_bottom" colspan="2">
+                            <button type = "button" id = "btn_signup">SUBMIT and LOGIN</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
             <script>
                 var err = "<%= signupErr %>";
                 if(!!err) document.getElementsByClassName("signupErr")[0].innerHTML = err;
@@ -119,5 +153,6 @@
                 })
 
             </script>
+        </div><!--container-->
     </body>
 </html>
