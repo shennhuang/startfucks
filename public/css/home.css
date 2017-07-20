@@ -24,23 +24,9 @@ main{
     grid-template-columns: repeat(var(--gridColNum), 1fr);
     grid-template-rows: repeat(var(--gridRowNum), 25vh);
 }
-.grid_1x1 {
-    background-color: #FFBB66;
-    grid-column: span 1;
-    grid-row: span 1;
-    margin: 2px;
-
-}
-.grid_2x1 {
-    background-color: #CCDDFF;
-    grid-column: span 2;
-    grid-row: span 1;
-    margin: 2px;
-}
-.grid_2x2 {
-    background-color: #DDFF77;
-    grid-column: span 2;
-    grid-row: span 2;
+.gridHidden{
+    grid-column:span 1; 
+    grid-row:span 1; 
     margin: 2px;
 }
 .gridItem{

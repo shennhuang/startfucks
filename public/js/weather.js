@@ -1,18 +1,11 @@
-let city = 'New Taipei City';
 let country = 'tw';
+let city = (document.getElementsByName('Weather')[0].getAttribute('id').split('_'))[1];
 
-//var xhr = new XMLHttpRequest();
+// let newImg = document.createElement('img');
+// document.getElementById('Weather_'+city).children[0].appendChild(newImg);
+
 function weather(city, country){
     
-    // xhr.open("GET", url);
-    // xhr.send(null);
-    // xhr.onload = function () {
-    //     let res = JSON.parse(this.responseText);
-    //     console.log(this.responseText);
-
-    //     document.getElementById('Weather_Taipei').children[1].innerHTML = '現在天氣： ' + res.weather[0].description + '<br>最低溫： ' + res.main.temp_min + ' C' + '<br>最高溫： ' + res.main.temp_max + ' C' + '<br>更新時間： ' + new Date(res.dt*1000).toLocaleString();
-    // };
-
     let host = 'http://127.0.0.1:8080';
 
     $.ajax({
@@ -23,8 +16,11 @@ function weather(city, country){
             country
         },
         success: function(result) {
-            if(result)
-                document.getElementById('Weather_Taipei').children[1].innerHTML = '現在天氣： ' + result.weather[0].description + '<br>最低溫： ' + result.main.temp_min + ' C' + '<br>最高溫： ' + result.main.temp_max + ' C' + '<br>更新時間： ' + new Date(result.dt*1000).toLocaleString();  
+            if(result) {
+                let icon = 'http://openweathermap.org/img/w/' + result.weather[0].icon + '.png'
+                document.getElementById('Weather_'+city).children[1].innerHTML = '現在天氣： ' + result.weather[0].description + '<img style=vertical-align:middle; src='+ icon + '><br>最低溫： ' + result.main.temp_min + ' C' + '<br>最高溫： ' + result.main.temp_max + ' C' + '<br>更新時間： ' + new Date(result.dt*1000).toLocaleString();
+
+            }
         }
     });
 

@@ -10,7 +10,7 @@ function getWeather(req, res){
         method: 'GET',
         url,
         headers: 
-        { 
+        {
             'content-type': 'application/json' 
         },
         json: true
