@@ -16,7 +16,7 @@
         <main  ondragover="allowDrop(event)" id="main">
             <% for(var v of result.settings) { %>
                 <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;" class="gridItem" >
-                    <p name="title"><%= v.title + "-" + v.subtitle %></p>
+                    <p name="title" style="font-weight:bold; font-size:18px"><%= v.title + "-" + v.subtitle %></p>
                     <p name="info">loading...</p>
                     <script>addScript("<%= v.title %>", "<%=v.subtitle %>");</script>
                 </div>
