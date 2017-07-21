@@ -10,6 +10,7 @@ function removeItem(event){
         hiddenGrid.setAttribute("id", gId);
         hiddenGrid.setAttribute("ondrop","dropOnHiddenItem(event," + n + ")" );
         hiddenGrid.setAttribute("class","gridHidden");
+        
         document.getElementById('main').insertBefore(hiddenGrid, event.currentTarget.parentNode);
     }
 

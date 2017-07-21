@@ -4,7 +4,7 @@ AWS.config.update({region:"us-west-2"});
 var dynamodb = new AWS.DynamoDB();
 
 var params = {
-    TableName : "startfucks_users",
+    TableName : "users_data",
     KeySchema: [       
         { AttributeName: "account", KeyType: "HASH"},  //Partition key
     ],

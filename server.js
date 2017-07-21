@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var session = require('express-session');
 var cors = require('cors');
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: false });
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -22,7 +24,7 @@ app.use(session({
     })
 );
 
-app.use(cors());
+//app.use(cors());
 
 app.use('/', route);
 

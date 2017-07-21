@@ -1,5 +1,5 @@
 var express = require('express')
-var app = express()
+var app = express();
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -13,7 +13,7 @@ var db = require("./db");
 function start(req, res) {
 
     if(req.method === 'GET'){
-        res.render('start',{loginErr : "",signupErr : ""});
+        res.render('start',{loginErr : "",signupErr : "",csrfToken: req.csrfToken()});
         return;
     }else if(req.method === 'POST'){
         var act = req.body.act;
@@ -54,7 +54,7 @@ function start(req, res) {
             };  
             db.dbget(getData,function(data){
 
-                if(!!data.Item){
+                if(data.Item){
                     res.render('start',{loginErr : "", signupErr : "account has been used"})
                     return;
                 }
@@ -67,8 +67,21 @@ function start(req, res) {
                 }
                 db.dbput(putData)
 
+
+                let userData = {
+                    TableName: "users_data",
+                    Item: {
+                        account: users.account,
+                        name: users.account,
+                        settings: {}
+                    }
+                }
+                db.dbput(userData);
+
+
                 req.session.account = users.account;
                 req.session.pwd = users.pwd;
+
                 res.redirect('/home')
             })
         }

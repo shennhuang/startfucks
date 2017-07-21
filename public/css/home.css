@@ -1,10 +1,11 @@
 :root{
     --gridColNum: 6;
     --gridRowNum: 10;
+
 }
 html{
-    width: 100vw;
-    height: 100vh;
+    width: 1440px;
+    height: 900px;
 }
 body{
     margin: 0px;
@@ -21,8 +22,8 @@ header{
 }
 main{
     display: grid;
-    grid-template-columns: repeat(var(--gridColNum), 1fr);
-    grid-template-rows: repeat(var(--gridRowNum), 25vh);
+    grid-template-columns: repeat(var(--gridColNum),[col] 1fr);
+    grid-template-rows: repeat(var(--gridRowNum),[row] 1fr);
 }
 .tagRemove{
     margin: 5px 2px;
@@ -35,8 +36,8 @@ main{
     color: #F00;
 }
 .gridHidden{
-    grid-column:span 1; 
-    grid-row:span 1; 
+    grid-column:span 1;
+    grid-row:span 1;
     margin: 2px;
     background-color: #F0FFFF
 }
@@ -45,4 +46,6 @@ main{
     margin: 2px;
     text-align: center;
     line-height: 3vh;
+    
+    
 }
