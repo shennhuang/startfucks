@@ -54,7 +54,7 @@ function start(req, res) {
             };  
             db.dbget(getData,function(data){
 
-                if(!!data.Item){
+                if(data.Item){
                     res.render('start',{loginErr : "", signupErr : "account has been used"})
                     return;
                 }
@@ -69,6 +69,7 @@ function start(req, res) {
 
                 req.session.account = users.account;
                 req.session.pwd = users.pwd;
+
                 res.redirect('/home')
             })
         }
