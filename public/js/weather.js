@@ -11,9 +11,6 @@ function weather(city, country){
     $.ajax({
         url: host + '/apis?q=weather',
         method: 'POST',
-        dataType: 'json',
-        // contentType: 'application/json',
-        headers:{'Access-Control-Allow-Origin':'*'},
         data:{
             city,
             country

@@ -26,4 +26,3 @@ function getUbike(stationName){
     });
 
 }
-getUbike()
