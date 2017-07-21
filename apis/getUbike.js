@@ -18,10 +18,11 @@ function getUbike(req, res){
         var ubikeList = {};
 
         for(let item of data){
-            let key = body.retVal[item].sna;
-            ubikeList[key] = item;
+            if(body.retVal[item].act != 0){
+                let key = body.retVal[item].sna;
+                ubikeList[key] = item;
+            }
         }
-
         var item = ubikeList[stationName];
 
         res.send(body.retVal[item].sbi);
