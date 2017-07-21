@@ -1,12 +1,12 @@
 var express = require('express');
 var request = require('request');
-function getUbike(stationName){
+function getUbike(req, res){
+
+    let stationName = req.body.stationName;
     let url = "	http://data.taipei/youbike"
     var options = { 
         method: 'GET',
         url,
-        // headers: 
-        // { 'content-type': 'application/json'},
         gzip: true,
         json: true,
     };
@@ -21,9 +21,11 @@ function getUbike(stationName){
             let key = body.retVal[item].sna;
             ubikeList[key] = item;
         }
+
         var item = ubikeList[stationName];
-        console.log(body.retVal[item].sbi)
+
+        res.send(body.retVal[item].sbi);
     });
 
 }
-getUbike()
+module.exports = getUbike;

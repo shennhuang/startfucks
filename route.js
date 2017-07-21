@@ -20,7 +20,6 @@ router.use('/start', function(req, res) {
 });
 
 router.post('/apis', function(req, res){
-    console.log(req.res)
     apis(req, res);
 });
 
