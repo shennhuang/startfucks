@@ -23,7 +23,13 @@ function home(req, res) {
                 subtitle: "New Taipei City",
                 gridItemSize: {width: 2, height: 1},
                 gridItemLocation: {x: 0, y: 0},
-            },]     
+            },
+            {
+                title: "Ubike",
+                subtitle: "南港公園",
+                gridItemSize: {width: 1, height: 1},
+                gridItemLocation: {x: 0, y: 0},
+            },]
         }
 
     };
