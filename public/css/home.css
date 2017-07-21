@@ -24,6 +24,16 @@ main{
     grid-template-columns: repeat(var(--gridColNum), 1fr);
     grid-template-rows: repeat(var(--gridRowNum), 25vh);
 }
+.tagRemove{
+    margin: 5px 2px;
+    padding: 0;
+    text-align: right;
+    line-height: 0;
+    color: #FFF;
+}
+.tagRemove:hover{
+    color: #F00;
+}
 .gridHidden{
     grid-column:span 1; 
     grid-row:span 1; 

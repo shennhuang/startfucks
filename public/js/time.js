@@ -1,6 +1,9 @@
+let timeCountry = (document.getElementsByName('Time')[0].getAttribute('id').split('_'))[1];
 function time(){
-    document.getElementById('Time_Taiwan').children[1].innerHTML = new Date().toLocaleString();
+    let element = document.getElementById('Time_'+timeCountry);
+    if(element)
+        element.children[2].innerHTML = new Date().toLocaleString();
     setTimeout('time()',1000);
 }
-document.getElementById('Time_Taiwan').children[1].setAttribute("style","font-size:20px");
+document.getElementById('Time_Taiwan').children[2].setAttribute("style","font-size:20px");
 time();
