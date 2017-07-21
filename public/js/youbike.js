@@ -18,9 +18,12 @@ function getUbike(stationName){
         var ubikeList = {};
 
         for(let item of data){
-            let key = body.retVal[item].sna;
-            ubikeList[key] = item;
+            if(body.retVal[item].act != 0){
+                let key = body.retVal[item].sna;
+                ubikeList[key] = item;
+            }
         }
+        console.log({item :item})
         var item = ubikeList[stationName];
         console.log(body.retVal[item].sbi)
     });
