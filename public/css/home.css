@@ -28,8 +28,11 @@ main{
     grid-column:span 1; 
     grid-row:span 1; 
     margin: 2px;
+    background-color: #F0FFFF
 }
 .gridItem{
     background-color: #CCDDFF;
     margin: 2px;
+    text-align: center;
+    line-height: 3vh;
 }
