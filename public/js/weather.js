@@ -5,10 +5,13 @@ let city = (document.getElementsByName('Weather')[0].getAttribute('id').split('_
 function weather(city, country){
 
     let host = 'http://localhost:8080';
-
+    
     $.ajax({
         url: host + '/apis?q=weather',
         method: 'POST',
+        dataType: 'json',
+        // contentType: 'application/json',
+        headers:{'Access-Control-Allow-Origin':'*'},
         data:{
             city,
             country
