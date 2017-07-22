@@ -14,8 +14,7 @@ function ubike(stationName){
         success: function(result) {
             if(result) {
                 
-                document.getElementById('Ubike_'+stationName).children[1].innerHTML = '剩餘數量： ' + result + '<br><br>更新時間： <br>' + new Date().toLocaleString();
-
+                document.getElementById('Ubike_'+stationName).children[2].innerHTML = '剩餘數量： ' + result + '<br><br>更新時間： <br>' + new Date().toLocaleString();
             }
         }
     });

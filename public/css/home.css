@@ -25,6 +25,16 @@ main{
     grid-template-columns: repeat(var(--gridColNum), 1fr);
     grid-template-rows: repeat(var(--gridRowNum), 25vh);
 }
+.tagRemove{
+    margin: 5px 2px;
+    padding: 0;
+    text-align: right;
+    line-height: 0;
+    color: #FFF;
+}
+.tagRemove:hover{
+    color: #F00;
+}
 .gridHidden{
     grid-column:span 1; 
     grid-row:span 1; 
@@ -45,11 +55,23 @@ main{
     height:50px;
 }
 .blockList{
-    width:50vw;
+    width:80vw;
     height:900px;
     position: absolute;
     top:50px;
     right:0px;
     background-color:gray;
-    opacity:0.4;
+    opacity:0.6;
+}
+.optionsContainer{
+    width:50vw;
+    height:25vh;
+    text-align:center;
+    vertical-align:middle;
+    background-color:red;
+    border:3px blue solid;
+}
+.options{
+    height:25vh;
+    background-color:green;
 }

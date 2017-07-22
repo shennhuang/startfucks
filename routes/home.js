@@ -1,4 +1,6 @@
 var express = require('express');
+var blockList = require("../public/data/apidata.json")
+
 
 function home(req, res) {
     if(!req.session || !req.session.account || !req.session.pwd){
@@ -33,8 +35,8 @@ function home(req, res) {
         }
 
     };
-
-    return res.render('home', {result: result[account], gridRowNum:10});
+    console.log(result)
+    return res.render('home', {result: result[account], gridRowNum:10,blockList});
 }
 
 module.exports = home;
