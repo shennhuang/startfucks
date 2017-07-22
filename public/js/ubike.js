@@ -1,6 +1,3 @@
-let stationName = (document.getElementsByName('Ubike')[0].getAttribute('id').split('_'))[1];
-
-
 function ubike(stationName){
 
     let host = 'http://localhost:8080';
@@ -26,7 +23,8 @@ function ubike(stationName){
             }
         });
 
-        setTimeout('ubike(stationName)',300000);
+        setTimeout(function(){
+            ubike(stationName);
+        },300000);
     }
 }
-ubike(stationName);

@@ -1,11 +1,7 @@
-let country = 'tw';
-let city = (document.getElementsByName('Weather')[0].getAttribute('id').split('_'))[1];
-
-
-function weather(city, country){
+function weather(weatherCity, weatherCountry){
 
     let host = 'http://localhost:8080';
-    let element = document.getElementById('Weather_'+city);
+    let element = document.getElementById('Weather_'+weatherCity);
 
     if(element){
 
@@ -13,8 +9,8 @@ function weather(city, country){
             url: host + '/apis?q=weather',
             type: 'POST',
             data:{
-                city,
-                country,
+                weatherCity,
+                weatherCountry,
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
             error: function(){
@@ -28,8 +24,8 @@ function weather(city, country){
                 }
             }
         });
-
-        setTimeout('weather(city, country)',900000);
+        setTimeout(function(){
+            weather(weatherCity, weatherCountry);
+        },900000);
     }
 }
-weather(city, country);

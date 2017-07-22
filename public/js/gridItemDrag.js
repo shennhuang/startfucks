@@ -3,32 +3,31 @@ function allowDrop(event){
 }
 function itemDrag(event){
     event.dataTransfer.setData("text", event.currentTarget.id);
-    //console.log(event.currentTarget.style.cssText)
 }
 var n = 60;
 function dropOnItem(event){
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
+    if(selectItemId !== event.currentTarget.id){ 
 
-    document.getElementById('main').insertBefore(document.getElementById(selectItemId),document.getElementById(event.currentTarget.id));
+        document.getElementById('main').insertBefore(document.getElementById(selectItemId),document.getElementById(event.currentTarget.id));
+
+        updateLocation();
+    }
     
-    updateLocation();
 }
 function dropOnHiddenItem(event){
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
-//console.log(document.getElementById(selectItemId).style)
-    let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);//11
-    //console.log(parseInt(selectItemWidth));
-    //console.log(event.currentTarget.style)
-   
+
+    let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
 
     if(selectItemId !== event.currentTarget.id){
         for(let i = 0; i < selectItemWidth; i++) {
             let hiddenGrid = document.createElement("DIV");
             let gId = "hiddenGrid"+ n++;
             hiddenGrid.setAttribute("id", gId);
-            hiddenGrid.setAttribute("ondrop","dropOnHiddenItem(event," + n + ")" );
+            hiddenGrid.setAttribute("ondrop","dropOnHiddenItem(event)");
             hiddenGrid.setAttribute("class","gridHidden");
             //hiddenGrid.innerHTML = "<p>" + gId + "</p>"
             document.getElementById('main').insertBefore(hiddenGrid, document.getElementById(selectItemId));
@@ -63,9 +62,10 @@ function dropOnHiddenItem(event){
         document.getElementById('main').removeChild(document.getElementById(event.currentTarget.id));
 
         updateLocation();
-
     }
 }
+/** 
+ * the function current not use maybe...
 function dropOnMain(event){
     let tempDiv = document.createElement("DIV");
     tempDiv.setAttribute("id", "tempDiv")
@@ -74,3 +74,5 @@ function dropOnMain(event){
     document.getElementById('main').insertBefore(document.getElementById(selectItemId),document.getElementById('tempDiv'));
     document.getElementById('main').removeChild(document.getElementById('tempDiv'));
 }
+
+**/

@@ -3,9 +3,9 @@ var express = require('express');
 var request = require('request');
 function getWeather(req, res){
 
-    let city = req.body.city;
-    let country = req.body.country;
-    let url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&units=metric&mode=json&lang=zh_tw&appid=' + config.weatherApiKey;
+    let weatherCity = req.body.weatherCity;
+    let weatherCountry = req.body.weatherCountry;
+    let url = 'http://api.openweathermap.org/data/2.5/weather?q=' + weatherCity + ',' + weatherCountry + '&units=metric&mode=json&lang=zh_tw&appid=' + config.weatherApiKey;
 
     var options = { 
         method: 'GET',
