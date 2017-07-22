@@ -67,13 +67,18 @@ function start(req, res) {
                 }
                 db.dbput(putData)
 
-
+                //新使用者預設資料
                 let userData = {
                     TableName: "users_data",
                     Item: {
                         account: users.account,
                         name: users.account,
-                        settings: {}
+                        settings: [{
+                            title: "Time",
+                            subtitle: "Taiwan",
+                            gridItemSize: {width: 1, height: 1},
+                            gridItemLocation: {col: 1, row: 1},
+                        }]
                     }
                 }
                 db.dbput(userData);

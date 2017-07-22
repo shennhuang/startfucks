@@ -15,13 +15,13 @@
     </head>
     <body>
         <header>
-            <p class="name">Hi! <%=result.name %></p>
+            <p class="name">Hi! <%=userData.name %></p>
             <button class="blockListBtn" onclick="liskBtnOnclick()"></button>
         </header>
         <main  ondragover="allowDrop(event)" id="main">
-            <% for(var v of result.settings) { %>
+            <% for(var v of userData.settings) { %>
                 <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-                    <p onClick="removeItem(event)" name="remove" title="remove" class="tagRemove">x</p>
+                        <p onClick="removeItem(event)" name="remove" title="remove" class="tagRemove">x</p>
                     <p name="title" style="font-weight:bold; font-size:18px"><%= v.title + "-" + v.subtitle %></p>
                     <p name="info">loading...</p>
                     <script>addScript("<%= v.title %>", "<%=v.subtitle %>");</script>
@@ -45,7 +45,7 @@
                             <font><%= apiKeys[i] %>:</font>
                         </td>
                         <td>
-                            <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= result %>')">
+                            <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= userData.account %>','<%= apiKeys[i] %>')">
                             </div>
                         </td>
                     </tr>
