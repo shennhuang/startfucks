@@ -9,11 +9,14 @@
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/addScript.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
+        <script type="text/javascript" src="/js/blocklist.js"></script>
         <script type="text/javascript" src="/js/removeItem.js"></script>
+
     </head>
     <body>
         <header>
             <p class="name">Hi! <%=result.name %></p>
+            <button class="blockListBtn" onclick="liskBtnOnclick()"></button>
         </header>
         <main  ondragover="allowDrop(event)" id="main">
             <% for(var v of result.settings) { %>
@@ -34,6 +37,22 @@
 
         </main>
 
+        <div class = "blockList" style = "display:none">
+            <table class = "optionsContainer" border= '1'>
+                <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
+                    <tr>
+                        <td >
+                            <font><%= apiKeys[i] %>:</font>
+                        </td>
+                        <td>
+                            <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= result %>')">
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+
         <script>
             function updateLocation(){
                 console.log('updateLocation');
@@ -48,5 +67,4 @@
         </script>
     
     </body>
-
 </html>

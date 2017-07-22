@@ -20,6 +20,7 @@ header{
     color: #F0FFFF;
     margin: 0px 20px;
     line-height: 50px;
+    display: inline-block;
 }
 main{
     display: grid;
@@ -50,5 +51,33 @@ main{
     background-color: #c6ecf6;  /**#CCDDFF;*/
     margin: 2px;
     text-align: center;
-    line-height: 3vh;  
+    line-height: 3vh;
+}
+.blockListBtn{
+    display: inline-block;
+    position: absolute;
+    right:0px;
+    width:50px;
+    height:50px;
+}
+.blockList{
+    width:80vw;
+    height:900px;
+    position: absolute;
+    top:50px;
+    right:0px;
+    background-color:gray;
+    opacity:0.6;
+}
+.optionsContainer{
+    width:50vw;
+    height:25vh;
+    text-align:center;
+    vertical-align:middle;
+    background-color:red;
+    border:3px blue solid;
+}
+.options{
+    height:25vh;
+    background-color:green;
 }
