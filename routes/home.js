@@ -22,7 +22,7 @@ function home(req, res) {
     });
 
 
-    var result = {
+    var userData = {
 
     [account]: {
             name: account,
@@ -31,7 +31,19 @@ function home(req, res) {
                 title: "Time",
                 subtitle: "Taiwan",
                 gridItemSize: {width: 1, height: 1},
-                gridItemLocation: {col: 1, row: 1},
+                gridItemIndex: 3,
+            },
+            {
+                title: "Weather",
+                subtitle: "Taipei",
+                gridItemSize: {width: 2, height: 1},
+                gridItemIndex: 7,
+            },
+            {
+                title: "Ubike",
+                subtitle: "南港公園",
+                gridItemSize: {width: 1, height: 1},
+                gridItemIndex: 20,
             },
             ]
         }
@@ -41,7 +53,7 @@ function home(req, res) {
     req.session.csrfSecret = csrfToken;
 
     var apiKeys = Object.keys(apidata);
-    return res.render('home', {result: result[account], gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
+    return res.render('home', {userData: userData[account], gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
 }
 
 module.exports = home;

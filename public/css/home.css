@@ -53,6 +53,10 @@ main{
     text-align: center;
     line-height: 3vh;
 }
+.itemTitle{
+    font-weight:bold;
+    font-size:18px;
+}
 .blockListBtn{
     display: inline-block;
     position: absolute;
