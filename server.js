@@ -28,7 +28,6 @@ app.use(session({
 
 app.use('/', route);
 
-
 app.listen(8080, function(){
-    console.log('server start at 127.0.0.1:8080');
+    console.log('server start at localhost:8080 - ' + new Date());
 });

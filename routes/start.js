@@ -30,7 +30,7 @@ function start(req, res) {
             db.dbget(getUsers,function(data){
                 if(!data.Item || pwd != data.Item.pwd){
                     console.log("worng!!!")
-                    res.render('start',{loginErr : "account or password is wrong", signupErr : ""});
+                    res.render('start',{loginErr : "account or password is wrong", signupErr : "",csrfToken: req.csrfToken()});
                     return;
                 }
                 
@@ -55,7 +55,7 @@ function start(req, res) {
             db.dbget(getData,function(data){
 
                 if(data.Item){
-                    res.render('start',{loginErr : "", signupErr : "account has been used"})
+                    res.render('start',{loginErr : "", signupErr : "account has been used",csrfToken: req.csrfToken()})
                     return;
                 }
                 var putData = {

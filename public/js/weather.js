@@ -17,6 +17,9 @@ function weather(city, country){
                 country,
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
+            error: function(){
+                window.open(host + '/start', '_self');
+            },
             success: function(result) {
                 if(result) {
                     let icon = 'http://openweathermap.org/img/w/' + result.weather[0].icon + '.png'

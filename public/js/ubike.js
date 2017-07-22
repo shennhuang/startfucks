@@ -15,6 +15,9 @@ function ubike(stationName){
                 stationName,
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
+            error: function(){
+                window.open(host + '/start', '_self');
+            },
             success: function(result) {
                 if(result) {
                     
