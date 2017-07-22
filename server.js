@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 var session = require('express-session');
 var cors = require('cors');
-var csrf = require('csurf');
-var csrfProtection = csrf({ cookie: false });
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -16,6 +14,8 @@ app.use(express.static(__dirname + '/public'));
 var router = express.Router();
 var route = require('./route');
 
+var csrf = require('csurf');
+
 app.use(session({
     secret : 'key',
     cookie: { maxAge: 12 * 60 * 60 * 1000 },
@@ -26,7 +26,7 @@ app.use(session({
 
 //app.use(cors());
 
-app.use('/', route);
+app.use('/', csrf({ cookie: false }) , route);
 
 app.listen(8080, function(){
     console.log('server start at localhost:8080 - ' + new Date());

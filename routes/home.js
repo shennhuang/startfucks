@@ -1,7 +1,10 @@
 var express = require('express');
 var apidata = require('../public/data/apidata.json')
 var db = require('./db');
+<<<<<<< HEAD
 var csrfToken = 0;
+=======
+>>>>>>> c41e0fb6e56d513b18036e502af6e2b5b5350f44
 
 function home(req, res) {
     if(!req.session || !req.session.account || !req.session.pwd){
@@ -48,12 +51,11 @@ function home(req, res) {
         }
 
     };
-
     let csrfToken = req.csrfToken();
     req.session.csrfSecret = csrfToken;
 
     var apiKeys = Object.keys(apidata);
-    return res.render('home', {result: result[account], gridRowNum:10, csrfToken: csrfToken,apidata,apiKeys});
+    return res.render('home', {result: result[account], gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
 }
 
 module.exports = home;
