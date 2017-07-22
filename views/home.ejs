@@ -23,8 +23,8 @@
         </header>
         <main ondragover="allowDrop(event)" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
-                    for(let v of userData.settings) {
-                        if(v.gridItemIndex === i) { %>
+                for(let v of userData.settings) {
+                    if(v.gridItemIndex === i) { %>
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event)" name="remove" title="remove" class="tagRemove">x</p>
                         <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
@@ -32,17 +32,17 @@
                         <script>callApi("<%= v.title %>", "<%= v.subtitle %>");</script>
                         <!--<script>addScript("<%= v.title %>", "<%=v.subtitle %>");</script>-->
                     </div>
-                        <%  i+= (v.gridItemSize.width - 1);
-                            hasItem = true;
-                            break;
-                        }
+                    <%  i+= (v.gridItemSize.width - 1);
+                        hasItem = true;
+                        break;
                     }
+                }
                 if(!hasItem) { %>
                     <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event)" class="gridHidden">
                         <!--<p><%= "hiddenGrid" +  i %></p>-->
                     </div>
                 <% }
-                    hasItem=false;
+                hasItem=false;
             } %>
         </main>
 
@@ -54,7 +54,8 @@
                             <font><%= apiKeys[i] %>:</font>
                         </td>
                         <td>
-                            <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= userData %>')">
+                            <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= userData.account %>','<%= apiKeys[i] %>')">
+
                             </div>
                         </td>
                     </tr>

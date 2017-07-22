@@ -55,8 +55,7 @@ function start(req, res) {
             db.dbget(getData,function(data){
 
                 if(data.Item){
-                    res.render('start',{loginErr : "", signupErr : "account has been used",csrfToken: req.csrfToken()})
-                    return;
+                    return res.render('start',{loginErr : "", signupErr : "account has been used",csrfToken: req.csrfToken()});
                 }
                 var putData = {
                     TableName: "startfucks_users",
@@ -65,25 +64,34 @@ function start(req, res) {
                         pwd:users.pwd,
                     }
                 }
-                db.dbput(putData)
+                db.dbput(putData);
 
-
+                //新使用者預設資料
                 let userData = {
                     TableName: "users_data",
                     Item: {
                         account: users.account,
                         name: users.account,
-                        settings: {}
+                        settings: [{
+                            title: "Time",
+                            subtitle: "Taiwan",
+                            gridItemSize: {width: 1, height: 1},
+                            gridItemIndex: 0,
+                        }]
                     }
                 }
-                db.dbput(userData);
+                db.dbput(userData).then(function(){
 
+                    req.session.account = users.account;
+                    req.session.pwd = users.pwd;
 
-                req.session.account = users.account;
-                req.session.pwd = users.pwd;
+                    res.redirect('/home');
 
-                res.redirect('/home')
-            })
+                });
+
+                
+            });
+
         }
 
     }
