@@ -36,31 +36,23 @@
             <% } %>
 
         </main>
-        
+
         <div class = "blockList" style = "display:none">
             <table class = "optionsContainer" border= '1'>
-                <tr >
-                    <td >
-                        <font>Time:</font>
-                    </td>
-                    <td>
-                        <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= result %>')">
-                        </div>
-                    </td>
-                </tr>
-                <tr >
-                    <td >
-                        <font>Weather:</font>
-                    </td>
-                    <td>
-                        <div class = "options" style = "width:calc((100vw - 24px)/6*2)">
-                        </div>
-                    </td>
-                </tr>
+                <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
+                    <tr>
+                        <td >
+                            <font><%= apiKeys[i] %>:</font>
+                        </td>
+                        <td>
+                            <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= result %>')">
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
             </table>
         </div>
 
-        <script>console.log('<%= Object.keys(result) %>')</script>
         <script>
             function updateLocation(){
                 console.log('updateLocation');

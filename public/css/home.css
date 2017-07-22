@@ -47,7 +47,6 @@ main{
     margin: 2px;
     text-align: center;
     line-height: 3vh;
-<<<<<<< HEAD
 }
 .blockListBtn{
     display: inline-block;
@@ -76,8 +75,4 @@ main{
 .options{
     height:25vh;
     background-color:green;
-=======
-    
-    
->>>>>>> ebfa89969ac76b72d65b9f967a771a2451eed682
 }
