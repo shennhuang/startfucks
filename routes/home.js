@@ -49,7 +49,40 @@ function home(req, res) {
         console.log({homegetdata : data.Item});
         return res.render('home', {userData: data.Item, gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
     });
-    
+
+
+    var userData = {
+
+    [account]: {
+            name: account,
+            settings: [
+            {
+                title: "Time",
+                subtitle: "Taiwan",
+                gridItemSize: {width: 1, height: 1},
+                gridItemIndex: 3,
+            },
+            {
+                title: "Weather",
+                subtitle: "Taipei",
+                gridItemSize: {width: 2, height: 1},
+                gridItemIndex: 7,
+            },
+            {
+                title: "Ubike",
+                subtitle: "南港公園",
+                gridItemSize: {width: 1, height: 1},
+                gridItemIndex: 20,
+            },
+            ]
+        }
+
+    };
+    let csrfToken = req.csrfToken();
+    req.session.csrfSecret = csrfToken;
+
+    var apiKeys = Object.keys(apidata);
+    return res.render('home', {userData: userData[account], gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
 }
 
 module.exports = home;

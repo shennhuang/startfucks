@@ -19,6 +19,7 @@
             <button class="blockListBtn" onclick="liskBtnOnclick()"></button>
         </header>
         <main  ondragover="allowDrop(event)" id="main">
+            <!--
             <% for(var v of userData.settings) { %>
                 <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event)" name="remove" title="remove" class="tagRemove">x</p>
@@ -27,12 +28,29 @@
                     <script>addScript("<%= v.title %>", "<%=v.subtitle %>");</script>
                 </div>
             <% } %>
+            -->
 
 
-            <% for(var i=1, n=60; i < n; i++) { %>
-                <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event)" class="gridHidden" >
-                    <!--<p><%= "hiddenGrid" +  i %></p>-->
-                </div>
+            <% for(let i=0, n=60, hasItem=false; i < n; i++) { %>
+                <% for(let v of userData.settings) { %>
+                    <% if(v.gridItemIndex === i) {%>
+                        <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                            <p onClick="removeItem(event)" name="remove" title="remove" class="tagRemove">x</p>
+                            <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
+                            <p name="info">loading...</p>
+                            <script>addScript("<%= v.title %>", "<%=v.subtitle %>");</script>
+                        </div>
+                        <% i+= (v.gridItemSize.width - 1) %>
+                        <% hasItem = true; %>
+                        <% break; %>
+                    <% } %>
+                <% } %>
+                <% if(!hasItem) { %>
+                    <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event)" class="gridHidden">
+                        <!--<p><%= "hiddenGrid" +  i %></p>-->
+                    </div>
+                <% } %>
+                <% hasItem=false; %>
             <% } %>
 
         </main>
@@ -45,7 +63,9 @@
                             <font><%= apiKeys[i] %>:</font>
                         </td>
                         <td>
+<<<<<<< HEAD
                             <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= userData.account %>','<%= apiKeys[i] %>')">
+
                             </div>
                         </td>
                     </tr>
