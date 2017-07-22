@@ -31,18 +31,7 @@ function home(req, res) {
                 gridItemSize: {width: 1, height: 1},
                 gridItemLocation: {col: 1, row: 1},
             },
-            {
-                title: "Weather",
-                subtitle: "New Taipei City",
-                gridItemSize: {width: 2, height: 1},
-                gridItemLocation: {col: 2, row: 3},
-            },
-            {
-                title: "Ubike",
-                subtitle: "南港公園",
-                gridItemSize: {width: 1, height: 1},
-                gridItemLocation: {col: 5, row: 5},
-            },]
+            ]
         }
 
     };

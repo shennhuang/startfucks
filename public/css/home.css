@@ -37,12 +37,16 @@ main{
     color: #F00;
 }
 .gridHidden{
-    grid-column:span 1;
-    grid-row:span 1;
+    width: calc(100 / 6)vw;
+    height: 25vh;
+    grid-column: span 1;
+    grid-row: span 1;
     margin: 2px;
     background-color: #F0FFFF;
 }
 .gridItem{
+    width: calc(100 / 6)vw;
+    height: 25vh;
     background-color: #c6ecf6;  /**#CCDDFF;*/
     margin: 2px;
     text-align: center;
