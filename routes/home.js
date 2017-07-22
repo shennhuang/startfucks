@@ -1,10 +1,7 @@
 var express = require('express');
 var apidata = require('../public/data/apidata.json')
 var db = require('./db');
-<<<<<<< HEAD
 var csrfToken = 0;
-=======
->>>>>>> c41e0fb6e56d513b18036e502af6e2b5b5350f44
 
 function home(req, res) {
     if(!req.session || !req.session.account || !req.session.pwd){
