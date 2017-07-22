@@ -1,6 +1,6 @@
 var express = require('express');
 var db = require('./db');
-var csrfToken = 0;
+
 function home(req, res) {
     if(!req.session || !req.session.account || !req.session.pwd){
         return res.redirect('/start');
@@ -47,11 +47,7 @@ function home(req, res) {
 
     };
 
-    
-    let csrfToken = req.csrfToken();
-    req.session.csrfSecret = csrfToken;
-
-    return res.render('home', {result: result[account], gridRowNum:10, csrfToken: csrfToken});
+    return res.render('home', {result: result[account], gridRowNum:10, csrfToken: req.csrfToken()});
 }
 
 module.exports = home;

@@ -10,7 +10,7 @@ function ubike(stationName){
 
         $.ajax({
             url: host + '/apis?q=ubike',
-            method: 'POST',
+            type: 'POST',
             data:{
                 stationName,
                 _csrf: $('meta[name="_csrf"]').attr('content')

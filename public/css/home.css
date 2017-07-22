@@ -12,11 +12,12 @@ body{
 }
 header{
     font-size: 25px;
-    background-color: #33CCFF;
+    background-color: #3a170f; /** #33CCFF; */
     width: 100vw;
     height: 50px;
 }
 .name{
+    color: #F0FFFF;
     margin: 0px 20px;
     line-height: 50px;
 }
@@ -39,13 +40,11 @@ main{
     grid-column:span 1;
     grid-row:span 1;
     margin: 2px;
-    background-color: #F0FFFF
+    background-color: #F0FFFF;
 }
 .gridItem{
-    background-color: #CCDDFF;
+    background-color: #c6ecf6;  /**#CCDDFF;*/
     margin: 2px;
     text-align: center;
-    line-height: 3vh;
-    
-    
+    line-height: 3vh;  
 }
