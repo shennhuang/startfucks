@@ -5,19 +5,22 @@ function itemDrag(event){
     event.dataTransfer.setData("text", event.currentTarget.id);
     //console.log(event.currentTarget.style.cssText)
 }
-var n = 58;
+var n = 60;
 function dropOnItem(event){
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
 
     document.getElementById('main').insertBefore(document.getElementById(selectItemId),document.getElementById(event.currentTarget.id));
-
+    
+    updateLocation();
 }
 function dropOnHiddenItem(event){
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
-
-    let selectItemWidth = (document.getElementById(selectItemId).style.cssText.split(' '))[5];
+//console.log(document.getElementById(selectItemId).style)
+    let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);//11
+    //console.log(parseInt(selectItemWidth));
+    //console.log(event.currentTarget.style)
    
 
     if(selectItemId !== event.currentTarget.id){
@@ -57,8 +60,9 @@ function dropOnHiddenItem(event){
         }
         document.getElementById('main').insertBefore(selectItem, document.getElementById(event.currentTarget.id));
 
-
         document.getElementById('main').removeChild(document.getElementById(event.currentTarget.id));
+
+        updateLocation();
 
     }
 }

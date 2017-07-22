@@ -9,6 +9,7 @@
         <div class = "div_header"></div>
         <div class = "container">
             <form name = "loginForm" action = "/start" method = "post">
+                <input type="hidden" name="_csrf" value= <%= csrfToken %> >
                 <table>
                     <tr>
                         <td class = "td_top" colspan="2">
@@ -67,6 +68,7 @@
             </script>
             
             <form name = "signForm" action = "/start" method = "post">
+                <input type="hidden" name="_csrf" value= <%= csrfToken %> >
                 <table>
                     <tr>
                         <td class = "td_top" colspan="2">

@@ -17,8 +17,7 @@ function dbput(putData){
 }
 
 function dbget(getData,fn){
-    var res ;
-
+    
     docClient.get(getData , function(err, data) { 
         fn(data)
     });

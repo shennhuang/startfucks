@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="_csrf" content= <%= csrfToken %> >
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", '<%= gridRowNum %>');</script>
+        <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/addScript.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
         <script type="text/javascript" src="/js/blocklist.js"></script>
@@ -19,7 +20,7 @@
         </header>
         <main  ondragover="allowDrop(event)" id="main">
             <% for(var v of result.settings) { %>
-                <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;" class="gridItem" >
+                <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                     <p onClick="removeItem(event)" name="remove" title="remove" class="tagRemove">x</p>
                     <p name="title" style="font-weight:bold; font-size:18px"><%= v.title + "-" + v.subtitle %></p>
                     <p name="info">loading...</p>
@@ -28,14 +29,13 @@
             <% } %>
 
 
-            <% for(var i=1, n=58; i < n; i++) { %>
+            <% for(var i=1, n=60; i < n; i++) { %>
                 <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event)" class="gridHidden" >
                     <!--<p><%= "hiddenGrid" +  i %></p>-->
                 </div>
             <% } %>
 
         </main>
-        
         
         <div class = "blockList" style = "display:none">
             <table class = "optionsContainer" border= '1'>
@@ -59,6 +59,20 @@
                 </tr>
             </table>
         </div>
+
         <script>console.log('<%= Object.keys(result) %>')</script>
+        <script>
+            function updateLocation(){
+                console.log('updateLocation');
+
+                let mainChildren = document.getElementById("main").children;
+                let gridItemLocation = [];
+                for(let item of mainChildren){
+                    //console.log(item.id)
+
+                }
+            }
+        </script>
+    
     </body>
 </html>

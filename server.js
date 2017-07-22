@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var session = require('express-session');
 var cors = require('cors');
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: false });
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -22,11 +24,10 @@ app.use(session({
     })
 );
 
-app.use(cors());
+//app.use(cors());
 
 app.use('/', route);
 
-
 app.listen(8080, function(){
-    console.log('server start at 127.0.0.1:8080');
+    console.log('server start at localhost:8080 - ' + new Date());
 });
