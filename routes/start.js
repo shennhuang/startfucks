@@ -72,12 +72,14 @@ function start(req, res) {
                     Item: {
                         account: users.account,
                         name: users.account,
-                        settings: [{
-                            title: "Time",
-                            subtitle: "Taiwan",
-                            gridItemSize: {width: 1, height: 1},
-                            gridItemIndex: 0,
-                        }]
+                        settings: {
+                            "Time_Taiwan":{
+                                title: "Time",
+                                subtitle: "Taiwan",
+                                gridItemSize: {width: 1, height: 1},
+                                gridItemIndex: 0,
+                            }
+                        }
                     }
                 }
                 db.dbput(userData).then(function(){

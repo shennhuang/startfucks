@@ -4,6 +4,7 @@
         <title>Home</title>
         <meta charset="utf-8">
         <meta name="_csrf" content= <%= csrfToken %> >
+        <% var userSettings = userData.settings %>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
@@ -21,12 +22,13 @@
             <p class="name">Hi! <%=userData.name %></p>
             <button class="blockListBtn" onclick="liskBtnOnclick()"></button>
         </header>
-        <main ondragover="allowDrop(event)" id="main">
+        <main ondragover="allowDrop(event);" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
-                for(let v of userData.settings) {
+                for(let key in userData.settings) {
+                    let v = userData.settings[key]; 
                     if(v.gridItemIndex === i) { %>
-                    <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event)" draggable="true" ondragstart="itemDrag(event)" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-                        <p onClick="removeItem(event)" name="remove" title="remove" class="tagRemove">x</p>
+                    <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                        <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                         <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
                         <p name="info">loading...</p>
                         <script>callApi("<%= v.title %>", "<%= v.subtitle %>");</script>
@@ -38,9 +40,7 @@
                     }
                 }
                 if(!hasItem) { %>
-                    <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event)" class="gridHidden">
-                        <!--<p><%= "hiddenGrid" +  i %></p>-->
-                    </div>
+                    <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
                 <% }
                 hasItem=false;
             } %>
@@ -64,15 +64,46 @@
         </div>
 
         <script>
-            function updateLocation(){
-                console.log('updateLocation');
+            function updateLocation() {
+                console.log('---updateLocation---');
+                let settings = JSON.parse('<%- JSON.stringify(userData.settings) %>');
+                
+                if(arguments[0]){
+                    delete settings[arguments[0]];
+                }else {
+                    let items = document.getElementById("main").children;
 
-                let mainChildren = document.getElementById("main").children;
-                let gridItemLocation = [];
-                for(let item of mainChildren){
-                    //console.log(item.id)
-
+                    for(let i = 0, j = 0; i < items.length; i++) {
+                        let item = items[i];
+                        let itemId = items[i].id;
+                        if(!(/hiddenGrid[0-9]+/).test(itemId)) {
+                            //console.log(itemId);
+                            //console.log(settings[itemId]);
+                            settings[itemId].gridItemIndex = i+j;
+                            let itemWidth = parseInt((item.style.cssText.split(' '))[5]);
+                            j += (itemWidth - 1);
+                        }
+                    }
                 }
+                console.log(settings);
+                //send settings to server for save
+                let host = 'http://localhost:8080';
+                $.ajax({
+                    url: host + '/home',
+                    type: 'POST',
+                    data:{
+                        settings,
+                        _csrf: $('meta[name="_csrf"]').attr('content')
+                    },
+                    error: function(){
+                        alert('Save Failed!');
+                    },
+                    success: function(result) {
+                        if(result) {
+                            alert('Auto Saved.');
+                        }
+                    }
+                });
             }
         </script>
     

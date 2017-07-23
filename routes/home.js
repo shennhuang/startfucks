@@ -9,7 +9,7 @@ function home(req, res) {
 
     let account = req.session.account;
     
-    var piggyIsCute = 1; //活著請選1,寫死請選0
+    var piggyIsCute = 0; //活著請選1,寫死請選0
     if(piggyIsCute){
         //////////活著真好/////////
         let getData = {
@@ -30,38 +30,38 @@ function home(req, res) {
         var userData = {
             [account]: {
                     name: account,
-                    settings: [
-                    {
-                        title: "Time",
-                        subtitle: "Taiwan",
-                        gridItemSize: {width: 1, height: 1},
-                        gridItemIndex: 8,
-                    },
-                    {
-                        title: "Weather",
-                        subtitle: "Taipei",
-                        gridItemSize: {width: 2, height: 1},
-                        gridItemIndex: 0,
-                    },            
-                    {
-                        title: "Weather",
-                        subtitle: "Nantou",
-                        gridItemSize: {width: 2, height: 1},
-                        gridItemIndex: 14,
-                    },
-                    {
-                        title: "Ubike",
-                        subtitle: "南港公園",
-                        gridItemSize: {width: 1, height: 1},
-                        gridItemIndex: 29,
-                    },
-                    {
-                        title: "Ubike",
-                        subtitle: "捷運南港軟體園區站(2號出口)",
-                        gridItemSize: {width: 1, height: 1},
-                        gridItemIndex: 22,
-                    },
-                    ]
+                    settings: {
+                        "Time_Taiwan":{
+                            title: "Time",
+                            subtitle: "Taiwan",
+                            gridItemSize: {width: 1, height: 1},
+                            gridItemIndex: 8,
+                        },
+                        "Weather_Taipei":{
+                            title: "Weather",
+                            subtitle: "Taipei",
+                            gridItemSize: {width: 2, height: 1},
+                            gridItemIndex: 0,
+                        },            
+                        "Weather_Nantou":{
+                            title: "Weather",
+                            subtitle: "Nantou",
+                            gridItemSize: {width: 2, height: 1},
+                            gridItemIndex: 14,
+                        },
+                        "Ubike_南港公園":{
+                            title: "Ubike",
+                            subtitle: "南港公園",
+                            gridItemSize: {width: 1, height: 1},
+                            gridItemIndex: 29,
+                        },
+                        "Ubike_捷運南港軟體園區站(2號出口)":{
+                            title: "Ubike",
+                            subtitle: "捷運南港軟體園區站(2號出口)",
+                            gridItemSize: {width: 1, height: 1},
+                            gridItemIndex: 22,
+                        },
+                    }
                 }
 
             };
