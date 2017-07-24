@@ -7,13 +7,10 @@ function home(req, res) {
     if(req.method === 'POST'){
         
         var userDataSave = {
-            TableName: "users_data",
+            TableName: "users_data;",
             Item : req.body.userData
         }
-        console.log({setting : userDataSave.Item.settings})
-        db.dbput(userDataSave,function(){
-            console.log({put:"put userData"});
-        })
+        db.dbput(userDataSave,function(){});
         res.send("GOOD");
     }else{
 
@@ -32,7 +29,6 @@ function home(req, res) {
         };
 
         db.dbget(getData, function(data){
-            console.log({homegetdata : data.Item.settings});
             var apiKeys = Object.keys(apidata);
             return res.render('home', {userData: data.Item, gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
         });
