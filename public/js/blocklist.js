@@ -1,5 +1,5 @@
 
-function liskBtnOnclick(){
+function listBtnOnclick(){
     var status = document.getElementsByClassName("blockList")[0].style.display;
     document.getElementsByClassName("blockList")[0].style.display = status == "none" ?  "" : "none";
 }
@@ -23,4 +23,7 @@ function blockAdded(account,apiName){
 }
 function blockRemove(){
 
+}
+function hiddenBlockList(){
+    document.getElementsByClassName("blockList")[0].style.display = "none";    
 }

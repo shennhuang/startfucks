@@ -4,7 +4,7 @@
         <title>Home</title>
         <meta charset="utf-8">
         <meta name="_csrf" content= <%= csrfToken %> >
-        <% var userSettings = userData.settings %>
+        <% var userSettings = userData.settings || {} %>
         <script>var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');</script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -21,9 +21,9 @@
     <body>
         <header>
             <p class="name">Hi! <%=userData.name %></p>
-            <button class="blockListBtn" onclick="liskBtnOnclick()"></button>
+            <button class="blockListBtn" onclick="listBtnOnclick()"></button>
         </header>
-        <main ondragover="allowDrop(event);" id="main">
+        <main ondragover="allowDrop(event);" onclick="hiddenBlockList()" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
                 for(let key in userData.settings) {
                     let v = userData.settings[key]; 
@@ -60,7 +60,9 @@
                           
                             <%  let v = apidata[apiKeys[i]]; %>
                             <div id="<%= v.title + "_" + v.subtitle + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                                <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                                 <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
+                                <p hidden="true" name="info">loading...</p>
 
                             </div>
 
