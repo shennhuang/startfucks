@@ -13,7 +13,7 @@ body{
 header{
     font-size: 25px;
     background-color: #3a170f; /** #33CCFF; */
-    width: 100vw;
+    width: 1440px;
     height: 50px;
 }
 .name{
@@ -26,6 +26,11 @@ main{
     display: grid;
     grid-template-columns: repeat(var(--gridColNum),[col] 1fr);
     grid-template-rows: repeat(var(--gridRowNum),[row] 1fr);
+}
+.blockListItem{
+    display: grid;
+    grid-template-columns: repeat(2,[col] calc((100vw - 12px) / 6));
+    grid-template-rows: repeat(1,[row] 1fr);
 }
 .tagRemove{
     margin: 5px 2px;
@@ -65,20 +70,20 @@ main{
     height:50px;
 }
 .blockList{
-    width:80vw;
-    height:900px;
+    width:50vw;
+    
     position: absolute;
     top:50px;
     right:0px;
     background-color:gray;
-    opacity:0.6;
+    opacity:1.0;
 }
 .optionsContainer{
-    width:50vw;
+    width:720px;
     height:25vh;
     text-align:center;
     vertical-align:middle;
-    background-color:red;
+    background-color:#FFF;
     border:3px blue solid;
 }
 .options{

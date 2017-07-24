@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="_csrf" content= <%= csrfToken %> >
         <% var userSettings = userData.settings %>
+        <script>var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');</script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
@@ -26,7 +27,7 @@
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
                 for(let key in userData.settings) {
                     let v = userData.settings[key]; 
-                    if(v.gridItemIndex === i) { %>
+                    if(+v.gridItemIndex === i) { %>
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                         <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
@@ -50,13 +51,26 @@
             <table class = "optionsContainer" border= '1'>
                 <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
                     <tr>
+                        
                         <td >
                             <font><%= apiKeys[i] %>:</font>
                         </td>
-                        <td>
+                        
+                        <td class="blockListItem">
+                          
+                            <%  let v = apidata[apiKeys[i]]; %>
+                            <div id="<%= v.title + "_" + v.subtitle + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                                <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
+
+                            </div>
+
+     
+
+                            <!--
                             <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= userData.account %>','<%= apiKeys[i] %>')">
 
                             </div>
+                            -->
                         </td>
                     </tr>
                 <% } %>
@@ -65,9 +79,9 @@
 
         <script>
             function updateLocation() {
-                console.log('---updateLocation---');
-                let settings = JSON.parse('<%- JSON.stringify(userData.settings) %>');
-                
+                //console.log('---updateLocation---');
+                //var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
+                //console.log(settings);
                 if(arguments[0]){
                     delete settings[arguments[0]];
                 }else {
@@ -85,7 +99,7 @@
                         }
                     }
                 }
-                console.log(settings);
+                //console.log(settings);
                 //send settings to server for save
                 let host = 'http://localhost:8080';
                 $.ajax({
@@ -100,7 +114,7 @@
                     },
                     success: function(result) {
                         if(result) {
-                            alert('Auto Saved.');
+                            alert(result);
                         }
                     }
                 });
