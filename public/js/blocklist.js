@@ -1,7 +1,7 @@
 
 function listBtnOnclick(){
     var status = document.getElementsByClassName("blockList")[0].style.display;
-    document.getElementsByClassName("blockList")[0].style.display = status == "none" ?  "" : "none";
+    document.getElementsByClassName("blockList")[0].style.display = status == "none" ?  "block" : "none";
 }
 
 function optionClick(account,apiName){

@@ -15,9 +15,10 @@
         <script type="text/javascript" src="/js/addScript.js"></script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
-        <script type="text/javascript" src="/js/blocklist.js"></script>
+        <script type="text/javascript" src="/js/blockList.js"></script>
         <script type="text/javascript" src="/js/removeItem.js"></script>
         <script type="text/javascript" src="/js/callApi.js"></script>
+        <script type="text/javascript" src="/js/editName.js"></script>
         <script type="text/javascript" src="/js/createSelectOptions.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
@@ -25,9 +26,20 @@
     </head>
     <body>
         <header>
-            <p class="name">Hi! <%=userData.name %></p>
+            <p class="hi">Hi!</p>
+            <p class = "userName"><%=userData.name %></p>
+            <button class = "setName" onclick="editName()"></button>
             <button class="blockListBtn" onclick="listBtnOnclick()"></button>
         </header>
+        <!--modal-->
+        <div class = "modalContainer">
+            <div class = "modal">
+                <h3 class="modalTitle">change name:</h3>
+                <input class="newName" type = "text"></input>
+                <button class="saveName" onclick="saveName()">save</button>
+            </div>
+        </div>
+        <!--modal-->
         <main ondragover="allowDrop(event);" onclick="hiddenBlockList()" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
                 for(let key in userData.settings) {
