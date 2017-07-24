@@ -19,5 +19,7 @@ function removeItem(event){
     let currentItemId = event.currentTarget.parentNode.id;
     document.getElementById('main').removeChild(event.currentTarget.parentNode);
 
-    updateLocation(currentItemId);
+    delete settings[currentItemId];
+
+    updateLocation();
 }

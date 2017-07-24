@@ -57,14 +57,17 @@ function start(req, res) {
                 if(data.Item){
                     return res.render('start',{loginErr : "", signupErr : "account has been used",csrfToken: req.csrfToken()});
                 }
-                var putData = {
+
+                //新增使用者帳號
+                var userAcc = {
                     TableName: "startfucks_users",
                     Item : {
                         account:users.account,
                         pwd:users.pwd,
                     }
                 }
-                db.dbput(putData);
+                db.dbput(userAcc).then(function(){}); //??
+
 
                 //新使用者預設資料
                 let userData = {
@@ -90,8 +93,6 @@ function start(req, res) {
                     res.redirect('/home');
 
                 });
-
-                
             });
 
         }

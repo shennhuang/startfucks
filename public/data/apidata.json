@@ -21,7 +21,7 @@
 
     "ubike":{
         "title": "Ubike",
-        "subtitle": "台北市立景美女中",
+        "subtitle": "臺北市立景美女中",
         "gridItemSize": {"width": 1, "height": 1},
         "gridItemLocation": {"x": 0, "y": 0},
         "list":{

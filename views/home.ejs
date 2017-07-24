@@ -68,7 +68,7 @@
 
                             <!--
                             <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= userData.account %>','<%= apiKeys[i] %>')">
-
+                            <script>console.log('<%= userData.settings %>')</script>
                             </div>
                             -->
                         </td>
@@ -80,25 +80,24 @@
         <script>
             function updateLocation() {
                 //console.log('---updateLocation---');
-                //var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
-                //console.log(settings);
-                if(arguments[0]){
-                    delete settings[arguments[0]];
-                }else {
-                    let items = document.getElementById("main").children;
+                let userData = JSON.parse('<%- JSON.stringify(userData) %>');
+                //let settings = userData.settings;
 
-                    for(let i = 0, j = 0; i < items.length; i++) {
-                        let item = items[i];
-                        let itemId = items[i].id;
-                        if(!(/hiddenGrid[0-9]+/).test(itemId)) {
-                            //console.log(itemId);
-                            //console.log(settings[itemId]);
-                            settings[itemId].gridItemIndex = i+j;
-                            let itemWidth = parseInt((item.style.cssText.split(' '))[5]);
-                            j += (itemWidth - 1);
-                        }
+                let items = document.getElementById("main").children;
+
+                for(let i = 0, j = 0; i < items.length; i++) {
+                    let item = items[i];
+                    let itemId = items[i].id;
+                    if(!(/hiddenGrid[0-9]+/).test(itemId)) {
+                        //console.log(itemId);
+                        //console.log(settings[itemId]);
+                        settings[itemId].gridItemIndex = i+j;
+                        let itemWidth = parseInt((item.style.cssText.split(' '))[5]);
+                        j += (itemWidth - 1);
                     }
                 }
+
+                userData.settings = settings;
                 //console.log(settings);
                 //send settings to server for save
                 let host = 'http://localhost:8080';
@@ -106,15 +105,15 @@
                     url: host + '/home',
                     type: 'POST',
                     data:{
-                        settings,
+                        userData,
                         _csrf: $('meta[name="_csrf"]').attr('content')
                     },
                     error: function(){
-                        alert('Save Failed!');
+                        // alert('Save Failed!');
                     },
                     success: function(result) {
                         if(result) {
-                            alert(result);
+                            // alert(result);
                         }
                     }
                 });

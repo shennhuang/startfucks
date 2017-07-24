@@ -5,13 +5,21 @@ function liskBtnOnclick(){
 }
 
 function optionClick(account,apiName){
-    
     blockAdded(account,apiName)
 }
 
 function blockAdded(account,apiName){
-    console.log({account : account})
-    console.log({apiName : apiName})
+    
+    //改route
+    // var getUserData =  {
+    //     TableName: "users_data",
+    //     Keys: {account,}
+    // };
+    
+    // db.dbget(getUserData,function(data){
+    //     console.log({Userdata : data})
+    // })
+
 }
 function blockRemove(){
 
