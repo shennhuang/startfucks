@@ -10,9 +10,13 @@ function home(req, res) {
             TableName: "users_data;",
             Item : req.body.userData
         }
-        db.dbput(userDataSave,function(){});
-        res.send("GOOD");
-    }else{
+
+        console.log({setting : userDataSave.Item.settings})
+        db.dbput(userDataSave,function(){
+            console.log({put:"put userData"});
+        })
+        return res.send("Auto Saved!");
+    }
 
     if(!req.session || !req.session.account || !req.session.pwd){
         return res.redirect('/start');
@@ -76,7 +80,6 @@ function home(req, res) {
 
         var apiKeys = Object.keys(apidata);
         return res.render('home', {userData: userData[account], gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
-    }
     }
 }
 

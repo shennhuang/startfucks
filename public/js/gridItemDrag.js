@@ -1,35 +1,53 @@
 function allowDrop(event){
     event.preventDefault();
+
+    hiddenBlockList();
 }
 function itemDrag(event){
-    event.dataTransfer.setData("text", event.currentTarget.id);
-
     //check hasItem in settings
     //console.log(event.currentTarget.id)
+
+    console.log( (event.currentTarget.id.split('_'))[2])
     
     if((event.currentTarget.id.split('_'))[2]){
         let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + (event.currentTarget.id.split("_"))[1];
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
+            return;
         }
     }
+    event.dataTransfer.setData("text", event.currentTarget.id);
+    
 }
 var n = 60;
 function dropOnItem(event){
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
-    let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
 
-    if(selectItemId !== event.currentTarget.id){ 
+    if(selectItemId && selectItemId !== event.currentTarget.id){ 
 
+        let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
+        
         //save selectItem in temp
         let selectItem = document.getElementById(selectItemId);
 
+        //add item
         if(!settings.hasOwnProperty(selectItemId)){
             //console.log('dropOnItem')
+            let title = (selectItem.id.split("_"))[0];
+            let subtitle = (selectItem.id.split("_"))[1];
             selectItem = document.getElementById(selectItemId).cloneNode(true);
-            selectItem.id = (selectItem.id.split("_"))[0] + "_" + (selectItem.id.split("_"))[1];
+            selectItem.id = title + "_" + subtitle;
 
+            //add children in item
+            selectItem.children[0].removeAttribute("hidden");
+            selectItem.children[2].removeAttribute("hidden");
+
+            let scriptElement = document.createElement("script");
+            scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+            selectItem.appendChild(scriptElement);
+
+            //update settings
             settings[selectItem.id] = {
                 title: (selectItem.id.split("_"))[0],
                 subtitle: (selectItem.id.split("_"))[1],
@@ -59,21 +77,33 @@ function dropOnItem(event){
 }
 function dropOnHiddenItem(event){
     event.preventDefault();
-
     
     let selectItemId = event.dataTransfer.getData("text");
-    let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
 
+    if(selectItemId && selectItemId !== event.currentTarget.id) {
 
-    if(selectItemId !== event.currentTarget.id) {
-
+        let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
+        
         //save selectItem in temp
         let selectItem = document.getElementById(selectItemId);
 
+        let title = (selectItem.id.split("_"))[0];
+        let subtitle = (selectItem.id.split("_"))[1];
+
+        //add item
         if(!settings.hasOwnProperty(selectItemId)){
             selectItem = document.getElementById(selectItemId).cloneNode(true);
-            selectItem.id = (selectItem.id.split("_"))[0] + "_" + (selectItem.id.split("_"))[1];
+            selectItem.id = title + "_" + subtitle;
 
+            //add children in item
+            selectItem.children[0].removeAttribute("hidden");
+            selectItem.children[2].removeAttribute("hidden");
+
+            let scriptElement = document.createElement("script");
+            scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+            selectItem.appendChild(scriptElement);
+
+            //update settings
             settings[selectItem.id] = {
                 title: (selectItem.id.split("_"))[0],
                 subtitle: (selectItem.id.split("_"))[1],
