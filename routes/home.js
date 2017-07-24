@@ -7,7 +7,7 @@ function home(req, res) {
     if(req.method === 'POST'){
         
         var userDataSave = {
-            TableName: "users_data;",
+            TableName: "users_data",
             Item : req.body.userData
         }
 

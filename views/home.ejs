@@ -66,7 +66,7 @@
                             <%  let v = apidata[apiKeys[i]]; %>
                             <div id="<%= v.title + "_" + v.subtitle + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
 
-                                <font name="title" class="itemTitle"><%= v.title + "-" %></font>
+                                <font name="title" class="itemTitle"><%= v.title + "-"%></font>
                                 <select class = "<%= apiKeys[i] %>Select" ></select>
 
                                 <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
@@ -80,5 +80,6 @@
             </table>
         </div>
         <script>createSelectOptions('<%- JSON.stringify(apidata) %>')</script>
+        <!--<script>updateLocation()</script>-->
     </body>
 </html>
