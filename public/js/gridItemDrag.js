@@ -1,23 +1,21 @@
 function allowDrop(event){
     event.preventDefault();
-
     hiddenBlockList();
 }
-function itemDrag(event){
-    //check hasItem in settings
-    //console.log(event.currentTarget.id)
+function itemDrag(event){  
+    //check new item
+    if((event.currentTarget.id.split('_'))[1] === 'default'){
 
-    console.log( (event.currentTarget.id.split('_'))[2])
-    
-    if((event.currentTarget.id.split('_'))[2]){
-        let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + (event.currentTarget.id.split("_"))[1];
+        let selectValue = event.currentTarget.querySelector("select").value;
+        let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
+
+        //check item has in settings
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
             return;
         }
     }
     event.dataTransfer.setData("text", event.currentTarget.id);
-    
 }
 var n = 60;
 function dropOnItem(event){
@@ -33,15 +31,22 @@ function dropOnItem(event){
 
         //add item
         if(!settings.hasOwnProperty(selectItemId)){
-            //console.log('dropOnItem')
             let title = (selectItem.id.split("_"))[0];
-            let subtitle = (selectItem.id.split("_"))[1];
+            let subtitle = selectItem.querySelector("select").value;
+
             selectItem = document.getElementById(selectItemId).cloneNode(true);
+
             selectItem.id = title + "_" + subtitle;
 
-            //add children in item
-            selectItem.children[0].removeAttribute("hidden");
-            selectItem.children[2].removeAttribute("hidden");
+            selectItem.removeChild(selectItem.querySelector("font"));
+            selectItem.removeChild(selectItem.querySelector("select"));
+
+            //update item content
+            selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("p[name=title]").removeAttribute("hidden");
+            selectItem.querySelector("p[name=info]").removeAttribute("hidden");
+
+            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle;
 
             let scriptElement = document.createElement("script");
             scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
@@ -49,13 +54,12 @@ function dropOnItem(event){
 
             //update settings
             settings[selectItem.id] = {
-                title: (selectItem.id.split("_"))[0],
-                subtitle: (selectItem.id.split("_"))[1],
+                title,
+                subtitle,
                 gridItemSize: {width: selectItemWidth, height: 1},
                 gridItemIndex: -1,
             };
 
- 
             //delete hidden grid
             let items = document.getElementById("main").children;
             for(let i = items.length-1, n = selectItemWidth; i >= 0 && n > 0; i--){
@@ -68,7 +72,6 @@ function dropOnItem(event){
             }
             
         }
-
         document.getElementById('main').insertBefore(selectItem,document.getElementById(event.currentTarget.id));
 
         updateLocation();
@@ -87,17 +90,25 @@ function dropOnHiddenItem(event){
         //save selectItem in temp
         let selectItem = document.getElementById(selectItemId);
 
-        let title = (selectItem.id.split("_"))[0];
-        let subtitle = (selectItem.id.split("_"))[1];
-
         //add item
         if(!settings.hasOwnProperty(selectItemId)){
+
+            let title = (selectItem.id.split("_"))[0];
+            let subtitle = selectItem.querySelector("select").value;
+
             selectItem = document.getElementById(selectItemId).cloneNode(true);
+
             selectItem.id = title + "_" + subtitle;
 
-            //add children in item
-            selectItem.children[0].removeAttribute("hidden");
-            selectItem.children[2].removeAttribute("hidden");
+            selectItem.removeChild(selectItem.querySelector("font"));
+            selectItem.removeChild(selectItem.querySelector("select"));
+
+            //update item content
+            selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("p[name=title]").removeAttribute("hidden");
+            selectItem.querySelector("p[name=info]").removeAttribute("hidden");
+
+            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle;
 
             let scriptElement = document.createElement("script");
             scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
@@ -105,15 +116,13 @@ function dropOnHiddenItem(event){
 
             //update settings
             settings[selectItem.id] = {
-                title: (selectItem.id.split("_"))[0],
-                subtitle: (selectItem.id.split("_"))[1],
+                title,
+                subtitle,
                 gridItemSize: {width: selectItemWidth, height: 1},
                 gridItemIndex: -1,
             };
         }
-        //console.log(settings)
-
-        if(settings.hasOwnProperty(selectItemId)){
+        else if(settings.hasOwnProperty(selectItemId)){
 
             //insert hidden grid
             for(let i = 0; i < selectItemWidth; i++) {
@@ -130,8 +139,6 @@ function dropOnHiddenItem(event){
             document.getElementById('main').removeChild(document.getElementById(selectItemId));
         
         }
-
-
         //remove targetLocation item
         for(let i = 0; i < selectItemWidth-1; i++) {
             let divElements = document.getElementsByTagName('div');
@@ -162,15 +169,3 @@ function dropOnHiddenItem(event){
         updateLocation();
     }
 }
-/** 
- * the function current not use maybe...
-function dropOnMain(event){
-    let tempDiv = document.createElement("DIV");
-    tempDiv.setAttribute("id", "tempDiv")
-    document.getElementById('main').appendChild(tempDiv);
-    let selectItemId = event.dataTransfer.getData("text");
-    document.getElementById('main').insertBefore(document.getElementById(selectItemId),document.getElementById('tempDiv'));
-    document.getElementById('main').removeChild(document.getElementById('tempDiv'));
-}
-
-**/

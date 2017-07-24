@@ -15,9 +15,10 @@
         <script type="text/javascript" src="/js/addScript.js"></script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
-        <script type="text/javascript" src="/js/blocklist.js"></script>
+        <script type="text/javascript" src="/js/blockList.js"></script>
         <script type="text/javascript" src="/js/removeItem.js"></script>
         <script type="text/javascript" src="/js/callApi.js"></script>
+        <script type="text/javascript" src="/js/editName.js"></script>
         <script type="text/javascript" src="/js/createSelectOptions.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
@@ -25,9 +26,20 @@
     </head>
     <body>
         <header>
-            <p class="name">Hi! <%=userData.name %></p>
+            <p class="hi">Hi!</p>
+            <p class = "userName"><%=userData.name %></p>
+            <button class = "setName" onclick="editName()"></button>
             <button class="blockListBtn" onclick="listBtnOnclick()"></button>
         </header>
+        <!--modal-->
+        <div class = "modalContainer">
+            <div class = "modal">
+                <h3 class="modalTitle">change name:</h3>
+                <input class="newName" type = "text"></input>
+                <button class="saveName" onclick="saveName()">save</button>
+            </div>
+        </div>
+        <!--modal-->
         <main ondragover="allowDrop(event);" onclick="hiddenBlockList()" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
                 for(let key in userData.settings) {
@@ -46,7 +58,7 @@
                     }
                 }
                 if(!hasItem) { %>
-                    <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
+                    <div id="<%= "hiddenGrid" + i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
                 <% }
                 hasItem=false;
             } %>
@@ -64,13 +76,13 @@
                         <td class="blockListItem">
                           
                             <%  let v = apidata[apiKeys[i]]; %>
-                            <div id="<%= v.title + "_" + v.subtitle + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                            <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
 
-                                <font name="title" class="itemTitle"><%= v.title + "-"%></font>
-                                <select class = "<%= apiKeys[i] %>Select" ></select>
+                                <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
+                                <select name="select" class = "<%= apiKeys[i] %>Select" ></select>
 
                                 <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
-                                <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
+                                <p hidden="true" name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
                                 <p hidden="true" name="info">loading...</p>
 
                             </div>
@@ -80,6 +92,5 @@
             </table>
         </div>
         <script>createSelectOptions('<%- JSON.stringify(apidata) %>')</script>
-        <!--<script>updateLocation()</script>-->
     </body>
 </html>

@@ -11,7 +11,7 @@ function home(req, res) {
             Item : req.body.userData
         }
 
-        console.log({setting : userDataSave.Item.settings})
+        //console.log({setting : userDataSave.Item.settings})
         db.dbput(userDataSave,function(){
             console.log({put:"put userData"});
         })
