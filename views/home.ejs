@@ -46,7 +46,7 @@
                     }
                 }
                 if(!hasItem) { %>
-                    <div id="<%= "hiddenGrid" +  i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
+                    <div id="<%= "hiddenGrid" + i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
                 <% }
                 hasItem=false;
             } %>
@@ -64,13 +64,13 @@
                         <td class="blockListItem">
                           
                             <%  let v = apidata[apiKeys[i]]; %>
-                            <div id="<%= v.title + "_" + v.subtitle + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                            <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
 
-                                <font name="title" class="itemTitle"><%= v.title + "-" %></font>
-                                <select class = "<%= apiKeys[i] %>Select" ></select>
+                                <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
+                                <select name="select" class = "<%= apiKeys[i] %>Select" ></select>
 
                                 <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
-                                <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
+                                <p hidden="true" name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
                                 <p hidden="true" name="info">loading...</p>
 
                             </div>

@@ -7,11 +7,11 @@ function home(req, res) {
     if(req.method === 'POST'){
         
         var userDataSave = {
-            TableName: "users_data;",
+            TableName: "users_data",
             Item : req.body.userData
         }
 
-        console.log({setting : userDataSave.Item.settings})
+        //console.log({setting : userDataSave.Item.settings})
         db.dbput(userDataSave,function(){
             console.log({put:"put userData"});
         })
