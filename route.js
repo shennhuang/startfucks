@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     res.redirect('start');
 });
 
-router.get('/home', function(req, res) {
+router.use('/home', function(req, res) {
     return home(req ,res);
 });
 

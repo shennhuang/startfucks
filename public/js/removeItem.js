@@ -8,7 +8,7 @@ function removeItem(event){
         let hiddenGrid = document.createElement("DIV");
         let gId = "hiddenGrid"+ n++;
         hiddenGrid.setAttribute("id", gId);
-        hiddenGrid.setAttribute("ondrop","dropOnHiddenItem(event)");
+        hiddenGrid.setAttribute("ondrop","dropOnHiddenItem(event); updateLocation();");
         hiddenGrid.setAttribute("class","gridHidden");
         
         document.getElementById('main').insertBefore(hiddenGrid, event.currentTarget.parentNode);
@@ -16,5 +16,8 @@ function removeItem(event){
 
     //document.body.removeChild(document.getElementById("script_" + event.currentTarget.parentNode.id));
 
+    let currentItemId = event.currentTarget.parentNode.id;
     document.getElementById('main').removeChild(event.currentTarget.parentNode);
+
+    updateLocation(currentItemId);
 }
