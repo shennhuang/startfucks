@@ -14,8 +14,8 @@ function home(req, res) {
         db.dbput(userDataSave,function(){
             console.log({put:"put userData"});
         })
-        res.send("GOOD");
-    }else{
+        return res.send("Auto Saved!");
+    }
 
     if(!req.session || !req.session.account || !req.session.pwd){
         return res.redirect('/start');
@@ -80,7 +80,6 @@ function home(req, res) {
 
         var apiKeys = Object.keys(apidata);
         return res.render('home', {userData: userData[account], gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
-    }
     }
 }
 

@@ -5,11 +5,15 @@
         <meta charset="utf-8">
         <meta name="_csrf" content= <%= csrfToken %> >
         <% var userSettings = userData.settings || {} %>
-        <script>var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');</script>
+        <script>
+            var userData = JSON.parse('<%- JSON.stringify(userData) %>');
+            var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
+        </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/addScript.js"></script>
+        <script type="text/javascript" src="/js/updateLocation.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
         <script type="text/javascript" src="/js/blocklist.js"></script>
         <script type="text/javascript" src="/js/removeItem.js"></script>
@@ -66,8 +70,6 @@
 
                             </div>
 
-     
-
                             <!--
                             <div class = "options" style = "width:calc((100vw - 24px)/6*1)" onclick = "optionClick('<%= userData.account %>','<%= apiKeys[i] %>')">
                             <script>console.log('<%= userData.settings %>')</script>
@@ -79,48 +81,5 @@
             </table>
         </div>
 
-        <script>
-            function updateLocation() {
-                //console.log('---updateLocation---');
-                let userData = JSON.parse('<%- JSON.stringify(userData) %>');
-                //let settings = userData.settings;
-
-                let items = document.getElementById("main").children;
-
-                for(let i = 0, j = 0; i < items.length; i++) {
-                    let item = items[i];
-                    let itemId = items[i].id;
-                    if(!(/hiddenGrid[0-9]+/).test(itemId)) {
-                        //console.log(itemId);
-                        //console.log(settings[itemId]);
-                        settings[itemId].gridItemIndex = i+j;
-                        let itemWidth = parseInt((item.style.cssText.split(' '))[5]);
-                        j += (itemWidth - 1);
-                    }
-                }
-
-                userData.settings = settings;
-                //console.log(settings);
-                //send settings to server for save
-                let host = 'http://localhost:8080';
-                $.ajax({
-                    url: host + '/home',
-                    type: 'POST',
-                    data:{
-                        userData,
-                        _csrf: $('meta[name="_csrf"]').attr('content')
-                    },
-                    error: function(){
-                        // alert('Save Failed!');
-                    },
-                    success: function(result) {
-                        if(result) {
-                            // alert(result);
-                        }
-                    }
-                });
-            }
-        </script>
-    
     </body>
 </html>
