@@ -1,12 +1,12 @@
-function ubike(stationName){
+function ubikeNTP(stationName){
 
     let host = 'http://localhost:8080';
-    let element = document.getElementById('Ubike_'+stationName);
+    let element = document.getElementById('Ubike(新北)_'+stationName);
 
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=ubike',
+            url: host + '/apis?q=ubikeNTP',
             type: 'POST',
             data:{
                 stationName,
@@ -17,14 +17,13 @@ function ubike(stationName){
             },
             success: function(result) {
                 if(result) {
-                    
-                    element.querySelector('p[name=info]').innerHTML = '剩餘數量： ' + result + '<br><br>Update: ' + new Date().toLocaleString();
+                    element.querySelector('p[name=info]').innerHTML = '剩餘數量： ' + result.AvailableRentBikes + '<br>剩餘空位： ' + result.AvailableReturnBikes + '<br><br>Update: ' + new Date(result.UpdateTime).toLocaleString();
                 }
             }
         });
 
         setTimeout(function(){
-            ubike(stationName);
+            ubikeNTP(stationName);
         },300000);
     }
 }
