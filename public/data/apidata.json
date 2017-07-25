@@ -41,7 +41,7 @@
     },
 
     "ubike":{
-        "title": "Taipei_Ubike",
+        "title": "Ubike",
         "subtitle": "臺北市立景美女中",
         "gridItemSize": {"width": 1, "height": 1},
         "list":{
