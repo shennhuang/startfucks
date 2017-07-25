@@ -1,4 +1,5 @@
 var express = require('express')
+var hash = require('../pwdHash/pwdHash.js')
 var app = express();
 
 const bodyParser = require('body-parser');
@@ -26,16 +27,15 @@ function start(req, res) {
                 }
             }
 
-            var pwd = req.body.loginPwd;
+            var hashpwd = hash.saltHashPassword(req.body.loginPwd);
             db.dbget(getUsers,function(data){
-                if(!data.Item || pwd != data.Item.pwd){
+                if(!data.Item || hashpwd != data.Item.pwd){
                     console.log("worng!!!")
                     res.render('start',{loginErr : "account or password is wrong", signupErr : "",csrfToken: req.csrfToken()});
                     return;
                 }
                 
                 req.session.account = req.body.loginAcc;
-                req.session.pwd = req.body.loginPwd;
                 return res.redirect('/home');
             })
         }else if(act == "signup"){
@@ -59,11 +59,13 @@ function start(req, res) {
                 }
 
                 //新增使用者帳號
+                var hashpwd = hash.saltHashPassword(users.pwd);// pwd add salt and hash
+                console.log(hashpwd);
                 var userAcc = {
                     TableName: "startfucks_users",
                     Item : {
                         account:users.account,
-                        pwd:users.pwd,
+                        pwd:hashpwd,
                     }
                 }
                 db.dbput(userAcc).then(function(){}); //??
@@ -88,7 +90,6 @@ function start(req, res) {
                 db.dbput(userData).then(function(){
 
                     req.session.account = users.account;
-                    req.session.pwd = users.pwd;
 
                     res.redirect('/home');
 

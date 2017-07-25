@@ -18,7 +18,7 @@ function home(req, res) {
         return res.send("Auto Saved!");
     }
 
-    if(!req.session || !req.session.account || !req.session.pwd){
+    if(!req.session || !req.session.account){
         return res.redirect('/start');
     }
 

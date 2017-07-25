@@ -1,6 +1,6 @@
 function createSelectOptions(apidata){
-
-    apidata = JSON.parse(apidata);
+    console.log(apidata)
+    // apidata = JSON.parse(apidata);
     let apiKeys = Object.keys(apidata);
     
     for (let item of apiKeys) {
