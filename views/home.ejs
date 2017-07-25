@@ -11,6 +11,7 @@
             var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
@@ -19,11 +20,13 @@
         <script type="text/javascript" src="/js/removeItem.js"></script>
         <script type="text/javascript" src="/js/callApi.js"></script>
         <script type="text/javascript" src="/js/editName.js"></script>
+        <script type="text/javascript" src="/js/logout.js"></script>
         <script type="text/javascript" src="/js/createSelectOptions.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
         <script type="text/javascript" src="/js/ubike.js"></script>
         <script type="text/javascript" src="/js/ubikeNTP.js"></script>
+        
     </head>
     <body>
         <header>
@@ -43,6 +46,21 @@
         </div>
         <!--modal-->
 
+        <!--toolbar-->
+        <div class = "toolbarContainer">
+            <table class = "toolbarTable">
+                <tr>
+                    <td>
+                        <i class="fa fa-cog fa-3" name="toolbarIcon" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <i class="fa fa-th-list" name="toolbarIcon" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--toolbar-->
+        
         <div style = "height:50px;"></div>
         <main ondragover="allowDrop(event);" onclick="hiddenBlockList()" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
@@ -88,8 +106,6 @@
                 <% } %>
             </table>
         </div>
-        <script>
-            createSelectOptions(apidata);
-        </script>
+        <script>createSelectOptions(apidata);</script>
     </body>
 </html>

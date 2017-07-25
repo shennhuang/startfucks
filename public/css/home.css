@@ -30,6 +30,7 @@ header{
     margin : 0;
     display: inline-block;
 }
+/*modal*/
 .modalContainer{
     width:100%;
     height:100%;
@@ -50,6 +51,26 @@ header{
     margin: 0;
     display: inline-block;
 }
+/*modal*/
+
+/*toobar*/
+.toolbarContainer{
+    position: fixed;
+    right:15px;
+    bottom:15px;
+    /*background-color:rgba(0,0,0,0.1);*/
+}
+.toolbarTable i{
+    margin:0 10px;
+    font-size:32px;
+    color:rgba(0,0,0,0.5);
+}
+.toolbarTable i:hover{
+    font-size:32px;
+    color:rgba(0,0,0,1);
+}
+/*toobar*/
+
 main{
     display: grid;
     grid-template-columns: repeat(var(--gridColNum),[col] 1fr);
