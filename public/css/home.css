@@ -90,6 +90,14 @@ main{
     font-weight:bold;
     font-size:18px;
 }
+.itemTitleLink{
+    font-weight:bold;
+    font-size:18px;
+    color: #037;
+}
+.itemTitleLink:hover{
+    color: #06f;
+}
 .blockListBtn{
     display: inline-block;
     position: absolute;
@@ -103,7 +111,7 @@ main{
     position: fixed;
     top:50px;
     right:0px;
-    border:3px blue solid;
+    border:3px #f6c6ec solid;
     background-color:gray;
     opacity:1.0;
     overflow: scroll;
@@ -114,5 +122,9 @@ main{
     text-align:center;
     vertical-align:middle;
     background-color:#FFF;
-    border:3px blue solid;
+    border:3px #ecf6c6 solid;
+    background-color: #ecf6c6;
+}
+#select{
+    font-size: 100%;
 }

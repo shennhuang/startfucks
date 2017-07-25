@@ -76,9 +76,9 @@ function start(req, res) {
                         account: users.account,
                         name: users.account,
                         settings: {
-                            "Time_Taiwan":{
+                            "Time_臺灣":{
                                 title: "Time",
-                                subtitle: "Taiwan",
+                                subtitle: "臺灣",
                                 gridItemSize: {width: 1, height: 1},
                                 gridItemIndex: 0,
                             }

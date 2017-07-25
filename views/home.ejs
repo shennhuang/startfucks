@@ -80,7 +80,7 @@
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
 
                                 <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
-                                <select name="select" class = "<%= apiKeys[i] %>Select" ></select>
+                                <select id="select" name="select" class = "<%= apiKeys[i] %>Select" ></select>
 
                                 <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                                 <p hidden="true" name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
