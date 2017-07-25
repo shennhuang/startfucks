@@ -4,6 +4,7 @@ function allowDrop(event){
 }
 function itemDrag(event){  
     //check new item
+
     if((event.currentTarget.id.split('_'))[1] === 'default'){
 
         let selectValue = event.currentTarget.querySelector("select").value;
