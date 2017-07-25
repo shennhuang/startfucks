@@ -13,8 +13,10 @@ body{
 header{
     font-size: 25px;
     background-color: #3a170f; /** #33CCFF; */
-    width: 1440px;
+    width: 100vw;
     height: 50px;
+    position:fixed;
+    top :0px
 }
 .hi{
     color: #F0FFFF;
@@ -96,8 +98,7 @@ main{
 }
 .blockList{
     width:50vw;
-    
-    position: absolute;
+    position: fixed;
     top:50px;
     right:0px;
     background-color:gray;
