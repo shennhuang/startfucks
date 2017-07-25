@@ -8,6 +8,7 @@
         <script>
             var userData = JSON.parse('<%- JSON.stringify(userData) %>');
             var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
+            var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,6 +32,7 @@
             <button class = "setName" onclick="editName()"></button>
             <button class="blockListBtn" title="Add Item" onclick="listBtnOnclick()"><img src="/img/plus.png" height="40px" style="vertical-align: middle;" onmouseover="listBtnOnMouseOver()"/></button>
         </header>
+
         <!--modal-->
         <div class = "modalContainer">
             <div class = "modal">
@@ -40,6 +42,7 @@
             </div>
         </div>
         <!--modal-->
+
         <div style = "height:50px;"></div>
         <main ondragover="allowDrop(event);" onclick="hiddenBlockList()" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
@@ -85,6 +88,8 @@
                 <% } %>
             </table>
         </div>
-        <script>createSelectOptions('<%- JSON.stringify(apidata) %>')</script>
+        <script>
+            createSelectOptions(apidata);
+        </script>
     </body>
 </html>
