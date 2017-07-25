@@ -14,11 +14,10 @@ function removeItem(event){
         document.getElementById('main').insertBefore(hiddenGrid, event.currentTarget.parentNode);
     }
 
-    //document.body.removeChild(document.getElementById("script_" + event.currentTarget.parentNode.id));
-
     let currentItemId = event.currentTarget.parentNode.id;
     document.getElementById('main').removeChild(event.currentTarget.parentNode);
 
+    //從前端settings裡移除該item
     delete settings[currentItemId];
 
     updateLocation();

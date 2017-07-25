@@ -3,19 +3,20 @@ function allowDrop(event){
     hiddenBlockList();
 }
 function itemDrag(event){  
-    //check new item
 
+    //用id是否有default來判斷是否要新增item
     if((event.currentTarget.id.split('_'))[1] === 'default'){
 
         let selectValue = event.currentTarget.querySelector("select").value;
         let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
 
-        //check item has in settings
+        //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
             return;
         }
     }
+    //將要記錄的資訊放入事件中(這裡紀錄目前拖曳的目標物件id)
     event.dataTransfer.setData("text", event.currentTarget.id);
 }
 var n = 60;

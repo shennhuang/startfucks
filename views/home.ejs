@@ -4,7 +4,7 @@
         <title>Home</title>
         <meta charset="utf-8">
         <meta name="_csrf" content= <%= csrfToken %> >
-        <% var userSettings = userData.settings || {} %>
+        <% var userSettings = userData.settings || {}; %>
         <script>
             var userData = JSON.parse('<%- JSON.stringify(userData) %>');
             var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
@@ -29,7 +29,7 @@
             <p class="hi">Hi!</p>
             <p class = "userName"><%=userData.name %></p>
             <button class = "setName" onclick="editName()"></button>
-            <button class="blockListBtn" onclick="listBtnOnclick()"></button>
+            <button class="blockListBtn" title="Add Item" onclick="listBtnOnclick()"><img src="/img/plus.png" height="40px" style="vertical-align: middle;" onmouseover="listBtnOnMouseOver()"/></button>
         </header>
         <!--modal-->
         <div class = "modalContainer">
@@ -51,7 +51,6 @@
                         <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
                         <p name="info">loading...</p>
                         <script>callApi("<%= v.title %>", "<%= v.subtitle %>");</script>
-                        <!--<script>addScript("<%= v.title %>", "<%=v.subtitle %>");</script>-->
                     </div>
                     <%  i+= (v.gridItemSize.width - 1);
                         hasItem = true;
@@ -72,20 +71,14 @@
                         <%  let v = apidata[apiKeys[i]]; %>
                         <td >
                             <font><%= v.title %>:</font>
-                        </td>
-                        
+                        </td>                      
                         <td class="blockListItem">
-                          
-                            
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-
                                 <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
                                 <select id="select" name="select" class = "<%= apiKeys[i] %>Select" ></select>
-
                                 <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                                 <p hidden="true" name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
                                 <p hidden="true" name="info">loading...</p>
-
                             </div>
                         </td>
                     </tr>

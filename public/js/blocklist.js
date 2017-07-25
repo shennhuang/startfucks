@@ -27,3 +27,6 @@ function blockRemove(){
 function hiddenBlockList(){
     document.getElementsByClassName("blockList")[0].style.display = "none";    
 }
+function listBtnOnMouseOver(){
+    document.getElementsByClassName("blockList")[0].style.display = "block";
+}

@@ -66,7 +66,7 @@ function start(req, res) {
                         pwd:users.pwd,
                     }
                 }
-                db.dbput(userAcc).then(function(){}); //??
+                db.dbput(userAcc);
 
 
                 //新使用者預設資料

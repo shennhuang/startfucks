@@ -25,7 +25,7 @@ function updateLocation() {
             _csrf: $('meta[name="_csrf"]').attr('content')
         },
         error: function(){
-            alert('Save Failed!');
+            alert('Save Failed!請重新登入');
         },
         success: function(result) {
             if(result) {

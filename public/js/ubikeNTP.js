@@ -17,11 +17,10 @@ function ubikeNTP(stationName){
             },
             success: function(result) {
                 if(result) {
-                    //gps
                     let lat = result.stationLoc.PositionLat;
                     let lon = result.stationLoc.PositionLon;
-
                     let mapUrl = "https://www.google.com.tw/maps/place/" + lat+"N+" + lon+"E";
+                    //設定點選事件並更換class(with pseudo class)
                     element.querySelector('p[name=title]').setAttribute("onclick", 'window.open(\"' + mapUrl + '\")');
                     element.querySelector('p[name=title]').removeAttribute("class");
                     element.querySelector('p[name=title]').setAttribute("class", "itemTitleLink");
