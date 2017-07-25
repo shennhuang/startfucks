@@ -6,6 +6,12 @@
     }
     function saveName(){
         var newName = document.getElementsByClassName('newName')[0].value;
+        if (!newName) {
+            document.getElementsByClassName('newName')[0].value = 
+                document.getElementsByClassName('userName')[0].innerHTML;
+            alert('你媽沒幫你取名膩？')
+            return;
+        }
         document.getElementsByClassName('userName')[0].innerHTML = newName;
 
         document.getElementsByClassName('modalContainer')[0].style.display = "none";

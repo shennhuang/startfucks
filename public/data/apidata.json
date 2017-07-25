@@ -41,7 +41,7 @@
     },
 
     "ubike":{
-        "title": "Ubike",
+        "title": "Taipei_Ubike",
         "subtitle": "臺北市立景美女中",
         "gridItemSize": {"width": 1, "height": 1},
         "list":{
@@ -399,6 +399,14 @@
             "世新大學": "0369",
             "新和國小": "0370",
             "春光公園": "0379" 
+        }
+    },
+    "newTaipeiUbike":{
+        "title": "newTaipeiUbike",
+        "subtitle": "New Taipei City",
+        "gridItemSize": {"width": 2, "height": 1},
+        "list":{
+            
         }
     }
 }
