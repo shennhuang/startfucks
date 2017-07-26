@@ -16,12 +16,10 @@ function news(newsSite){
                 window.open(host + '/start', '_self');
             },
             success: function(result) {
-                if(result && result.status === 'ok') {
-                    let articles = result.articles;
+                if(result) {
                     element.querySelector('p[name=info]').innerHTML = "";
-                    for(let i in articles){
-                        let img = articles[i].urlToImage;
-                        element.querySelector('p[name=info]').innerHTML += '<a href=' + articles[i].url + '>' + articles[i].title + '</a><br><img style="vertical-align:middle;width:50%;height:50%;" src='+ img + '><br>' + new Date(articles[i].publishedAt).toLocaleString() + '<br><br>';
+                    for(let i in result){
+                        element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + '>' + result[i].articleTitle + '</a><br><img style="vertical-align:middle;width:50%;height:50%;" src='+ result[i].articleImg + '><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
                     }
                     return;
                 }

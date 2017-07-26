@@ -15,7 +15,17 @@ function getNews(req, res){
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        return res.status(200).send(body);
+        let result = [];
+        let articles = body.articles;
+        for(let i in body.articles){
+            let articleUrl = articles[i].url;
+            let articleTitle = articles[i].title
+            let articleImg = articles[i].urlToImage;
+            let articleDate = articles[i].publishedAt;
+            result.push({articleUrl, articleTitle, articleImg, articleDate});
+        }
+
+        return res.status(200).send(result);
     });
 
 }
