@@ -14,6 +14,7 @@ var db = require("./db");
 function start(req, res) {
 
     if(req.method === 'GET'){
+        req.session.account = "";
         res.render('start',{loginErr : "",signupErr : "",csrfToken: req.csrfToken()});
         return;
     }else if(req.method === 'POST'){

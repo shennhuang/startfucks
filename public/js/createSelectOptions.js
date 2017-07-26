@@ -1,5 +1,4 @@
 function createSelectOptions(apidata){
-    console.log(apidata)
     // apidata = JSON.parse(apidata);
     let apiKeys = Object.keys(apidata);
     

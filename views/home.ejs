@@ -11,13 +11,14 @@
             var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
         <script type="text/javascript" src="/js/addSubselect.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
-        <script type="text/javascript" src="/js/blockList.js"></script>
+        <script type="text/javascript" src="/js/toolbar.js"></script>
         <script type="text/javascript" src="/js/removeItem.js"></script>
         <script type="text/javascript" src="/js/callApi.js"></script>
         <script type="text/javascript" src="/js/editName.js"></script>
@@ -28,42 +29,18 @@
         <script type="text/javascript" src="/js/ubike.js"></script>
         <script type="text/javascript" src="/js/ubikeNTP.js"></script>
         <script type="text/javascript" src="/js/news.js"></script>
+        <script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>
     </head>
     <body>
-        <header>
+        <header onclick="hiddenBlockList();hiddenSettingList();">
             <p class="hi">Hi!</p>
             <p class = "userName"><%=userData.name %></p>
-            <button class = "setName" onclick="editName()"></button>
-            <button class="blockListBtn" title="Add Item" onclick="listBtnOnclick()"><img src="/img/plus.png" height="40px" style="vertical-align: middle;" onmouseover="listBtnOnMouseOver()"/></button>
+            <!--<button class = "setName" onclick="editName()"></button>-->
+            <!--<button class="blockListBtn" title="Add Item" onclick="blockListBtnOnclick()"><img src="/img/plus.png" height="40px" style="vertical-align: middle;" onmouseover="listBtnOnMouseOver()"/></button>-->
         </header>
 
-        <!--modal-->
-        <div class = "modalContainer">
-            <div class = "modal">
-                <h3 class="modalTitle">change name:</h3>
-                <input class="newName" type = "text"></input>
-                <button class="saveName" onclick="saveName()">save</button>
-            </div>
-        </div>
-        <!--modal-->
-
-        <!--toolbar-->
-        <div class = "toolbarContainer">
-            <table class = "toolbarTable">
-                <tr>
-                    <td>
-                        <i class="fa fa-cog fa-3" name="toolbarIcon" aria-hidden="true"></i>
-                    </td>
-                    <td>
-                        <i class="fa fa-th-list" name="toolbarIcon" aria-hidden="true"></i>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <!--toolbar-->
-        
         <div style = "height:50px;"></div>
-        <main ondragover="allowDrop(event);" onclick="hiddenBlockList()" id="main">
+        <main ondragover="allowDrop(event);" onclick="hiddenBlockList();hiddenSettingList();" id="main">
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
                 for(let key in userData.settings) {
                     let v = userData.settings[key]; 
@@ -80,7 +57,7 @@
                     }
                 }
                 if(!hasItem) { %>
-                    <div id="<%= "hiddenGrid" + i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
+                    <div id="<%= 'hiddenGrid' + i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
                 <% }
                 hasItem=false;
             } %>
@@ -107,6 +84,54 @@
                 <% } %>
             </table>
         </div>
+
+        <!--toolbar-->
+        <div class = "toolbarContainer">
+            <table class = "toolbarTable">
+                <tr>
+                    <td>
+                        <i class="fa fa-cog" name="toolbarIcon" id = "settingListBtn" aria-hidden="true" onclick="settingListBtnOnclick()"></i> <!--setting-->
+                    </td>
+                    <td>
+                        <i class="fa fa-th-list" name="toolbarIcon" id = "blockListBtn" aria-hidden="true" onclick="blockListBtnOnclick()"></i><!--blockList-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--toolbar-->
+
+        <!--settingsList-->
+        <div class = "settingList" style = "display:none">
+            <table class = "settingTable">
+                <tr onclick="logout()">
+                    <td>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <font>Sign out</font>
+                    </td>
+                </tr>
+                 <tr onclick="editName()">
+                     <td>
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                       <font>Change name</font>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--settingsList-->
+
+        <!--modal-->
+        <div class = "modalContainer">
+            <div class = "modal">
+                <h3 class="modalTitle">change name:</h3>
+                <input class="newName" type = "text"></input>
+                <button class="saveName" onclick="saveName()">save</button>
+            </div>
+        </div>
+        <!--modal-->
 
         <script>createSelectOptions(apidata);</script>
     </body>
