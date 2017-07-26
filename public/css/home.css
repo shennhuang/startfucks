@@ -4,7 +4,7 @@
 
 }
 html{
-    width: 1440px;
+    width: 100%;/**1440px;*/
     height: 900px;
 }
 body{
@@ -106,6 +106,7 @@ main{
     margin: 2px;
     text-align: center;
     line-height: 3vh;
+    overflow: scroll;
 }
 .itemTitle{
     font-weight:bold;

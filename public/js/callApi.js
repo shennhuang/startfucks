@@ -11,4 +11,7 @@ function callApi(title, subtitle){
     if(title === "Ubike(新北)"){
         ubikeNTP(subtitle);
     }
+    if(title === "News"){
+        news(subtitle);
+    }
 }
