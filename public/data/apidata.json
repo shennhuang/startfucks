@@ -399,7 +399,7 @@
             "春光公園": "0379" 
         }
     },
-    "ubikeNTP":{
+    "ubike(新北)":{
         "title": "Ubike(新北)",
         "subtitle": "板橋車站",
         "gridItemSize": {"width": 1, "height": 1},
@@ -801,6 +801,7 @@
         "subtitle":"CNN",
         "gridItemSize":{"width":2, "height":1},
         "list":{
+            "聯合(udn)": "udn",
             "ABC News (AU)": "abc-news-au",
             "Al Jazeera English": "al-jazeera-english",
             "Ars Technica": "ars-technica",
@@ -861,6 +862,22 @@
             "The Washington Post": "the-washington-post",
             "Time": "time",
             "USA Today": "usa-today"
+        },
+        "sublist":{
+            "聯合(udn)":{
+                "要聞":"6638",
+                "運動":"7227",
+                "全球":"7225",
+                "社會":"6639",
+                "產經":"6644",
+                "股市":"6645",
+                "生活":"6649",
+                "文教":"11195",
+                "評論":"6643",
+                "地方":"6641",
+                "兩岸":"6640",
+                "數位":"7226"
+            }
         }
     }
 }

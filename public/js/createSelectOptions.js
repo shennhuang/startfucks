@@ -11,5 +11,8 @@ function createSelectOptions(apidata){
             option.text = listItem;
             selectClass.options.add(option);
         }
+        let event = {};
+        event.currentTarget = selectClass;
+        addSubselect(event);
     }
 }

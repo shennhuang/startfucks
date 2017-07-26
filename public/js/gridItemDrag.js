@@ -9,6 +9,12 @@ function itemDrag(event){
 
         let selectValue = event.currentTarget.querySelector("select").value;
         let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
+        
+        let subselectValue;
+        if(event.currentTarget.querySelector("select[id=subselect]")){
+            subselectValue = event.currentTarget.querySelector("select[id=subselect]").value;
+            checkItemId += ("_" + subselectValue);
+        }
 
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
@@ -34,21 +40,33 @@ function dropOnItem(event){
         //add item
         if(!settings.hasOwnProperty(selectItemId)){
             let title = (selectItem.id.split("_"))[0];
-            let subtitle = selectItem.querySelector("select").value;
 
+            //一定要先取選單的值
+            let subtitle = selectItem.querySelector("select").value;
+            //取得子選單的值,加在subtitle裡
+            let subselectValue;
+            if(selectItem.querySelector("select[id=subselect]")){
+                subselectValue = selectItem.querySelector("select[id=subselect]").value;
+                subtitle += ("_" + subselectValue);
+            }
+
+            //接下來的的操作用複製的物件,這樣選單的才不會消失(這時選取的值會變預設,所以前面要先存起來)
             selectItem = document.getElementById(selectItemId).cloneNode(true);
 
             selectItem.id = title + "_" + subtitle;
 
             selectItem.removeChild(selectItem.querySelector("font"));
             selectItem.removeChild(selectItem.querySelector("select"));
+            if(selectItem.querySelector("select[id=subselect]")){
+                selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
+            }
 
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
-            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle;
+            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle.replace("_","-");
 
             let scriptElement = document.createElement("script");
             scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
@@ -98,19 +116,30 @@ function dropOnHiddenItem(event){
             let title = (selectItem.id.split("_"))[0];
             let subtitle = selectItem.querySelector("select").value;
 
+            //取得子選單的值,加在subtitle裡
+            let subselectValue;
+            if(selectItem.querySelector("select[id=subselect]")){
+                subselectValue = selectItem.querySelector("select[id=subselect]").value;
+                subtitle += ("_" + subselectValue);
+            }
+
             selectItem = document.getElementById(selectItemId).cloneNode(true);
 
             selectItem.id = title + "_" + subtitle;
 
             selectItem.removeChild(selectItem.querySelector("font"));
             selectItem.removeChild(selectItem.querySelector("select"));
+            if(selectItem.querySelector("select[id=subselect]")){
+                selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
+            }
+            
 
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
-            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle;
+            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle.replace("_","-");
 
             let scriptElement = document.createElement("script");
             scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";

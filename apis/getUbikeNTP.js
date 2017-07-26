@@ -19,7 +19,7 @@ function getUbikeNTP(req, res){
     request(stationOptions, function (error, response, body) {
         if (error) throw new Error(error);
 
-        let queryStationID = apidata.ubikeNTP.list[stationName];
+        let queryStationID = apidata["ubike(新北)"].list[stationName];
         let stationLoc = {};
         for(let v of body){
             if(v.StationID === queryStationID){
@@ -31,7 +31,7 @@ function getUbikeNTP(req, res){
         request(availabilityOptions, function (error, response, body) {
             if (error) throw new Error(error);
 
-            let queryStationID = apidata.ubikeNTP.list[stationName];
+            let queryStationID = apidata["ubike(新北)"].list[stationName];
 
             let data;
 
