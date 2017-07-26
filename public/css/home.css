@@ -30,46 +30,6 @@ header{
     margin : 0;
     display: inline-block;
 }
-/*modal*/
-.modalContainer{
-    width:100%;
-    height:100%;
-    position: fixed;
-    left:0;
-    top:0;
-    background-color: rgba(0,0,0,0.4);
-    display:none;
-}
-.modal{
-    width:50%;
-    padding: 20px;
-    margin: 15% auto;
-    border: 1px solid #888;
-    background-color: #fff;
-}
-.modalTitle,.newName,.saveName{
-    margin: 0;
-    display: inline-block;
-}
-/*modal*/
-
-/*toobar*/
-.toolbarContainer{
-    position: fixed;
-    right:15px;
-    bottom:15px;
-    /*background-color:rgba(0,0,0,0.1);*/
-}
-.toolbarTable i{
-    margin:0 10px;
-    font-size:32px;
-    color:rgba(0,0,0,0.5);
-}
-.toolbarTable i:hover{
-    font-size:32px;
-    color:rgba(0,0,0,1);
-}
-/*toobar*/
 
 main{
     display: grid;
@@ -132,10 +92,9 @@ main{
     width:50vw;
     height:calc(75vh + 33px);
     position: fixed;
-    top:50px;
+    bottom:55px;
     right:0px;
     border:3px #f6c6ec solid;
-    background-color:gray;
     opacity:1.0;
     overflow: scroll;
 }
@@ -151,3 +110,65 @@ main{
 #select{
     font-size: 100%;
 }
+
+/*modal*/
+.modalContainer{
+    width:100%;
+    height:100%;
+    position: fixed;
+    left:0;
+    top:0;
+    background-color: rgba(0,0,0,0.4);
+    display:none;
+}
+.modal{
+    width:50%;
+    padding: 20px;
+    margin: 15% auto;
+    border: 1px solid #888;
+    background-color: #fff;
+}
+.modalTitle,.newName,.saveName{
+    margin: 0;
+    display: inline-block;
+}
+/*modal*/
+
+/*toolbar*/
+.toolbarContainer{
+    position: fixed;
+    right:15px;
+    bottom:15px;
+    /*background-color:rgba(0,0,0,0.1);*/
+}
+.toolbarTable i{
+    margin:0 10px;
+    font-size:32px;
+    color:#000;
+    opacity: 0.5;
+}
+.toolbarTable i:hover{
+    font-size:32px;
+    color:#000;
+    opacity: 1;
+}
+/*toolbar*/
+
+/*setting*/
+.settingList{
+    position: fixed;
+    bottom:55px;
+    right:35px;
+    border:3px #f6c6ec solid;
+}
+.settingTable{
+    border:3px #ecf6c6 solid;
+    background-color: #ecf6c6;
+}
+.settingTable font:hover{
+    text-decoration: underline;
+}
+.settingTable tr{
+    padding: 20px;
+}
+/*setting*/
