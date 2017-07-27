@@ -22,7 +22,7 @@ function ubikeNTP(stationName){
                     let lon = result.stationLoc.PositionLon;
                     let mapUrl = "https://www.google.com.tw/maps/place/" + lat+"N+" + lon+"E";
                     //設定點選事件並更換class(with pseudo class)
-                    element.querySelector('p[name=title]').setAttribute("onclick", 'window.open(\"' + mapUrl + '\")');
+                    element.querySelector('p[name=title]').setAttribute("onclick", 'window.open(\"' + mapUrl + '\" ,  "_blank")');
                     element.querySelector('p[name=title]').removeAttribute("class");
                     element.querySelector('p[name=title]').setAttribute("class", "itemTitleLink");
                     element.querySelector('p[name=info]').innerHTML = '剩餘數量： ' + result.data.AvailableRentBikes + '<br>剩餘空位： ' + result.data.AvailableReturnBikes + '<br><br><br>Update: ' + new Date(result.data.UpdateTime).toLocaleString();

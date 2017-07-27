@@ -21,9 +21,9 @@ function news(newsSite){
                     element.querySelector('p[name=info]').innerHTML = "";
                     for(let i in result){
                         if(result[i].articleImg){
-                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + '>' + result[i].articleTitle + '</a><br><img style="vertical-align:middle;width:50%;height:50%;" src='+ result[i].articleImg + '><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
+                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' target="_blank">' + result[i].articleTitle + '</a><br><img style="vertical-align:middle;width:50%;height:50%;" src='+ result[i].articleImg + '><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
                         }else {
-                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + '>' + result[i].articleTitle + '</a><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
+                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' target="_blank">' + result[i].articleTitle + '</a><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
                         }
                     }
                     return;
