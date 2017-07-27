@@ -802,6 +802,7 @@
         "gridItemSize":{"width":2, "height":1},
         "list":{
             "聯合(udn)": "udn",
+            "BBC(中文網)":"bbcchinese",
             "ABC News (AU)": "abc-news-au",
             "Al Jazeera English": "al-jazeera-english",
             "Ars Technica": "ars-technica",
@@ -877,6 +878,9 @@
                 "地方":"6641",
                 "兩岸":"6640",
                 "數位":"7226"
+            },
+            "BBC(中文網)":{
+                "主頁新聞":""
             }
         }
     }

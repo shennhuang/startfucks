@@ -44,19 +44,19 @@ function home(req, res) {
                 account : account,
                 name: account,
                 settings: {
-                    "Time_Taiwan":{
+                    "Time_臺灣":{
                         title: "Time",
                         subtitle: "Taiwan",
                         gridItemSize: {width: 1, height: 1},
                         gridItemIndex: 8,
                     },
-                    "Weather_Taipei":{
+                    "Weather_臺北市":{
                         title: "Weather",
                         subtitle: "Taipei",
                         gridItemSize: {width: 2, height: 1},
                         gridItemIndex: 0,
                     },            
-                    "Weather_Nantou":{
+                    "Weather_南投縣":{
                         title: "Weather",
                         subtitle: "Nantou",
                         gridItemSize: {width: 2, height: 1},

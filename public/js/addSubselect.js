@@ -4,6 +4,10 @@ function addSubselect(event){
     let item = event.currentTarget.parentNode;
     let selectValue = event.currentTarget.value;
 
+    if(item.querySelector("select[id=subselect]")){
+        item.removeChild(item.querySelector("select[id=subselect]"));
+    }
+
     if(apidata[itemTitle].sublist && apidata[itemTitle].sublist[selectValue]){
         let sublist = apidata[itemTitle].sublist[selectValue];
         let subselect = document.createElement("select");
@@ -14,9 +18,5 @@ function addSubselect(event){
             subselect.options.add(option);
         }
         item.insertBefore(subselect, item.querySelector("p[name=remove]"));
-    }else{
-        if(item.querySelector("select[id=subselect]")){
-            item.removeChild(item.querySelector("select[id=subselect]"));
-        }
     }
 }
