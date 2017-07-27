@@ -4,7 +4,7 @@ function time(timeCountry){
     if(element) {
         element.querySelector('p[name=info]').setAttribute("style","font-size:20px");
 
-        element.querySelector('p[name=info]').innerHTML = new Date().toLocaleString();
+        element.querySelector('p[name=info]').innerHTML = "<br><br>" + new Date().toLocaleString();
         setTimeout(function(){
             time(timeCountry);
         },1000);

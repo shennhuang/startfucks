@@ -24,7 +24,7 @@ function ubikeNTP(stationName){
                     element.querySelector('p[name=title]').setAttribute("onclick", 'window.open(\"' + mapUrl + '\")');
                     element.querySelector('p[name=title]').removeAttribute("class");
                     element.querySelector('p[name=title]').setAttribute("class", "itemTitleLink");
-                    element.querySelector('p[name=info]').innerHTML = '剩餘數量： ' + result.data.AvailableRentBikes + '<br>剩餘空位： ' + result.data.AvailableReturnBikes + '<br><br>Update: ' + new Date(result.data.UpdateTime).toLocaleString();
+                    element.querySelector('p[name=info]').innerHTML = '剩餘數量： ' + result.data.AvailableRentBikes + '<br>剩餘空位： ' + result.data.AvailableReturnBikes + '<br><br><br>Update: ' + new Date(result.data.UpdateTime).toLocaleString();
                 }
             }
         });

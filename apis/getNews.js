@@ -8,16 +8,18 @@ function getNews(req, res){
     let newsSite = (req.body.newsSite.split('_'))[0];
     let subSite = (req.body.newsSite.split('_'))[1];
 
-    if(!subSite){
-        return newsOrg(req, res, newsSite, subSite);
-    }
-
     if(newsSite === '聯合(udn)'){
         return udn(req, res, newsSite, subSite);
     }
     if(newsSite === 'BBC(中文網)'){
         return bbc(req, res, newsSite, subSite);
     }
+    if(newsSite === 'ETNEWS新聞雲'){
+        return etnews(req, res, newsSite, subSite);
+    }
+
+
+    return newsOrg(req, res, newsSite, subSite);
 
 }
 function newsOrg(req, res, newsSite ,subSite){
@@ -87,8 +89,7 @@ function udn(req, res, newsSite, subSite){
     });
 }
 function bbc(req, res, newsSite, subSite){
-    let newsSiteId = apidata.news.sublist[newsSite][subSite];
-    let url = "http://www.bbc.co.uk/zhongwen/trad" + newsSiteId + "/index.xml";
+    let url = "http://www.bbc.co.uk/zhongwen/trad/index.xml";
     var options = { 
         method: 'GET',
         url,
@@ -109,6 +110,40 @@ function bbc(req, res, newsSite, subSite){
             let articleImg = "";
             if(articles[i].hasOwnProperty("media:thumbnail")){
                 articleImg = articles[i]["media:thumbnail"].url;
+            }
+            result.push({articleUrl, articleTitle, articleImg, articleDate});
+        }
+        return res.status(200).send(result);
+    });
+}
+function etnews(req, res, newsSite, subSite){
+    let url = "http://feeds.feedburner.com/ettoday/realtime?format=xml";
+    var options = { 
+        method: 'GET',
+        url,
+        json: true,
+    };
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+
+        body = xmlparser.toJson(body,{object: true});
+
+        let result = [];
+        let articles = body.rss.channel.item;
+        for(let i in articles){
+            let articleUrl = articles[i]["feedburner:origLink"];
+            let articleTitle = articles[i].title
+            let articleDate = articles[i].pubDate;
+
+            let articleImg = "";
+            let des = articles[i].description;
+            let imgTagIndex = des.indexOf("<img src=");
+            let imgUrlEnd = des.indexOf(".jpg\"")+4;
+            if(imgTagIndex >= 0){
+                for(let i = imgTagIndex+9; i < des.length && i <= imgUrlEnd; i++){
+                    articleImg += des[i];
+                }
             }
             result.push({articleUrl, articleTitle, articleImg, articleDate});
         }
