@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var session = require('express-session');
 var cors = require('cors');
+var compression = require('compression');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -23,7 +24,7 @@ app.use(session({
     saveUninitialized: true
     })
 );
-
+app.use(compression());
 //app.use(cors());
 
 app.use('/', csrf({ cookie: false }) , route);
