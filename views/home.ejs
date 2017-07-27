@@ -29,7 +29,7 @@
         <script type="text/javascript" src="/js/ubike.js"></script>
         <script type="text/javascript" src="/js/ubikeNTP.js"></script>
         <script type="text/javascript" src="/js/news.js"></script>
-<!--<script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>-->
+        <!--<script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>-->
 
     </head>
     <body>
@@ -91,10 +91,12 @@
             <table class = "toolbarTable">
                 <tr>
                     <td>
-                        <i class="fa fa-cog" name="toolbarIcon" id = "settingListBtn" aria-hidden="true" onclick="settingListBtnOnclick()"></i> <!--setting-->
+                        <i class="fa fa-cog" name="toolbarIcon" id = "settingListBtn" aria-hidden="true" onclick="settingListBtnOnclick()"
+                            onmouseover="settingListBtnOnmouseover(this)" onmouseout="settingListBtnOnmouseout(this)"></i> <!--setting-->
                     </td>
                     <td>
-                        <i class="fa fa-th-list" name="toolbarIcon" id = "blockListBtn" aria-hidden="true" onclick="blockListBtnOnclick()"></i><!--blockList-->
+                        <i class="fa fa-th-list" name="toolbarIcon" id = "blockListBtn" aria-hidden="true" onclick="blockListBtnOnclick()"
+                            onmouseover="blockListBtnOnmouseover(this)" onmouseout="blockListBtnOnmouseout(this)"></i><!--blockList-->
                     </td>
                 </tr>
             </table>
