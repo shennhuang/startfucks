@@ -1,12 +1,13 @@
 function allowDrop(event){
     event.preventDefault();
     hiddenBlockList();
+    hiddenSettingList();
 }
 function itemDrag(event){  
 
     //用id是否有default來判斷是否要新增item
     if((event.currentTarget.id.split('_'))[1] === 'default'){
-
+        
         let selectValue = event.currentTarget.querySelector("select").value;
         let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
         

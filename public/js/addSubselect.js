@@ -7,7 +7,7 @@ function addSubselect(event){
     if(item.querySelector("select[id=subselect]")){
         item.removeChild(item.querySelector("select[id=subselect]"));
     }
-
+    
     if(apidata[itemTitle].sublist && apidata[itemTitle].sublist[selectValue]){
         let sublist = apidata[itemTitle].sublist[selectValue];
         let subselect = document.createElement("select");

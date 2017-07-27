@@ -11,7 +11,6 @@ var sha512 = function(password, salt){
 
 function saltHashPassword(userpassword) { 
     var passwordData = sha512(userpassword, salt);
-    console.log(passwordData);
     return passwordData;
 }
 
