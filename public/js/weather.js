@@ -14,6 +14,7 @@ function weather(weatherCity, weatherCountry){
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
             error: function(){
+                //alert('您的頁面已經過期,請重新登入！');
                 window.open(host + '/start', '_self');
             },
             success: function(result) {

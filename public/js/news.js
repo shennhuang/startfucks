@@ -13,6 +13,7 @@ function news(newsSite){
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
             error: function(){
+                //alert('您的頁面已經過期,請重新登入！');
                 window.open(host + '/start', '_self');
             },
             success: function(result) {
@@ -27,7 +28,7 @@ function news(newsSite){
                     }
                     return;
                 }
-                element.querySelector('p[name=info]').innerHTML = 'Can not loading :(';
+                element.querySelector('p[name=info]').innerHTML = 'Can not loading or no data :(';
             }
         });
         setTimeout(function(){
