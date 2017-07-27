@@ -1,10 +1,13 @@
-function createSelectOptions(apidata){
+function createSelectOptions(){
     // apidata = JSON.parse(apidata);
     let apiKeys = Object.keys(apidata);
     
     for (let item of apiKeys) {
         let listKeys = Object.keys(apidata[item].list);
         let selectClass = document.getElementsByClassName(item+"Select")[0];
+        
+        if(!selectClass) return;
+
         for (let listItem of listKeys){
             var option = document.createElement("option");
             option.text = listItem;
@@ -14,4 +17,8 @@ function createSelectOptions(apidata){
         event.currentTarget = selectClass;
         addSubselect(event);
     }
+}
+function bata_createSelectOptions(target){
+    console.log({apidata : apidata[target].list})
+    
 }

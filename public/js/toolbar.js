@@ -2,7 +2,7 @@
 function blockListBtnOnclick(){
     hiddenSettingList()
     
-    var status = document.getElementsByClassName("blockList")[0].style.display;
+    let status = document.getElementsByClassName("blockList")[0].style.display;
     if(status == "none"){
         // open
         document.getElementsByClassName("blockList")[0].style.display = "block"
@@ -10,8 +10,7 @@ function blockListBtnOnclick(){
         return;
     }
     // close
-    document.getElementsByClassName("blockList")[0].style.display = "none"
-    document.getElementById('blockListBtn').style.opacity = 0.5;
+    hiddenBlockList();
 }
 
 function hiddenBlockList(){
@@ -35,7 +34,7 @@ function blockListBtnOnmouseout(x){
 function settingListBtnOnclick(){
     hiddenBlockList();
 
-    var status = document.getElementsByClassName("settingList")[0].style.display;
+    let status = document.getElementsByClassName("settingList")[0].style.display;
     if(status == "none"){
         // open
         document.getElementsByClassName("settingList")[0].style.display = "block"
@@ -43,8 +42,7 @@ function settingListBtnOnclick(){
         return;
     }
     // close
-    document.getElementsByClassName("settingList")[0].style.display = "none"
-    document.getElementById('settingListBtn').style.opacity = 0.5;
+    hiddenSettingList();
 }
 
 function hiddenSettingList(){
