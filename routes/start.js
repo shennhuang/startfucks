@@ -61,7 +61,6 @@ function start(req, res) {
 
                 //新增使用者帳號
                 var hashpwd = hash.saltHashPassword(users.pwd);// pwd add salt and hash
-                console.log(hashpwd);
                 var userAcc = {
                     TableName: "startfucks_users",
                     Item : {
