@@ -12,10 +12,13 @@ function getNews(req, res){
         return udn(req, res, newsSite, subSite);
     }
     if(newsSite === 'BBC(中文網)'){
-        return bbc(req, res, newsSite, subSite);
+        return bbcchinese(req, res, newsSite, subSite);
     }
     if(newsSite === 'ETNEWS新聞雲'){
         return etnews(req, res, newsSite, subSite);
+    }
+    if(newsSite === '蘋果即時新聞'){
+        return appledaily(req, res, newsSite, subSite);
     }
 
 
@@ -26,7 +29,7 @@ function newsOrg(req, res, newsSite ,subSite){
 
     let newsSiteId = apidata.news.list[newsSite];
     let url = "https://newsapi.org/v1/articles?source=" + newsSiteId + "&apiKey=" + config.newsorgApiKey;
-    var options = { 
+    let options = { 
         method: 'GET',
         url,
         json: true,
@@ -52,7 +55,7 @@ function udn(req, res, newsSite, subSite){
 
     let newsSiteId = apidata.news.sublist[newsSite][subSite];
     let url = "https://udn.com/rssfeed/news/2/" + newsSiteId + "?ch=news";
-    var options = { 
+    let options = { 
         method: 'GET',
         url,
         json: true,
@@ -61,7 +64,11 @@ function udn(req, res, newsSite, subSite){
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
         //rss xml to json object
-        body = xmlparser.toJson(body,{object: true});
+        try {
+            body = xmlparser.toJson(body,{object: true});
+        } catch (error) {
+            return res.send('');
+        }
 
         let result = [];
         let articles = body.rss.channel.item;
@@ -88,9 +95,9 @@ function udn(req, res, newsSite, subSite){
         return res.status(200).send(result);
     });
 }
-function bbc(req, res, newsSite, subSite){
+function bbcchinese(req, res, newsSite, subSite){
     let url = "http://www.bbc.co.uk/zhongwen/trad/index.xml";
-    var options = { 
+    let options = { 
         method: 'GET',
         url,
         json: true,
@@ -99,7 +106,11 @@ function bbc(req, res, newsSite, subSite){
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        body = xmlparser.toJson(body,{object: true});
+        try {
+            body = xmlparser.toJson(body,{object: true});
+        } catch (error) {
+            return res.send('');
+        }
 
         let result = [];
         let articles = body.rss.channel.item;
@@ -118,7 +129,7 @@ function bbc(req, res, newsSite, subSite){
 }
 function etnews(req, res, newsSite, subSite){
     let url = "http://feeds.feedburner.com/ettoday/realtime?format=xml";
-    var options = { 
+    let options = { 
         method: 'GET',
         url,
         json: true,
@@ -127,7 +138,11 @@ function etnews(req, res, newsSite, subSite){
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        body = xmlparser.toJson(body,{object: true});
+        try {
+            body = xmlparser.toJson(body,{object: true});
+        } catch (error) {
+            return res.send('');
+        }
 
         let result = [];
         let articles = body.rss.channel.item;
@@ -148,6 +163,62 @@ function etnews(req, res, newsSite, subSite){
             result.push({articleUrl, articleTitle, articleImg, articleDate});
         }
         return res.status(200).send(result);
+    });
+}
+function appledaily(req, res, newsSite, subSite){
+    let newsSiteId = apidata.news.sublist[newsSite][subSite];
+    let url = "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/" + newsSiteId;
+    let options = { 
+        method: 'GET',
+        url,
+        json: true,
+    };
+
+    request(options, function(error, response, body){
+        if(error) throw new Error(error);
+
+        try {
+            body = xmlparser.toJson(body,{object: true});
+        } catch (error) {
+            return res.send('');
+        }
+
+        let result = [];
+        let articles = body.rss.channel.item;
+        if(!articles){
+            return res.status(200).send('');
+        }
+
+        let promiseGroup = [];
+        for(let i in articles){
+            let articleUrl = articles[i].link;
+            let articleTitle = articles[i].title
+            let articleDate = articles[i].pubDate;
+            promiseGroup[i] = new Promise((resolve, reject)=>{
+                request({method:'GET',url:articleUrl, result},function(error, response, body){
+                    let imgTagIndex = body.toString().indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
+                    let articleImg = "";
+
+                    if(imgTagIndex >= 0){
+                        for(let i = imgTagIndex+11; i < body.length; i++){
+                            articleImg += body[i];
+                            if(body[i-4] === '.' && body[i-3] === 'j'&& body[i-2] === 'p'&& body[i-1] === 'g'){
+                                break;
+                            }
+                        }
+                    }
+                    result.push({articleUrl, articleTitle, articleImg, articleDate});
+                    return resolve();
+                });
+            });
+        }
+        Promise
+        .all(promiseGroup)
+        .then(()=>{
+            //console.log('promiseGroup success');
+            return res.status(200).send(result);
+        });
+            
     });
 }
 module.exports = getNews;
