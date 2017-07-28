@@ -84,9 +84,10 @@
                                     <% } %>
                                 </select>
                                 
-                                <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
-                                <p hidden="true" name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
+                                <p hidden="true" name="remove" title="remove" class="tagRemove" onClick="removeItem(event);">x</p>
+                                <p hidden="true" name="title" class="itemTitle"></p>
                                 <p hidden="true" name="info">loading...</p>
+                                <script name="callapi"></script>
                             </div>
                         </td>
                     </tr>
@@ -146,5 +147,4 @@
 
         <!--<script>createSelectOptions();</script>-->
     </body>
-    <script>console.log("AA")</script>
 </html>

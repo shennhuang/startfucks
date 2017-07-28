@@ -196,7 +196,7 @@ function appledaily(req, res, newsSite, subSite){
             let articleDate = articles[i].pubDate;
             promiseGroup[i] = new Promise((resolve, reject)=>{
                 request({method:'GET',url:articleUrl, result},function(error, response, body){
-                    let imgTagIndex = body.toString().indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
+                    let imgTagIndex = body.indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
                     let articleImg = "";
 
                     if(imgTagIndex >= 0){

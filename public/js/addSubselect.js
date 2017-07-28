@@ -1,5 +1,4 @@
 function addSubselect(event){
-
     let itemTitle = (event.currentTarget.parentNode.id.split("_"))[0].toLowerCase();
     let item = event.currentTarget.parentNode;
     let selectValue = event.currentTarget.value;
