@@ -3,7 +3,7 @@
     <head>
         <title>Home</title>
         <meta charset="utf-8">
-        <meta name="_csrf" content= <%= csrfToken %> >
+        <meta name="_csrf" content= '<%= csrfToken %>' >
         <% var userSettings = userData.settings || {}; %>
         <script>
             var userData = JSON.parse('<%- JSON.stringify(userData) %>');
@@ -45,8 +45,7 @@
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
                 for(let key in userData.settings) {
                     let v = userData.settings[key]; 
-                    if(+v.gridItemIndex === i) { 
-                       %>
+                    if(+v.gridItemIndex === i) { ％>
 
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
@@ -66,6 +65,7 @@
             } %>
         </main>
 
+        <!--blockList-->
         <div class = "blockList" style = "display:none">
             <table class = "optionsContainer" border= '1'>
                 <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
@@ -77,12 +77,17 @@
                         <td class="blockListItem">
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                                 <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
-                                <select id="select" name="select" onchange="addSubselect(event)" class = "<%= apiKeys[i] %>Select" >
-                                    <% listKeys = Object.keys(v.list); %>
-                                    <% for (var j = 0 ; j < listKeys.length ; j ++){ %>
-                                        <option><%= listKeys[j] %></option>
-                                    <% } %>
-                                </select>
+                                
+                                <% if(v.listType == "select") { %>
+                                    <select id="select" name="select" onchange="addSubselect(event)" class = "<%= apiKeys[i] %>Select" >
+                                        <% listKeys = Object.keys(v.list); %>
+                                        <% for (var j = 0 ; j < listKeys.length ; j ++){ %>
+                                            <option><%= listKeys[j] %></option>
+                                        <% } %>
+                                    </select>
+                                <% }else if(v.listType == "input") { %>
+                                    <input></input>
+                                <% } %>
                                 
                                 <p hidden="true" name="remove" title="remove" class="tagRemove" onClick="removeItem(event);">x</p>
                                 <p hidden="true" name="title" class="itemTitle"></p>
