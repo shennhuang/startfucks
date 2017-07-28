@@ -50,7 +50,7 @@
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                         <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle.replace("_","-") %></p>
-                        <p name="info">loading...</p>
+                        <p name="info" class="info">loading...</p>
                         <script>callApi("<%= v.title %>", "<%= v.subtitle %>");</script>
                     </div>
                     <%  i+= (v.gridItemSize.width - 1);
@@ -85,12 +85,14 @@
                                             <option><%= listKeys[j] %></option>
                                         <% } %>
                                     </select>
+                                    <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
                                 <% } %>
                                 
                                 <p hidden="true" name="remove" title="remove" class="tagRemove" onClick="removeItem(event);">x</p>
                                 <p hidden="true" name="title" class="itemTitle"></p>
+
                                 <p hidden="true" name="info">loading...</p>
                                 <script name="callapi"></script>
                             </div>

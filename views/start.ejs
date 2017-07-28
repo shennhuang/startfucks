@@ -48,8 +48,8 @@
                 var err = "<%= loginErr %>";
                 if(!!err) document.getElementsByClassName("loginErr")[0].innerHTML = err;
                 $("#btn_login").click(function(){
-                    var loginAcc = document.getElementsByName("loginAcc")[0].value
-                    var loginPwd = document.getElementsByName("loginPwd")[0].value
+                    var loginAcc = document.getElementsByName("loginAcc")[0].value;
+                    var loginPwd = document.getElementsByName("loginPwd")[0].value;
 
                     // check acc,pwd,cpwd is empty
                     if(loginAcc == ""){
@@ -63,7 +63,9 @@
                         return;
                     }
                     document.getElementsByName("loginForm")[0].submit();
-                })
+                    this.disabled = true;
+
+                })                
                     
             </script>
             
@@ -154,6 +156,8 @@
                     }  
                     
                     document.getElementsByName("signForm")[0].submit();
+                    this.disabled = true;
+
                 })
 
             </script>
