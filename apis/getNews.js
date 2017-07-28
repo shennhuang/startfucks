@@ -5,6 +5,10 @@ var request = require('request');
 var xmlparser = require('xml2json');
 function getNews(req, res){
 
+    if(req.body.articleUrl){
+        return getImg(req, res);
+    }
+
     let newsSite = (req.body.newsSite.split('_'))[0];
     let subSite = (req.body.newsSite.split('_'))[1];
 
@@ -192,36 +196,39 @@ function appledaily(req, res, newsSite, subSite){
         let promiseGroup = [];
         let postNum = (articles.length > 20)? 20: articles.length;
 
-        for(let i = 0; i < postNum; i++){
+        for(let i = 0; i < articles.length; i++){
             let articleUrl = articles[i].link;
             let articleTitle = articles[i].title;
             let articleDate = articles[i].pubDate;
             promiseGroup[i] = new Promise((resolve, reject)=>{
-                request({method:'GET',url:articleUrl, result},function(error, response, body){
-                    if(error) console.log(error);
+                // request({method:'GET',url:articleUrl, result},function(error, response, body){
+                //     if(error) console.log(error);
 
-                    let articleImg = "";
-                    try {
-                        let imgTagIndex = body.indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
+                //     let articleImg = "";
+                //     try {
+                //         let imgTagIndex = body.indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
 
-                        if(imgTagIndex >= 0){
-                            for(let i = imgTagIndex+12; i < body.length; i++){
-                                articleImg += body[i];
-                                if(body[i+1] === '\"'){
-                                    break;
-                                }
-                            }
-                            //console.log(articleImg)
-                        }
-                        result.push({articleUrl, articleTitle, articleImg, articleDate});
-                        return resolve();
-                    } catch (error) {
-                        console.log("error: " + error);
-                        result.push({articleUrl, articleTitle, articleDate});
-                        return resolve();
-                    }
+                //         if(imgTagIndex >= 0){
+                //             for(let i = imgTagIndex+12; i < body.length; i++){
+                //                 articleImg += body[i];
+                //                 if(body[i+1] === '\"'){
+                //                     break;
+                //                 }
+                //             }
+                //             console.log(articleImg)
+                //         }
+                //         result.push({articleUrl, articleTitle, articleImg, articleDate});
+                //         return resolve();
+                //     } catch (error) {
+                //         console.log("error: " + error);
+                //         result.push({articleUrl, articleTitle, articleDate});
+                //         return resolve();
+                //     }
                     
-                });
+                // });
+
+                result.push({articleUrl, articleTitle, articleImg:'click', articleDate});
+                return resolve();
             });
         }
         Promise
@@ -235,6 +242,29 @@ function appledaily(req, res, newsSite, subSite){
             return res.send('');
         });
             
+    });
+}
+function getImg(req, res){
+    request({method:'GET',url:req.body.articleUrl},function(error, response, body){
+        if(error) console.log(error);
+
+        let articleImg = "";
+        try {
+            let imgTagIndex = body.indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
+
+            if(imgTagIndex >= 0){
+                for(let i = imgTagIndex+12; i < body.length; i++){
+                    articleImg += body[i];
+                    if(body[i+1] === '\"'){
+                        break;
+                    }
+                }
+                return res.send({articleImg});
+            }
+        } catch (error) {
+            console.log("error: " + error);
+        }
+        return res.send({articleImg:""});
     });
 }
 module.exports = getNews;

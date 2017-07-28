@@ -51,7 +51,7 @@
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                         <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle.replace("_","-") %></p>
-                        <p name="info">loading...</p>
+                        <p name="info" class="info">loading...</p>
                         <script>callApi("<%= v.title %>", "<%= v.subtitle %>");</script>
                     </div>
                     <%  i+= (v.gridItemSize.width - 1);
@@ -77,13 +77,13 @@
                         <td class="blockListItem">
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                                 <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
-                                <select id="select" name="select" onchange="addSubselect(event)" class = "<%= apiKeys[i] %>Select" >
-                                    <% listKeys = Object.keys(v.list); %>
-                                    <% for (var j = 0 ; j < listKeys.length ; j ++){ %>
+                                <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
+                                    <% listKeys = Object.keys(v.list);
+                                       for (var j = 0 ; j < listKeys.length ; j ++){ %>
                                         <option><%= listKeys[j] %></option>
                                     <% } %>
+                                    <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                 </select>
-                                
                                 <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                                 <p hidden="true" name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
                                 <p hidden="true" name="info">loading...</p>
@@ -146,5 +146,4 @@
 
         <!--<script>createSelectOptions();</script>-->
     </body>
-    <script>console.log("AA")</script>
 </html>
