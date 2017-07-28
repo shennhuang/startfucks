@@ -12,7 +12,6 @@
         </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
-        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
@@ -45,9 +44,7 @@
             <% for(let i=0, n=60, hasItem=false; i < n; i++) {
                 for(let key in userData.settings) {
                     let v = userData.settings[key]; 
-                    if(+v.gridItemIndex === i) { 
-                       %>
-
+                    if(+v.gridItemIndex === i) { %>
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                         <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle.replace("_","-") %></p>
@@ -66,7 +63,7 @@
             } %>
         </main>
 
-        <div class = "blockList" style = "display:none">
+        <div ondragover="allowDrop(event);" class = "blockList" style = "display:none">
             <table class = "optionsContainer" border= '1'>
                 <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
                     <tr>
@@ -75,7 +72,7 @@
                             <font><%= v.title %>:</font>
                         </td>
                         <td class="blockListItem">
-                            <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                            <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" ondragend="dragEnd(event)" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                                 <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
                                 <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
                                     <% listKeys = Object.keys(v.list);

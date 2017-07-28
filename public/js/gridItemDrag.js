@@ -1,9 +1,21 @@
 function allowDrop(event){
     event.preventDefault();
+    document.getElementsByTagName("header")[0].removeAttribute("hidden");
+
     hiddenBlockList();
     hiddenSettingList();
 }
-function itemDrag(event){  
+var infoTemp;
+//ondragstart
+function itemDrag(event){
+    let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
+    let title = (event.currentTarget.id.split("_"))[0];
+    if(title === 'News'){
+        infoTemp = event.currentTarget.querySelector("p[name=info]");
+        event.currentTarget.removeChild(event.currentTarget.querySelector("p[name=info]"));
+    }
+    document.getElementsByTagName("header")[0].hidden = "true";
+    event.dataTransfer.setDragImage(event.currentTarget, 150 * selectItemWidth, 200);
 
     //用id是否有default來判斷是否要新增item
     if((event.currentTarget.id.split('_'))[1] === 'default'){
@@ -25,11 +37,16 @@ function itemDrag(event){
     }
     //將要記錄的資訊放入事件中(這裡紀錄目前拖曳的目標物件id)
     event.dataTransfer.setData("text", event.currentTarget.id);
+
 }
 var n = 60;
 function dropOnItem(event){
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
+    if((selectItemId.split("_"))[0] === 'News'){
+        document.getElementById(selectItemId).appendChild(infoTemp);
+        delete infoTemp;
+    }
 
     if(selectItemId && selectItemId !== event.currentTarget.id){ 
 
@@ -103,6 +120,10 @@ function dropOnHiddenItem(event){
     event.preventDefault();
     
     let selectItemId = event.dataTransfer.getData("text");
+    if((selectItemId.split("_"))[0] === 'News'){
+        document.getElementById(selectItemId).appendChild(infoTemp);
+        delete infoTemp;
+    }
 
     if(selectItemId && selectItemId !== event.currentTarget.id) {
 
@@ -153,7 +174,7 @@ function dropOnHiddenItem(event){
                 gridItemSize: {width: selectItemWidth, height: 1},
                 gridItemIndex: -1,
             };
-        }
+        }//move item
         else if(settings.hasOwnProperty(selectItemId)){
 
             //insert hidden grid

@@ -194,39 +194,14 @@ function appledaily(req, res, newsSite, subSite){
         }
 
         let promiseGroup = [];
+        //新聞顯示篇數
         let postNum = (articles.length > 20)? 20: articles.length;
 
-        for(let i = 0; i < articles.length; i++){
+        for(let i = 0; i < postNum; i++){
             let articleUrl = articles[i].link;
             let articleTitle = articles[i].title;
             let articleDate = articles[i].pubDate;
             promiseGroup[i] = new Promise((resolve, reject)=>{
-                // request({method:'GET',url:articleUrl, result},function(error, response, body){
-                //     if(error) console.log(error);
-
-                //     let articleImg = "";
-                //     try {
-                //         let imgTagIndex = body.indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
-
-                //         if(imgTagIndex >= 0){
-                //             for(let i = imgTagIndex+12; i < body.length; i++){
-                //                 articleImg += body[i];
-                //                 if(body[i+1] === '\"'){
-                //                     break;
-                //                 }
-                //             }
-                //             console.log(articleImg)
-                //         }
-                //         result.push({articleUrl, articleTitle, articleImg, articleDate});
-                //         return resolve();
-                //     } catch (error) {
-                //         console.log("error: " + error);
-                //         result.push({articleUrl, articleTitle, articleDate});
-                //         return resolve();
-                //     }
-                    
-                // });
-
                 result.push({articleUrl, articleTitle, articleImg:'click', articleDate});
                 return resolve();
             });

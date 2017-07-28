@@ -36,8 +36,6 @@ main{
     grid-template-columns: repeat(var(--gridColNum),[col] 1fr);
     grid-template-rows: repeat(var(--gridRowNum),[row] 1fr);
 }
-.info{
-}
 .articleImg{
     vertical-align:middle;
     width:50%;
