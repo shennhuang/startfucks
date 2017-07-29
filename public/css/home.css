@@ -33,8 +33,8 @@ header{
 
 main{
     display: grid;
-    grid-template-columns: repeat(var(--gridColNum),[col] 1fr);
-    grid-template-rows: repeat(var(--gridRowNum),[row] 1fr);
+    grid-template-columns: repeat(var(--gridColNum),1fr);
+    grid-template-rows: repeat(var(--gridRowNum),1fr);
 }
 .articleImg{
     vertical-align:middle;
@@ -43,8 +43,8 @@ main{
 }
 .blockListItem{
     display: grid;
-    grid-template-columns: repeat(2,[col] calc((100vw - 12px) / 6));
-    grid-template-rows: repeat(1,[row] 1fr);
+    grid-template-columns: repeat(2,calc((100vw - 12px) / 6));
+    grid-template-rows: repeat(1,1fr);
 }
 .tagRemove{
     margin: 5px 2px;

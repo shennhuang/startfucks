@@ -96,7 +96,7 @@ function dropOnItem(event){
             if(subtitle === "null"){
                 selectItem.querySelector("p[name=title]").innerHTML = title;
             }else{
-                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace("_","-");
+                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace(/_/g,"-");
             }
 
             let scriptElement = document.createElement("script");
@@ -183,7 +183,7 @@ function dropOnHiddenItem(event){
             if(subtitle === "null"){
                 selectItem.querySelector("p[name=title]").innerHTML = title;
             }else{
-                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace("_","-");
+                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace(/_/g,"-");
             }
 
             let scriptElement = document.createElement("script");
