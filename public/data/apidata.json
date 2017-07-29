@@ -3,6 +3,7 @@
         "title": "Time",
         "subtitle": "Taiwan",
         "gridItemSize": {"width": 1, "height": 1},
+        "listType":"select",
         "list":{
             "臺灣" : "Taiwan"
         }
@@ -12,6 +13,7 @@
         "title": "Weather",
         "subtitle": "New Taipei City",
         "gridItemSize": {"width": 2, "height": 1},
+        "listType":"select",
         "list":{
             "臺北市": "Taipei City",
             "基隆市": "Keelung City",
@@ -42,6 +44,7 @@
         "title": "Ubike",
         "subtitle": "臺北市立景美女中",
         "gridItemSize": {"width": 1, "height": 1},
+        "listType":"select",
         "list":{
             "捷運市政府站(3號出口)": "0001",
             "捷運國父紀念館站(2號出口)": "0002",
@@ -403,6 +406,7 @@
         "title": "Ubike(新北)",
         "subtitle": "板橋車站",
         "gridItemSize": {"width": 1, "height": 1},
+        "listType":"select",
         "list":{
             "中正北路193巷(愛買三重店)": "1380",
             "大安路與中山路二段口": "1350",
@@ -800,6 +804,7 @@
         "title":"News",
         "subtitle":"CNN",
         "gridItemSize":{"width":2, "height":1},
+        "listType":"select",
         "list":{
             "聯合(udn)": "udn",
             "ETNEWS新聞雲":"etnews",
@@ -904,11 +909,12 @@
                 "論壇":"113"
             }
         }
-    },   
-    "postsmall":{
-        "title": "PostSmall",
+    },
+    "post(s)":{
+        "title": "Post(s)",
         "subtitle": "null",
         "gridItemSize":{"width":1, "height":1},
+        "listType":"input",
         "list":{
             "null" : "nothing"
         }
@@ -917,6 +923,7 @@
         "title":"中央氣象局警、特報",
         "subtitle":"",
         "gridItemSize":{"width":2, "height":1},
+        "listType":"select",
         "list":{
             "null":"null"
         }

@@ -17,18 +17,40 @@ function itemDrag(event){
     document.getElementsByTagName("header")[0].hidden = "true";
     event.dataTransfer.setDragImage(event.currentTarget, 150 * selectItemWidth, 200);
 
-    //用id是否有default來判斷是否要新增item
+    //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
-        let selectValue = "";
-        if(event.currentTarget.querySelector("select")){
-            selectValue = event.currentTarget.querySelector("select").value;
-        }
-        let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
         
-        let subselectValue;
-        if(event.currentTarget.querySelector("select[id=subselect]")){
-            subselectValue = event.currentTarget.querySelector("select[id=subselect]").value;
-            checkItemId += ("_" + subselectValue);
+        let checkItemId = (event.currentTarget.id.split("_"))[0];
+        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
+        
+        //判斷listType
+        if(checkItemListType == "select"){
+            let selectValue = "";
+            if(event.currentTarget.querySelector("select")){
+                selectValue = event.currentTarget.querySelector("select").value;
+            }
+            let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
+            
+            let subselectValue;
+            if(event.currentTarget.querySelector("select[id=subselect]")){
+                subselectValue = event.currentTarget.querySelector("select[id=subselect]").value;
+                checkItemId += ("_" + subselectValue);
+            }
+        }else{
+            let selectValue = event.currentTarget.querySelector("input").value;
+            let regexp = /[%<>/\\"']/;
+            if(regexp.test(selectValue)){
+                alert("The title can not contain the following characters: %<>/\ \" ' ")
+            }
+            if(selectValue == ""){
+                alert("Title can not empty.")
+                return;
+            }
+            let len = selectValue.length;
+            if(len > 20 || len < 1){
+                alert("Title length is between 1 and 20 words")
+                return;
+            }
         }
 
         //確認拖曳的item是否已經存在
@@ -41,8 +63,8 @@ function itemDrag(event){
     event.dataTransfer.setData("text", event.currentTarget.id);
 
 }
-var n = 60;
-function dropOnItem(event){
+var n = 60; // 不明生物
+function dropOnItem(event){ 
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
     if((selectItemId.split("_"))[0] === 'News'){
@@ -51,13 +73,11 @@ function dropOnItem(event){
     }
 
     if(selectItemId && selectItemId !== event.currentTarget.id){ 
-
-        let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
+        console.log("!!!")
+        let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]); //壓別人的寬度
+        let selectItem = document.getElementById(selectItemId); //壓別人的物件
         
-        //save selectItem in temp
-        let selectItem = document.getElementById(selectItemId);
-
-        //add item
+        //新增block
         if(!settings.hasOwnProperty(selectItemId)){
             let title = (selectItem.id.split("_"))[0];
             let subtitle = "null";
@@ -82,6 +102,11 @@ function dropOnItem(event){
                 if(selectItem.querySelector("select[id=subselect]")){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
+            }else if(selectItem.querySelector("input")){
+                selectItem.removeChild(selectItem.querySelector("input"));
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
             }else{                
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
                 selectItem.id = title + "_" + subtitle;
@@ -99,10 +124,13 @@ function dropOnItem(event){
                 selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace(/_/g,"-");
             }
 
-            let scriptElement = document.createElement("script");
-            scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
-            selectItem.appendChild(scriptElement);
+            // 用append方式產生callapi(已棄用)
+            // let scriptElement = document.createElement("script");
+            // scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+            // selectItem.appendChild(scriptElement);
 
+            selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+            
             //update settings
             settings[selectItem.id] = {
                 title,
@@ -122,7 +150,7 @@ function dropOnItem(event){
                 }
             }
             
-        }
+        }//新增block
         document.getElementById('main').insertBefore(selectItem,document.getElementById(event.currentTarget.id));
 
         updateLocation();
@@ -148,6 +176,7 @@ function dropOnHiddenItem(event){
         //add item
         if(!settings.hasOwnProperty(selectItemId)){
 
+            
             let title = (selectItem.id.split("_"))[0];
             let subtitle = "null";
             if(selectItem.querySelector("select")){
@@ -161,9 +190,7 @@ function dropOnHiddenItem(event){
                 }
 
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
-
                 selectItem.id = title + "_" + subtitle;
-
                 selectItem.removeChild(selectItem.querySelector("font"));
                 selectItem.removeChild(selectItem.querySelector("select"));
                 if(selectItem.querySelector("select[id=subselect]")){

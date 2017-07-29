@@ -121,6 +121,27 @@ main{
 #subselect{
     font-size: 100%;
 }
+.smallPostContent{
+    height : 12vh;
+    overflow: scroll;
+}
+.largePostContent{
+    height : 14vh;
+    overflow: scroll;
+}
+.smallPosttextarea{
+    height : 14vh;
+    width :inherit;
+    resize:none;
+}
+.largePosttextarea{
+    height : 15vh;
+    width :inherit;
+    resize:none;
+}
+.postBtn{
+    margin: 0 auto;
+}
 
 /*modal*/
 .modalContainer{

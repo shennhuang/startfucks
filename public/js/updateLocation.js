@@ -26,8 +26,8 @@ function updateLocation() {
                 removeNum--;
             }
         }
+        
     }
-
     userData.settings = settings;
 
     //send settings to server for save

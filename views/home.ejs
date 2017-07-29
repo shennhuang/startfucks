@@ -3,7 +3,7 @@
     <head>
         <title>Home</title>
         <meta charset="utf-8">
-        <meta name="_csrf" content= <%= csrfToken %> >
+        <meta name="_csrf" content= '<%= csrfToken %>' >
         <% var userSettings = userData.settings || {}; %>
         <script>
             var userData = JSON.parse('<%- JSON.stringify(userData) %>');
@@ -31,12 +31,14 @@
         <script type="text/javascript" src="/js/callApi.js"></script>
         <script type="text/javascript" src="/js/editName.js"></script>
         <script type="text/javascript" src="/js/logout.js"></script>
+        <script type="text/javascript" src="/js/postBtn.js"></script>
         <script type="text/javascript" src="/js/createSelectOptions.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
         <script type="text/javascript" src="/js/ubike.js"></script>
         <script type="text/javascript" src="/js/ubikeNTP.js"></script>
         <script type="text/javascript" src="/js/news.js"></script>
+        <script type="text/javascript" src="/js/posts.js"></script>
         <script type="text/javascript" src="/js/cwbWarning.js"></script>
         <!--<script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>-->
 
@@ -67,12 +69,13 @@
                     }
                 }
                 if(!hasItem) { %>
-                    <div id="<%= 'hiddenGrid' + i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"><!--<p><%= "hiddenGrid" +  i %></p>--></div>
+                    <div id="<%= 'hiddenGrid' + i %>" ondrop="dropOnHiddenItem(event);" class="gridHidden"></div>
                 <% }
                 hasItem=false;
             } %>
         </main>
 
+        <!--blockList-->
         <div ondragover="allowDrop(event);" class = "blockList" style = "display:none">
             <table class = "optionsContainer" border= '1'>
                 <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
@@ -83,19 +86,26 @@
                         </td>
                         <td class="blockListItem">
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                                
                                 <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
-                                <% if(v.subtitle) { %>
-                                <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
-                                    <% listKeys = Object.keys(v.list);
-                                       for (var j = 0 ; j < listKeys.length ; j ++){ %>
-                                        <option><%= listKeys[j] %></option>
+                                <% if(v.listType == "select") { %>
+                                    <% if(v.subtitle) { %>
+                                    <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
+                                        <% listKeys = Object.keys(v.list);
+                                        for (var j = 0 ; j < listKeys.length ; j ++){ %>
+                                            <option><%= listKeys[j] %></option>
+                                        <% } %>
+                                        <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
+                                    </select>
                                     <% } %>
-                                    <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
-                                </select>
+                                <% }else if(v.listType == "input") { %>
+                                    <input></input>
                                 <% } %>
+                                
                                 <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
-                                <p hidden="true" name="title" class="itemTitle"><%= v.title + "-" + v.subtitle %></p>
+                                <p hidden="true" name="title" class="itemTitle"></p>
                                 <p hidden="true" name="info">loading...</p>
+                                <script name="callapi"></script>
                             </div>
                         </td>
                     </tr>

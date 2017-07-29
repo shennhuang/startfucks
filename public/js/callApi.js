@@ -17,4 +17,10 @@ function callApi(title, subtitle){
     if(title === "中央氣象局警、特報"){
         cwbWarning();
     }
+    if(title === "Post(s)"){
+        postsGet(subtitle,"s");
+    }
+    if(title === "Post(l)"){
+        posts(subtitle,"l");
+    }
 }
