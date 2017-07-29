@@ -20,5 +20,8 @@ function removeItem(event){
     //從前端settings裡移除該item
     delete settings[currentItemId];
 
+    while(document.body.querySelector('div[role=tooltip]')){
+        document.body.removeChild(document.body.querySelector('div[role=tooltip]'));
+    }
     updateLocation();
 }

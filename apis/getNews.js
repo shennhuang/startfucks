@@ -66,7 +66,7 @@ function udn(req, res, newsSite, subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) console.log(error);
         //rss xml to json object
         try {
             body = xmlparser.toJson(body,{object: true});

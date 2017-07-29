@@ -24,8 +24,10 @@ function getUbike(req, res){
             }
         }
         var item = ubikeList[stationName];
-
-        res.send(body.retVal[item].sbi);
+        if(body.retVal[item]){
+            return res.send(body.retVal[item].sbi);
+        }
+        return res.send('');
     });
 
 }
