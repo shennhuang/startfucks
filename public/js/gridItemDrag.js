@@ -19,8 +19,10 @@ function itemDrag(event){
 
     //用id是否有default來判斷是否要新增item
     if((event.currentTarget.id.split('_'))[1] === 'default'){
-        
-        let selectValue = event.currentTarget.querySelector("select").value;
+        let selectValue = "";
+        if(event.currentTarget.querySelector("select")){
+            selectValue = event.currentTarget.querySelector("select").value;
+        }
         let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
         
         let subselectValue;
@@ -58,25 +60,32 @@ function dropOnItem(event){
         //add item
         if(!settings.hasOwnProperty(selectItemId)){
             let title = (selectItem.id.split("_"))[0];
+            let subtitle = "null";
 
-            //一定要先取選單的值
-            let subtitle = selectItem.querySelector("select").value;
-            //取得子選單的值,加在subtitle裡
-            let subselectValue;
-            if(selectItem.querySelector("select[id=subselect]")){
-                subselectValue = selectItem.querySelector("select[id=subselect]").value;
-                subtitle += ("_" + subselectValue);
-            }
+            if(selectItem.querySelector("select")){
+                //一定要先取選單的值
+                subtitle = selectItem.querySelector("select").value;
+                //取得子選單的值,加在subtitle裡
+                let subselectValue;
+                if(selectItem.querySelector("select[id=subselect]")){
+                    subselectValue = selectItem.querySelector("select[id=subselect]").value;
+                    subtitle += ("_" + subselectValue);
+                }
 
-            //接下來的的操作用複製的物件,這樣選單的才不會消失(這時選取的值會變預設,所以前面要先存起來)
-            selectItem = document.getElementById(selectItemId).cloneNode(true);
+                //接下來的的操作用複製的物件,這樣選單的才不會消失(這時選取的值會變預設,所以前面要先存起來)
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
 
-            selectItem.id = title + "_" + subtitle;
+                selectItem.id = title + "_" + subtitle;
 
-            selectItem.removeChild(selectItem.querySelector("font"));
-            selectItem.removeChild(selectItem.querySelector("select"));
-            if(selectItem.querySelector("select[id=subselect]")){
-                selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
+                selectItem.removeChild(selectItem.querySelector("font"));
+                selectItem.removeChild(selectItem.querySelector("select"));
+                if(selectItem.querySelector("select[id=subselect]")){
+                    selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
+                }
+            }else{                
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
             }
 
             //update item content
@@ -84,7 +93,11 @@ function dropOnItem(event){
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
-            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle.replace("_","-");
+            if(subtitle === "null"){
+                selectItem.querySelector("p[name=title]").innerHTML = title;
+            }else{
+                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace("_","-");
+            }
 
             let scriptElement = document.createElement("script");
             scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
@@ -136,32 +149,42 @@ function dropOnHiddenItem(event){
         if(!settings.hasOwnProperty(selectItemId)){
 
             let title = (selectItem.id.split("_"))[0];
-            let subtitle = selectItem.querySelector("select").value;
+            let subtitle = "null";
+            if(selectItem.querySelector("select")){
+                subtitle = selectItem.querySelector("select").value;
 
-            //取得子選單的值,加在subtitle裡
-            let subselectValue;
-            if(selectItem.querySelector("select[id=subselect]")){
-                subselectValue = selectItem.querySelector("select[id=subselect]").value;
-                subtitle += ("_" + subselectValue);
-            }
+                //取得子選單的值,加在subtitle裡
+                let subselectValue;
+                if(selectItem.querySelector("select[id=subselect]")){
+                    subselectValue = selectItem.querySelector("select[id=subselect]").value;
+                    subtitle += ("_" + subselectValue);
+                }
 
-            selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
 
-            selectItem.id = title + "_" + subtitle;
+                selectItem.id = title + "_" + subtitle;
 
-            selectItem.removeChild(selectItem.querySelector("font"));
-            selectItem.removeChild(selectItem.querySelector("select"));
-            if(selectItem.querySelector("select[id=subselect]")){
-                selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
+                selectItem.removeChild(selectItem.querySelector("font"));
+                selectItem.removeChild(selectItem.querySelector("select"));
+                if(selectItem.querySelector("select[id=subselect]")){
+                    selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
+                }
+            }else{
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
             }
             
-
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
-            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle.replace("_","-");
+            if(subtitle === "null"){
+                selectItem.querySelector("p[name=title]").innerHTML = title;
+            }else{
+                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace("_","-");
+            }
 
             let scriptElement = document.createElement("script");
             scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
@@ -174,6 +197,7 @@ function dropOnHiddenItem(event){
                 gridItemSize: {width: selectItemWidth, height: 1},
                 gridItemIndex: -1,
             };
+            
         }//move item
         else if(settings.hasOwnProperty(selectItemId)){
 

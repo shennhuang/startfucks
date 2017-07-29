@@ -14,4 +14,7 @@ function callApi(title, subtitle){
     if(title === "News"){
         news(subtitle);
     }
+    if(title === "中央氣象局警、特報"){
+        cwbWarning();
+    }
 }

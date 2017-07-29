@@ -84,6 +84,7 @@ main{
 }
 .itemTitleLink:hover{
     color: #06f;
+    cursor:pointer;
 }
 .blockListBtn{
     display: inline-block;
@@ -176,3 +177,6 @@ main{
     padding: 20px;
 }
 /*setting*/
+iframe{
+    transform: scale(0.9);
+}

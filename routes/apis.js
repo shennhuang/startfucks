@@ -3,6 +3,7 @@ var getWeather = require('../apis/getWeather');
 var getUbike = require('../apis/getUbike');
 var getUbikeNTP = require('../apis/getUbikeNTP');
 var getNews = require('../apis/getNews');
+var getcwbWarning = require('../apis/getcwbWarning');
 
 function apis(req, res){
 
@@ -17,6 +18,9 @@ function apis(req, res){
     }
     if(req.query.q === 'news'){
         return getNews(req, res);
+    }
+    if(req.query.q === 'cwbWarning'){
+        return getcwbWarning(req, res);
     }
 }
 
