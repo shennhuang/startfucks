@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var apidata = require('../public/data/apidata.json')
 function getUbike(req, res){
     let stationName = req.body.stationName;
     let url = "http://data.taipei/youbike"
@@ -10,6 +11,8 @@ function getUbike(req, res){
         json: true,
     };
 
+    let ubikeList = apidata.ubike.list;
+    console.log({ubikeList:ubikeList})
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
@@ -25,8 +28,6 @@ function getUbike(req, res){
         }
         
         var item = ubikeList[stationName];
-        
-        
         res.send(body.retVal[item].sbi);
     });
 

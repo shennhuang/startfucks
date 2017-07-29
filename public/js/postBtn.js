@@ -5,6 +5,7 @@ function postBtnOnclick(x,id){
         var textareaValue = document.getElementById(id).value;
 
         document.getElementById(xId).innerHTML = "Edit";
+        let test = document.getElementById(xId);
     }
     if(inner = "Edit"){
         document.getElementById(xId).innerHTML = "Save";
