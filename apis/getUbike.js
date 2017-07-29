@@ -25,8 +25,7 @@ function getUbike(req, res){
             }
 
         }
-        
-        var item = ubikeList[stationName]; 
+        var item = ubikeList[stationName];
         if(body.retVal[item]){
             return res.send(body.retVal[item].sbi);
         }

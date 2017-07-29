@@ -12,7 +12,16 @@
         </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $(function(){
+                $(document).tooltip({
+                    position:{at: "center right"}
+                });
+            });
+        </script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
         <script type="text/javascript" src="/js/addSubselect.js"></script>
@@ -155,6 +164,7 @@
         <!--modal-->
 
         <!--<script>createSelectOptions();</script>-->
+
     </body>
 
 </html>

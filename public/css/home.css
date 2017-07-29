@@ -48,8 +48,9 @@ main{
 }
 .tagRemove{
     margin: 5px 2px;
+    width: 5px;
     padding: 0;
-    text-align: right;
+    text-align: left;
     line-height: 0;
     color: #FFF;
 }
@@ -198,6 +199,3 @@ main{
     padding: 20px;
 }
 /*setting*/
-iframe{
-    transform: scale(0.9);
-}

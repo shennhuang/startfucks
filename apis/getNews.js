@@ -41,7 +41,6 @@ function newsOrg(req, res, newsSite ,subSite){
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
-
         let result = [];
         let articles = body.articles;
         for(let i in articles){
@@ -49,7 +48,8 @@ function newsOrg(req, res, newsSite ,subSite){
             let articleTitle = articles[i].title
             let articleImg = articles[i].urlToImage;
             let articleDate = articles[i].publishedAt;
-            result.push({articleUrl, articleTitle, articleImg, articleDate});
+            let articleDes = articles[i].description;
+            result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes});
         }
 
         return res.status(200).send(result);
@@ -66,7 +66,7 @@ function udn(req, res, newsSite, subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) console.log(error);
         //rss xml to json object
         try {
             body = xmlparser.toJson(body,{object: true});
@@ -92,8 +92,8 @@ function udn(req, res, newsSite, subSite){
                     }
                 }
             }
-
-            result.push({articleUrl, articleTitle, articleImg, articleDate});
+            des = des.replace(/<[^>]*>/g,'');
+            result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
         }
 
         return res.status(200).send(result);
@@ -122,11 +122,12 @@ function bbcchinese(req, res, newsSite, subSite){
             let articleUrl = articles[i].link;
             let articleTitle = articles[i].title
             let articleDate = articles[i].pubDate;
+            let des = articles[i].description;
             let articleImg = "";
             if(articles[i].hasOwnProperty("media:thumbnail")){
                 articleImg = articles[i]["media:thumbnail"].url;
             }
-            result.push({articleUrl, articleTitle, articleImg, articleDate});
+            result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
         }
         return res.status(200).send(result);
     });
@@ -164,7 +165,9 @@ function etnews(req, res, newsSite, subSite){
                     articleImg += des[i];
                 }
             }
-            result.push({articleUrl, articleTitle, articleImg, articleDate});
+            des = des.replace(/<[^>]*>/g,'');
+            des = des.substring(0, des.indexOf('《詳全文...》'));
+            result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
         }
         return res.status(200).send(result);
     });
@@ -201,8 +204,12 @@ function appledaily(req, res, newsSite, subSite){
             let articleUrl = articles[i].link;
             let articleTitle = articles[i].title;
             let articleDate = articles[i].pubDate;
+            let des = articles[i].description;
+            des = des.replace(/<[^>]*>/g,'');
+            des = des.substring(0, des.indexOf('詳全文：'));
+
             promiseGroup[i] = new Promise((resolve, reject)=>{
-                result.push({articleUrl, articleTitle, articleImg:'click', articleDate});
+                result.push({articleUrl, articleTitle, articleImg:'click', articleDate, articleDes: des});
                 return resolve();
             });
         }
