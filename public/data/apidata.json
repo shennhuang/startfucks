@@ -909,5 +909,15 @@
                 "論壇":"113"
             }
         }
+    },
+    
+    "post(s)":{
+        "title": "Post(s)",
+        "subtitle": "null",
+        "gridItemSize":{"width":1, "height":1},
+        "listType":"input",
+        "list":{
+            "null" : "nothing"
+        }
     }
 }

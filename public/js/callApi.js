@@ -14,4 +14,10 @@ function callApi(title, subtitle){
     if(title === "News"){
         news(subtitle);
     }
+    if(title === "Post(s)"){
+        postsGet(subtitle,"s");
+    }
+    if(title === "Post(l)"){
+        posts(subtitle,"l");
+    }
 }

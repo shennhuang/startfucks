@@ -6,12 +6,9 @@ function updateLocation() {
         let item = items[i];
         let itemId = items[i].id;
         if(!(/hiddenGrid[0-9]+/).test(itemId)) {
-            ///////計算格子 要改
             let itemWidth = parseInt((item.style.cssText.split(' '))[5]);
-            a = itemWidth == 2 && i % 6 == 5 ? 1 : 0;
-            settings[itemId].gridItemIndex = i+j+a;
+            settings[itemId].gridItemIndex = i+j;
             j += (itemWidth - 1);
-            console.log({id:itemId,index:settings[itemId].gridItemIndex})
         }
         
     }
