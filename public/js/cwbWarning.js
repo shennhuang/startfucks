@@ -19,7 +19,7 @@ function cwbWarning(){
                     element.querySelector('p[name=title]').setAttribute("onclick", 'window.open(\"' + result.link + '\" ,  "_blank")');
                     element.querySelector('p[name=title]').removeAttribute("class");
                     element.querySelector('p[name=title]').setAttribute("class", "itemTitleLink");
-                    element.querySelector('p[name=info]').innerHTML = result.title + '<br><br>' + result.description +'<a href="http://www.cwb.gov.tw/V7/prevent/warning/Data/TEDPTA/TEDptaweb_C.htm" target="_blank">路徑潛勢圖</a><br>Update: ' + new Date(result.date).toLocaleString();
+                    element.querySelector('p[name=info]').innerHTML = result.title + '<br><br>' + result.description +'<a href="http://www.cwb.gov.tw/V7/prevent/typhoon/Data/PTA_NEW/index.htm" target="_blank">颱風消息</a><br>Update: ' + new Date(result.date).toLocaleString();
 
 
                 }

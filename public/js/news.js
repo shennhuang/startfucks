@@ -21,13 +21,13 @@ function news(newsSite){
                     element.querySelector('p[name=info]').innerHTML = "";
                     for(let i in result){
                         if(result[i].articleImg === 'click'){
-                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' draggable="false" target="_blank">' + result[i].articleTitle + '</a><br><img class="articleImg" draggable="false" src="" alt="點我看圖" onclick="openImg(event,\'' + result[i].articleUrl + '\');"><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
+                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' draggable="false" target="_blank" title="' + result[i].articleDes + '\">' + result[i].articleTitle + '</a><br><img class="articleImg" draggable="false" src="" alt="點我看圖" onclick="openImg(event,\'' + result[i].articleUrl + '\');"><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
                             continue;
                         }
                         if(result[i].articleImg){
-                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' draggable="false" target="_blank">' + result[i].articleTitle + '</a><br><img class="articleImg" draggable="false" src='+ result[i].articleImg + '><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
+                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' draggable="false" target="_blank" title="' + result[i].articleDes + '\">' + result[i].articleTitle + '</a><br><img class="articleImg" draggable="false" src='+ result[i].articleImg + '><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
                         }else {
-                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' draggable="false" target="_blank">' + result[i].articleTitle + '</a><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
+                            element.querySelector('p[name=info]').innerHTML += '<a href=' + result[i].articleUrl + ' draggable="false" target="_blank" title="' + result[i].articleDes + '\">' + result[i].articleTitle + '</a><br>' + ((result[i].articleDate)? new Date(result[i].articleDate).toLocaleString() : '') + '<br><br>';
                         }
                     }
                     return;
