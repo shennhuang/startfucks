@@ -1,21 +1,36 @@
 function allowDrop(event){
     event.preventDefault();
+    document.getElementsByTagName("header")[0].removeAttribute("hidden");
+
     hiddenBlockList();
     hiddenSettingList();
 }
-function itemDrag(event){  
+var infoTemp;
+//ondragstart
+function itemDrag(event){
+    let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
+    let title = (event.currentTarget.id.split("_"))[0];
+    if(title === 'News' && event.currentTarget.querySelector("p[name=info]")){
+        infoTemp = event.currentTarget.querySelector("p[name=info]");
+        event.currentTarget.removeChild(event.currentTarget.querySelector("p[name=info]"));
+    }
+    document.getElementsByTagName("header")[0].hidden = "true";
+    event.dataTransfer.setDragImage(event.currentTarget, 150 * selectItemWidth, 200);
 
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
-
+        
         let checkItemId = (event.currentTarget.id.split("_"))[0];
         let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
         
         //判斷listType
         if(checkItemListType == "select"){
-            let selectValue = event.currentTarget.querySelector("select").value;
-            checkItemId =  checkItemId + "_" + selectValue;
-
+            let selectValue = "";
+            if(event.currentTarget.querySelector("select")){
+                selectValue = event.currentTarget.querySelector("select").value;
+            }
+            let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
+            
             let subselectValue;
             if(event.currentTarget.querySelector("select[id=subselect]")){
                 subselectValue = event.currentTarget.querySelector("select[id=subselect]").value;
@@ -46,13 +61,17 @@ function itemDrag(event){
     }
     //將要記錄的資訊放入事件中(這裡紀錄目前拖曳的目標物件id)
     event.dataTransfer.setData("text", event.currentTarget.id);
+
 }
 var n = 60; // 不明生物
 function dropOnItem(event){ 
     event.preventDefault();
-    let selectItemId = event.dataTransfer.getData("text"); //壓別人的id
-    
-    //若壓別人的不為空值(?) && 不是自己壓自己
+    let selectItemId = event.dataTransfer.getData("text");
+    if((selectItemId.split("_"))[0] === 'News'){
+        document.getElementById(selectItemId).appendChild(infoTemp);
+        delete infoTemp;
+    }
+
     if(selectItemId && selectItemId !== event.currentTarget.id){ 
         console.log("!!!")
         let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]); //壓別人的寬度
@@ -61,34 +80,37 @@ function dropOnItem(event){
         //新增block
         if(!settings.hasOwnProperty(selectItemId)){
             let title = (selectItem.id.split("_"))[0];
-            let checkItemListType = apidata[title.toLowerCase()].listType;
+            let subtitle = "null";
 
-            //一定要先取選單的值
-            let subtitle = selectItem.querySelector(checkItemListType).value;
-            
-            if(checkItemListType == "select"){ //判斷listType
-                let subselectValue;
+            if(selectItem.querySelector("select")){
+                //一定要先取選單的值
+                subtitle = selectItem.querySelector("select").value;
                 //取得子選單的值,加在subtitle裡
+                let subselectValue;
                 if(selectItem.querySelector("select[id=subselect]")){
                     subselectValue = selectItem.querySelector("select[id=subselect]").value;
                     subtitle += ("_" + subselectValue);
                 }
-            }
-            //接下來的操作用複製的物件,這樣選單的才不會消失(這時選取的值會變預設,所以前面要先存起來)
-            selectItem = document.getElementById(selectItemId).cloneNode(true);
 
-            //改變狀態 從list樣式 -> 格字內的格式
-            //刪除list的title
-            selectItem.id = title + "_" + subtitle;
-            selectItem.removeChild(selectItem.querySelector("font"));
+                //接下來的的操作用複製的物件,這樣選單的才不會消失(這時選取的值會變預設,所以前面要先存起來)
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
 
-            if(checkItemListType == "select"){
+                selectItem.id = title + "_" + subtitle;
+
+                selectItem.removeChild(selectItem.querySelector("font"));
                 selectItem.removeChild(selectItem.querySelector("select"));
                 if(selectItem.querySelector("select[id=subselect]")){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
-            }else if(checkItemListType == "input"){
+            }else if(selectItem.querySelector("input")){
                 selectItem.removeChild(selectItem.querySelector("input"));
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
+            }else{                
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
             }
 
             //update item content
@@ -96,7 +118,11 @@ function dropOnItem(event){
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
-            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle.replace("_","-");
+            if(subtitle === "null"){
+                selectItem.querySelector("p[name=title]").innerHTML = title;
+            }else{
+                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace("_","-");
+            }
 
             // 用append方式產生callapi(已棄用)
             // let scriptElement = document.createElement("script");
@@ -135,6 +161,10 @@ function dropOnHiddenItem(event){
     event.preventDefault();
     
     let selectItemId = event.dataTransfer.getData("text");
+    if((selectItemId.split("_"))[0] === 'News'){
+        document.getElementById(selectItemId).appendChild(infoTemp);
+        delete infoTemp;
+    }
 
     if(selectItemId && selectItemId !== event.currentTarget.id) {
 
@@ -148,37 +178,40 @@ function dropOnHiddenItem(event){
 
             
             let title = (selectItem.id.split("_"))[0];
-            let apiKey = title.toLocaleLowerCase();
-            let listType = apidata[apiKey].listType;
-            let subtitle = selectItem.querySelector(listType).value;
+            let subtitle = "null";
+            if(selectItem.querySelector("select")){
+                subtitle = selectItem.querySelector("select").value;
 
-            if(listType == "select"){
                 //取得子選單的值,加在subtitle裡
                 let subselectValue;
                 if(selectItem.querySelector("select[id=subselect]")){
                     subselectValue = selectItem.querySelector("select[id=subselect]").value;
                     subtitle += ("_" + subselectValue);
                 }
-            } 
-            selectItem = document.getElementById(selectItemId).cloneNode(true);
 
-            selectItem.id = title + "_" + subtitle;
-
-            selectItem.removeChild(selectItem.querySelector("font"));
-            selectItem.removeChild(selectItem.querySelector(listType));
-            if(listType == "select"){
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
+                selectItem.removeChild(selectItem.querySelector("select"));
                 if(selectItem.querySelector("select[id=subselect]")){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
+            }else{
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
             }
             
-
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
-            selectItem.querySelector("p[name=title]").innerHTML = title + "-" + subtitle.replace("_","-");
+            if(subtitle === "null"){
+                selectItem.querySelector("p[name=title]").innerHTML = title;
+            }else{
+                selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace("_","-");
+            }
 
             let scriptElement = document.createElement("script");
             scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
@@ -191,7 +224,8 @@ function dropOnHiddenItem(event){
                 gridItemSize: {width: selectItemWidth, height: 1},
                 gridItemIndex: -1,
             };
-        }
+            
+        }//move item
         else if(settings.hasOwnProperty(selectItemId)){
 
             //insert hidden grid

@@ -12,7 +12,6 @@
         </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
-        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
@@ -31,6 +30,7 @@
         <script type="text/javascript" src="/js/ubikeNTP.js"></script>
         <script type="text/javascript" src="/js/news.js"></script>
         <script type="text/javascript" src="/js/posts.js"></script>
+        <script type="text/javascript" src="/js/cwbWarning.js"></script>
         <!--<script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>-->
 
     </head>
@@ -48,10 +48,9 @@
                 for(let key in userData.settings) {
                     let v = userData.settings[key]; 
                     if(+v.gridItemIndex === i) { %>
-
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                         <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
-                        <p name="title" class="itemTitle"><%= v.title + "-" + v.subtitle.replace("_","-") %></p>
+                        <p name="title" class="itemTitle"><%= (v.subtitle!=="null")?(v.title + "-" + v.subtitle.replace("_","-")):(v.title) %></p>
                         <p name="info" class="info">loading...</p>
                         <script>callApi("<%= v.title %>", "<%= v.subtitle %>");</script>
                     </div>
@@ -66,9 +65,9 @@
                 hasItem=false;
             } %>
         </main>
-        
+
         <!--blockList-->
-        <div class = "blockList" style = "display:none">
+        <div ondragover="allowDrop(event);" class = "blockList" style = "display:none">
             <table class = "optionsContainer" border= '1'>
                 <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
                     <tr>
@@ -78,21 +77,23 @@
                         </td>
                         <td class="blockListItem">
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-                                <font name="selectTitle" class="itemTitle"><%= v.title + "-" %></font>
                                 
+                                <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
                                 <% if(v.listType == "select") { %>
-                                    <select id="select" name="select" onchange="addSubselect(event)" class = "<%= apiKeys[i] %>Select" >
-                                        <% listKeys = Object.keys(v.list); %>
-                                        <% for (var j = 0 ; j < listKeys.length ; j ++){ %>
+                                    <% if(v.subtitle) { %>
+                                    <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
+                                        <% listKeys = Object.keys(v.list);
+                                        for (var j = 0 ; j < listKeys.length ; j ++){ %>
                                             <option><%= listKeys[j] %></option>
                                         <% } %>
+                                        <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                     </select>
-                                    <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
+                                    <% } %>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
                                 <% } %>
                                 
-                                <p hidden="true" name="remove" title="remove" class="tagRemove" onClick="removeItem(event);">x</p>
+                                <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                                 <p hidden="true" name="title" class="itemTitle"></p>
                                 <p hidden="true" name="info">loading...</p>
                                 <script name="callapi"></script>
@@ -155,4 +156,5 @@
 
         <!--<script>createSelectOptions();</script>-->
     </body>
+
 </html>

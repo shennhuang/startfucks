@@ -4,6 +4,7 @@ var getUbike = require('../apis/getUbike');
 var getUbikeNTP = require('../apis/getUbikeNTP');
 var getNews = require('../apis/getNews');
 var getPosts = require('../apis/getPosts');
+var getcwbWarning = require('../apis/getcwbWarning');
 
 function apis(req, res){
     if(req.query.q === 'weather'){     
@@ -21,8 +22,11 @@ function apis(req, res){
     if(req.query.q === 'getpost_s'){
         return getPosts(req, res);
     }
-    if(req.query.q === 'post_l'){
+    if(req.query.q === 'gstpost_l'){
         // return getNews(req, res);
+    }
+    if(req.query.q === 'cwbWarning'){
+        return getcwbWarning(req, res);
     }
 }
 

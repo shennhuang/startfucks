@@ -194,9 +194,10 @@ function appledaily(req, res, newsSite, subSite){
         }
 
         let promiseGroup = [];
+        //新聞顯示篇數
         let postNum = (articles.length > 20)? 20: articles.length;
 
-        for(let i = 0; i < articles.length; i++){
+        for(let i = 0; i < postNum; i++){
             let articleUrl = articles[i].link;
             let articleTitle = articles[i].title;
             let articleDate = articles[i].pubDate;
