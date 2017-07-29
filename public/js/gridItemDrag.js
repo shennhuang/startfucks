@@ -10,7 +10,7 @@ var infoTemp;
 function itemDrag(event){
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
     let title = (event.currentTarget.id.split("_"))[0];
-    if(title === 'News'){
+    if(title === 'News' && event.currentTarget.querySelector("p[name=info]")){
         infoTemp = event.currentTarget.querySelector("p[name=info]");
         event.currentTarget.removeChild(event.currentTarget.querySelector("p[name=info]"));
     }
