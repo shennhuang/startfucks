@@ -25,11 +25,11 @@ function itemDrag(event){
         
         //判斷listType
         if(checkItemListType == "select"){
-            let selectValue = "";
+            let selectValue = "null";
             if(event.currentTarget.querySelector("select")){
                 selectValue = event.currentTarget.querySelector("select").value;
             }
-            let checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
+            checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
             
             let subselectValue;
             if(event.currentTarget.querySelector("select[id=subselect]")){
@@ -52,7 +52,7 @@ function itemDrag(event){
                 return;
             }
         }
-
+//console.log(checkItemId)
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
