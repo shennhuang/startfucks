@@ -1,13 +1,29 @@
-function postBtnOnclick(x,id){
+function postBtnOnclick(x,textareaId){
     let xId = x.id;
-    if(inner = "Save"){
+    let elementId = xId.split("~")[0];
+    let inner = x.innerHTML;
+    let textareaValue = document.getElementById(textareaId).value;
+    let divValue = document.getElementById(elementId+"~div").value || "";
+    if(inner == "Save"){
         // id = id.replace("/a","(").replace("/b",")")
-        var textareaValue = document.getElementById(id).value;
+        let postWords = document.getElementById(textareaId).value;
+        let size = xId.split('_')[0];
+        let title = xId.split('_')[1].split('~')[0];
+        console.log({size:size})
+        if(size == 'Post(s)') postsPut(title,"s",postWords);
+        else if(size == 'Post(l)') postsPut(title,"l",postWords);
 
+        document.getElementById(textareaId).style.display = "none"
+        document.getElementById(elementId + '~div').style.display = "block"
+        document.getElementById(elementId + '~div').innerHTML = document.getElementById(textareaId).value;
         document.getElementById(xId).innerHTML = "Edit";
-        let test = document.getElementById(xId);
     }
-    if(inner = "Edit"){
+    if(inner == "Edit"){
+        
+            
+        document.getElementById(textareaId).style.display = "block"
+        document.getElementById(elementId + '~div').style.display = "none"
+        document.getElementById(textareaId).value = document.getElementById(elementId + '~div').innerHTML;
         document.getElementById(xId).innerHTML = "Save";
     }
 }

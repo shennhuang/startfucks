@@ -1,12 +1,11 @@
 function postsGet(title,size){
-    
     let host = 'http://localhost:8080';
     let elementId = "Post(" + size  + ")_" + title;
     let element = document.getElementById(elementId);
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=getpost_'+size,
+            url: host + '/apis?q=getPosts_'+size,
             type: 'POST',
             data:{
                 title : elementId,
@@ -25,14 +24,14 @@ function postsGet(title,size){
                         //設定btn
                         let btn = document.createElement("button");
                         let btnId = document.createAttribute("id");
-                        btnId.value = "postBtn";
+                        btnId.value = elementId + "~btn";
                         btn.setAttributeNode(btnId);
                         let btnOnclick = document.createAttribute("onclick");
                         btnOnclick.value = "postBtnOnclick(this,'" + newElementId + "')";
                         btn.setAttributeNode(btnOnclick);
 
                         element.appendChild(btn);
-                        btn.innerHTML = "Save"
+                        btn.innerHTML = "Edit"
 
                         //設定info
                         let infoStyle = document.createAttribute("style");
@@ -41,8 +40,8 @@ function postsGet(title,size){
                         info.setAttributeNode(infoStyle);
 
 
-                        element.querySelector('p[name=info]').innerHTML = "<textarea id='" + newElementId + "'class='smallPosttextarea'></textarea>";
-                        // "<div id = 'smallPostContent'>HelloWorld</div>"
+                        element.querySelector('p[name=info]').innerHTML = "<div id = '" + elementId  + "~div' class = 'smallPostContent' style='display:block;'>HelloWorld</div><textarea id='" + newElementId + "'class='smallPosttextarea' style='display:none;'></textarea>";
+                        // 
                         // "<textarea sytle='width:50px;height:50px;'>"
                     }
                 }
@@ -50,7 +49,41 @@ function postsGet(title,size){
         });
 
         setTimeout(function(){
-            posts(title,size);
+            postsGet(title,size);
+        },300000);
+    }
+}
+function postsPut(title,size,words){
+    let host = 'http://localhost:8080';
+    let elementId = "Post(" + size  + ")_" + title;
+    let element = document.getElementById(elementId);
+    console.log({title:title})
+    console.log({element:element})
+    if(element){
+
+        $.ajax({
+            url: host + '/apis?q=postPosts_' + size,
+            type: 'POST',
+            data:{
+                title : elementId,
+                words : words,
+                _csrf: $('meta[name="_csrf"]').attr('content')
+            },
+            error: function(){
+                //alert('您的頁面已經過期,請重新登入！');
+                window.open(host + '/start', '_self');
+            },
+            success: function(result) {
+                if(result) {
+                    if(size = "s"){
+                        
+                    }
+                }
+            }
+        });
+
+        setTimeout(function(){
+            postsGet(title,size);
         },300000);
     }
 }

@@ -122,7 +122,10 @@ main{
     font-size: 100%;
 }
 .smallPostContent{
-    height : 12vh;
+    height : calc(14vh);
+    width: calc((100vw/6) - 10px);
+    padding: 1px;
+    text-align: left;
     overflow: scroll;
 }
 .largePostContent{
@@ -130,12 +133,14 @@ main{
     overflow: scroll;
 }
 .smallPosttextarea{
-    height : 14vh;
-    width :inherit;
+    height : calc(14vh + 2px);
+    width: calc((100vw/6) - 10px);
+    font-size: 15.5px;
+    padding: 0;
     resize:none;
 }
 .largePosttextarea{
-    height : 15vh;
+    height : 14vh;
     width :inherit;
     resize:none;
 }

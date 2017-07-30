@@ -12,24 +12,16 @@ function getUbike(req, res){
         json: true,
     };
 
+    let ubikeList = apidata.ubike.list;
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        var data = Object.keys(body.retVal);
-        var ubikeList = {};
         
-        for(let item of data){
-            if(body.retVal[item].act != 0){
-                let key = body.retVal[item].sna;
-                ubikeList[key] = item;
-            }
-
-        }
         var item = ubikeList[stationName];
-        if(body.retVal[item]){
-            return res.send(body.retVal[item].sbi);
+        if(body.retVal[item].act == "0"){
+            return res.send('');
         }
-        return res.send('');
+        return res.send({sbi : body.retVal[item].sbi,bemp : body.retVal[item].bemp});
     });
 
 }

@@ -97,15 +97,20 @@
                                         <% } %>
                                         <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                     </select>
+                                    <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
+                                    <p hidden="true" name="title" class="itemTitle"></p>
+                                    <p hidden="true" name="info">loading...</p>
+                                    <script name="callapi"></script>
                                     <% } %>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
+                                    <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
+                                    <p hidden="true" name="title" class="itemTitle"></p>
+                                    <p hidden="true" name="info"></p>
                                 <% } %>
                                 
-                                <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
-                                <p hidden="true" name="title" class="itemTitle"></p>
-                                <p hidden="true" name="info">loading...</p>
-                                <script name="callapi"></script>
+                                
+                                
                             </div>
                         </td>
                     </tr>
