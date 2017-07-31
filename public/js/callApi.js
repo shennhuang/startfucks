@@ -21,6 +21,6 @@ function callApi(title, subtitle){
         postsGet(subtitle,"s");
     }
     if(title === "Post(l)"){
-        posts(subtitle,"l");
+        postsGet(subtitle,"l");
     }
 }

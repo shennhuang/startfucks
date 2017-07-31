@@ -17,35 +17,44 @@ function postsGet(title,size){
             },
             success: function(result) {
                 if(result) {
-                    if(size = "s"){
-                        //內文有括號會被html視為function,所以要取代掉
-                        let newElementId = elementId.replace("(","/a").replace(")","/b");
-                        
-                        //設定btn
-                        let btn = document.createElement("button");
-                        let btnId = document.createAttribute("id");
-                        btnId.value = elementId + "~btn";
-                        btn.setAttributeNode(btnId);
-                        let btnOnclick = document.createAttribute("onclick");
-                        btnOnclick.value = "postBtnOnclick(this,'" + newElementId + "')";
-                        btn.setAttributeNode(btnOnclick);
+                    
+                    //內文有括號會被html視為function,所以要取代掉
+                    let newElementId = elementId.replace("(","/a").replace(")","/b");
+                    
+                    //設定btn
+                    let btn = document.createElement("button");
+                    let btnId = document.createAttribute("id");
+                    btnId.value = elementId + "~btn";
+                    btn.setAttributeNode(btnId);
+                    let btnOnclick = document.createAttribute("onclick");
+                    btnOnclick.value = "postBtnOnclick(this,'" + newElementId + "')";
+                    btn.setAttributeNode(btnOnclick);
 
-                        element.appendChild(btn);
-                        btn.innerHTML = "Edit"
+                    element.appendChild(btn);
+                    btn.innerHTML = "Edit"
 
-                        //設定info
-                        let infoStyle = document.createAttribute("style");
-                        infoStyle.value = "margin:0";
-                        let info = element.querySelector('p[name=info]');
-                        info.setAttributeNode(infoStyle);
+                    //設定info
+                    let infoStyle = document.createAttribute("style");
+                    infoStyle.value = "margin:0";
+                    let info = element.querySelector('p[name=info]');
+                    info.setAttributeNode(infoStyle);
 
-
-                        element.querySelector('p[name=info]').innerHTML = "<div id = '" + elementId  + "~div' class = 'smallPostContent' style='display:block;'>HelloWorld</div><textarea id='" + newElementId + "'class='smallPosttextarea' style='display:none;'></textarea>";
-                        // 
-                        // "<textarea sytle='width:50px;height:50px;'>"
+                    console.log({result:result})
+                    if(result == "(null)") result = '';
+                    if(size == "s"){
+                        console.log("SSSS")
+                        element.querySelector('p[name=info]').innerHTML = "<div id = '" + elementId  + "~div' class = 'smallPostContent' style='display:block;'><pre>" + result + "</pre></div><textarea id='" + newElementId + "'class='smallPosttextarea' style='display:none;'></textarea>";
+                        return;
                     }
+                    if(size == "l"){
+                        console.log("LLLLL")
+                        element.querySelector('p[name=info]').innerHTML = "<div id = '" + elementId  + "~div' class = 'largePostContent' style='display:block;'><pre>" + result + "</pre></div><textarea id='" + newElementId + "'class='largePosttextarea' style='display:none;'></textarea>";
+                        return;
+                    }
+                
                 }
             }
+            
         });
 
         setTimeout(function(){
@@ -57,6 +66,7 @@ function postsPut(title,size,words){
     let host = 'http://localhost:8080';
     let elementId = "Post(" + size  + ")_" + title;
     let element = document.getElementById(elementId);
+    if(!words) words = "(null)"
     console.log({title:title})
     console.log({element:element})
     if(element){
@@ -75,9 +85,7 @@ function postsPut(title,size,words){
             },
             success: function(result) {
                 if(result) {
-                    if(size = "s"){
-                        
-                    }
+                    console.log(result);
                 }
             }
         });

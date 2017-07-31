@@ -9,9 +9,10 @@ function getposts(req,res){
     };
     db.dbget(getData,function(data){
         // console.log(data.Item.settings[title])
-        let postData = data.Item.settings[title]
-
-        res.send("postGet success")
+        let postWords = data.Item.settings[title].postWords;
+        console.log({postdata : postWords});
+        if(!postWords) postWords = "(null)"
+        res.send(postWords);
     })
 
     

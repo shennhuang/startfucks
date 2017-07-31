@@ -13,6 +13,9 @@ function getcwbWarning(req, res){
         body = xmlparser.toJson(body,{object: true});
 
         let items = body.rss.channel.item;
+        if(!Array.isArray(items)){
+            items = [items];
+        }
         if(items){
             let result = [];
             for(let i in items){
@@ -27,8 +30,6 @@ function getcwbWarning(req, res){
                     for(let i = keyWordStart; i < keyWordEnd; i++){
                         keyWord += des[i];
                     }
-                    // keyWord = keyWord.replace(/\n/g,"<br><br>");
-                    // keyWord = keyWord.replace(/[\s\t]/g,"");
                     keyWord = keyWord.replace(/：/,"：<br>");
                     keyWord = keyWord.replace(/編號：/,"編號：<br>");
                 }

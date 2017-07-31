@@ -21,9 +21,13 @@ function itemDrag(event){
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
         
-        let checkItemId;
-        if(event.currentTarget.querySelector("select")){
-            let selectValue = "";
+
+        let checkItemId = (event.currentTarget.id.split("_"))[0];
+        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
+        
+        //判斷listType
+         if(event.currentTarget.querySelector("select")){
+            let selectValue = "null";
             if(event.currentTarget.querySelector("select")){
                 selectValue = event.currentTarget.querySelector("select").value;
             }
@@ -52,7 +56,7 @@ function itemDrag(event){
                 return;
             }
         }
-
+//console.log(checkItemId)
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
@@ -224,9 +228,11 @@ function dropOnHiddenItem(event){
                 selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace(/_/g,"-");
             }
 
-            let scriptElement = document.createElement("script");
-            scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
-            selectItem.appendChild(scriptElement);
+            // let scriptElement = document.createElement("script");
+            // scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+            // selectItem.appendChild(scriptElement);
+            selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+
 
             //update settings
             settings[selectItem.id] = {
