@@ -6,6 +6,7 @@ function postPosts(req,res){
     console.log({body:req.body})
     let title = req.body.title;
     let words = req.body.words;
+    if(!words) words = null;
     let getData = {
         TableName: "users_data",
         Key: {account : req.session.account}
@@ -22,9 +23,9 @@ function postPosts(req,res){
                 settings: data.Item.settings,
             }
         }
-        db.dbput(userData,function(){
-            res.send("postPost success")
-        })
+        db.dbput(userData).then(function(){
+            res.send('postPosts Success.');
+        });
         
         
     })

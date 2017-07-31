@@ -133,7 +133,8 @@ function dropOnItem(event){
             // let scriptElement = document.createElement("script");
             // scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
             // selectItem.appendChild(scriptElement);
-
+            
+            // if(title.indexOf('Post(') < 0)
             selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
             
             //update settings
