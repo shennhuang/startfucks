@@ -18,7 +18,8 @@ function ubike(stationName){
             },
             success: function(result) {
                 if(result) {
-                    return element.querySelector('p[name=info]').innerHTML = '剩餘數量： ' + result + '<br><br><br>Update: ' + new Date().toLocaleString();
+                    return element.querySelector('p[name=info]').innerHTML = '剩餘數量： ' + result.sbi +  '<br>剩餘空位: ' + result.bemp +
+                        '<br><br><br>Update: ' + new Date().toLocaleString();
                 }
                 element.querySelector('p[name=info]').innerHTML = 'No Service. <br><br><br>Update: ' + new Date().toLocaleString();
             }

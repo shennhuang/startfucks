@@ -8,6 +8,7 @@ function allowDrop(event){
 var infoTemp;
 //ondragstart
 function itemDrag(event){
+    console.log({obj:event.currentTarget})
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
     let title = (event.currentTarget.id.split("_"))[0];
     if(title === 'News' && event.currentTarget.querySelector("p[name=info]")){
@@ -20,11 +21,12 @@ function itemDrag(event){
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
         
+
         let checkItemId = (event.currentTarget.id.split("_"))[0];
         let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
         
         //判斷listType
-        if(checkItemListType == "select"){
+         if(event.currentTarget.querySelector("select")){
             let selectValue = "null";
             if(event.currentTarget.querySelector("select")){
                 selectValue = event.currentTarget.querySelector("select").value;
@@ -36,8 +38,10 @@ function itemDrag(event){
                 subselectValue = event.currentTarget.querySelector("select[id=subselect]").value;
                 checkItemId += ("_" + subselectValue);
             }
-        }else{
+        }
+        if(event.currentTarget.querySelector("input")){
             let selectValue = event.currentTarget.querySelector("input").value;
+            checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
             let regexp = /[%<>/\\"']/;
             if(regexp.test(selectValue)){
                 alert("The title can not contain the following characters: %<>/\ \" ' ")
@@ -73,7 +77,6 @@ function dropOnItem(event){
     }
 
     if(selectItemId && selectItemId !== event.currentTarget.id){ 
-        console.log("!!!")
         let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]); //壓別人的寬度
         let selectItem = document.getElementById(selectItemId); //壓別人的物件
         
@@ -103,8 +106,10 @@ function dropOnItem(event){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
             }else if(selectItem.querySelector("input")){
-                selectItem.removeChild(selectItem.querySelector("input"));
+                subtitle = selectItem.querySelector("input").value;
+                console.log({sub : subtitle})
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.removeChild(selectItem.querySelector("input"));
                 selectItem.id = title + "_" + subtitle;
                 selectItem.removeChild(selectItem.querySelector("font"));
             }else{                
@@ -165,17 +170,19 @@ function dropOnHiddenItem(event){
         document.getElementById(selectItemId).appendChild(infoTemp);
         delete infoTemp;
     }
-
+    console.log({selectItemId:selectItemId})
     if(selectItemId && selectItemId !== event.currentTarget.id) {
 
         let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
         
         //save selectItem in temp
         let selectItem = document.getElementById(selectItemId);
-
+        console.log({selectItempp:selectItem})
         //add item
+        console.log({settinghas : settings.hasOwnProperty(selectItemId)})
+        console.log({setting:settings}  )
         if(!settings.hasOwnProperty(selectItemId)){
-
+            console.log("addonitem")
             
             let title = (selectItem.id.split("_"))[0];
             let subtitle = "null";
@@ -196,6 +203,14 @@ function dropOnHiddenItem(event){
                 if(selectItem.querySelector("select[id=subselect]")){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
+            }else if(selectItem.querySelector("input")){
+                console.log("input")
+                subtitle = selectItem.querySelector("input").value;
+                
+                selectItem = document.getElementById(selectItemId).cloneNode(true);
+                selectItem.removeChild(selectItem.querySelector("input"));
+                selectItem.id = title + "_" + subtitle;
+                selectItem.removeChild(selectItem.querySelector("font"));
             }else{
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
                 selectItem.id = title + "_" + subtitle;
@@ -213,9 +228,11 @@ function dropOnHiddenItem(event){
                 selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace(/_/g,"-");
             }
 
-            let scriptElement = document.createElement("script");
-            scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
-            selectItem.appendChild(scriptElement);
+            // let scriptElement = document.createElement("script");
+            // scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+            // selectItem.appendChild(scriptElement);
+            selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
+
 
             //update settings
             settings[selectItem.id] = {

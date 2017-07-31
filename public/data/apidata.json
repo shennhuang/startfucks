@@ -919,6 +919,15 @@
             "null" : "nothing"
         }
     },
+    "post(l)":{
+        "title": "Post(l)",
+        "subtitle": "null",
+        "gridItemSize":{"width":2, "height":1},
+        "listType":"input",
+        "list":{
+            "null" : "nothing"
+        }
+    },
     "中央氣象局警、特報":{
         "title":"中央氣象局警、特報",
         "subtitle":"",

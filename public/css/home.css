@@ -122,21 +122,43 @@ main{
     font-size: 100%;
 }
 .smallPostContent{
-    height : 12vh;
+    height : calc(14vh + 2px);
+    width: calc((100vw/6) - 10px);
+    padding: 1px;
+    text-align: left;
     overflow: scroll;
+}
+.smallPostContent pre{
+    font-size: 14px;
+    margin: 0px;
+    color: red;
+    width:inherit;
 }
 .largePostContent{
-    height : 14vh;
+    height : calc(14vh + 2px);
+    width: calc((100vw/3) - 10px);
+    padding: 1px;
+    text-align: left;
     overflow: scroll;
 }
+.largePostContent pre{
+    font-size: 14px;
+    margin: 0px;
+    color: red;
+    width:inherit;
+}
 .smallPosttextarea{
-    height : 14vh;
-    width :inherit;
+    height : calc(14vh + 2px);
+    width: calc((100vw/6) - 10px);
+    font-size: 14px;
+    padding: 0;
     resize:none;
 }
 .largePosttextarea{
-    height : 15vh;
-    width :inherit;
+    height : calc(14vh + 2px);
+    width: calc((100vw/3) - 10px);
+    font-size: 14px;
+    padding: 0;
     resize:none;
 }
 .postBtn{
