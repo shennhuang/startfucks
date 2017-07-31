@@ -15,7 +15,6 @@ function cwbWarning(){
                 window.open(host + '/start', '_self');
             },
             success: function(result) {
-                //console.log(result);
                 if(result) {
                     element.querySelector('p[name=info]').innerHTML = "";
                     for(let i in result){

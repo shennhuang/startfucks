@@ -18,7 +18,3 @@ function createSelectOptions(){
         addSubselect(event);
     }
 }
-function bata_createSelectOptions(target){//bata???
-    console.log({apidata : apidata[target].list})
-    
-}

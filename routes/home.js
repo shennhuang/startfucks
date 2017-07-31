@@ -10,11 +10,11 @@ function home(req, res) {
             TableName: "users_data",
             Item : req.body.userData
         }
-
-        //console.log({setting : userDataSave.Item.settings})
-        db.dbput(userDataSave,function(){
+        console.log({homeput:req.body.userData.settings})
+        db.dbput(userDataSave).then(function(){
             console.log({put:"put userData"});
-        })
+        });
+            
         return res.send("Auto Saved!");
     }
 

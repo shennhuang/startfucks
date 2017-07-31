@@ -131,7 +131,6 @@ main{
 .smallPostContent pre{
     font-size: 14px;
     margin: 0px;
-    color: red;
     width:inherit;
 }
 .largePostContent{
@@ -144,7 +143,6 @@ main{
 .largePostContent pre{
     font-size: 14px;
     margin: 0px;
-    color: red;
     width:inherit;
 }
 .smallPosttextarea{
