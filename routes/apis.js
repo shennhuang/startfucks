@@ -24,6 +24,7 @@ function apis(req, res){
         return getPosts(req, res);
     }
     if(req.query.q === 'postPosts_s' || req.query.q === 'postPosts_l'){
+        console.log("postpostRoute")
         return postPosts(req, res);
     }
     if(req.query.q === 'cwbWarning'){

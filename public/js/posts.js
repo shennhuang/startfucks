@@ -56,10 +56,6 @@ function postsGet(title,size){
             }
             
         });
-
-        setTimeout(function(){
-            postsGet(title,size);
-        },300000);
     }
 }
 function postsPut(title,size,words){
@@ -90,8 +86,5 @@ function postsPut(title,size,words){
             }
         });
 
-        setTimeout(function(){
-            postsGet(title,size);
-        },300000);
     }
 }

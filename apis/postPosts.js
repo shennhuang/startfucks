@@ -23,6 +23,7 @@ function postPosts(req,res){
             }
         }
         db.dbput(userData,function(){
+            console.log("post????")
             res.send("postPost success")
         })
         

@@ -15,7 +15,10 @@ function postBtnOnclick(x,textareaId){
 
         document.getElementById(textareaId).style.display = "none"
         document.getElementById(elementId + '~div').style.display = "block"
-        document.getElementById(elementId + '~div').querySelector('pre').innerHTML = document.getElementById(textareaId).value;
+        textareaValue = document.getElementById(textareaId).value + "";
+        textareaValue = textareaValue.toString();
+        console.log({textareaValue : textareaValue})
+        document.getElementById(elementId + '~div').querySelector('pre').innerHTML = textareaValue;
         document.getElementById(xId).innerHTML = "Edit";
     }
     if(inner == "Edit"){
