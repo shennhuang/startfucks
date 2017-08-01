@@ -7,7 +7,7 @@ function postBtnOnclick(x,textareaId){
     if(inner == "Save"){
         
         let postWords = document.getElementById(textareaId).value;
-        console.log("----------"+postWords+"$");
+        //處理特殊字元
         postWords = postWords.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g,"&#039;").replace(/\n/g,"\\n");
         
         let size = xId.split('_')[0];
@@ -25,6 +25,7 @@ function postBtnOnclick(x,textareaId){
         document.getElementById(textareaId).style.display = "block";
         document.getElementById(elementId + '~div').style.display = "none";
         let textValue = document.getElementById(elementId + '~div').querySelector('pre').innerHTML;
+        //處理特殊字元
         textValue = textValue.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"").replace(/&#039;/g,"'");
         document.getElementById(textareaId).value = textValue;
         document.getElementById(xId).innerHTML = "Save";

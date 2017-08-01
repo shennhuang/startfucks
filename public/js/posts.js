@@ -59,8 +59,7 @@ function postsPut(title,size,words){
     let elementId = "Post(" + size  + ")_" + title;
     let element = document.getElementById(elementId);
     if(!words) words = "";
-    console.log({title:title})
-    console.log({element:element})
+
     if(element){
 
         $.ajax({

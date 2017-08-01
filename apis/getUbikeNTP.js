@@ -29,7 +29,7 @@ function getUbikeNTP(req, res){
         }
 
         request(availabilityOptions, function (error, response, body) {
-            if (error) throw new Error(error);
+            if (error) console.log(error);
 
             let queryStationID = apidata["ubike(新北)"].list[stationName];
 
