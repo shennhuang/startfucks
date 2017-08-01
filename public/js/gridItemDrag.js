@@ -43,7 +43,7 @@ function itemDrag(event){
             checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
             let regexp = /[&<>/\\"']/;
             if(regexp.test(selectValue)){
-                alert("The title can not contain the following characters: &<>/\ \" ' ")
+                alert("The title can not contain the following characters: &<>/\\ \" ' ")
             }
             if(selectValue == ""){
                 alert("Title can not empty.")

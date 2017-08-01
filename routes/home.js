@@ -5,12 +5,22 @@ var db = require('./db');
 function home(req, res) {
 
     if(req.method === 'POST'){
-        
+        let userData = req.body.userData;
+        let keys = Object.keys(userData.settings);
+        console.log({"%%%%%%%%%%":keys})
+        for(let key of keys){
+            console.log("~~~~~~~~~~~~~~~~~~~")
+            if(key.indexOf('Post(') >= 0 && userData.settings[key].postWords == ""){
+                console.log({key:key})
+                userData.settings[key].postWords = null;
+            } 
+        }
+
         var userDataSave = {
             TableName: "users_data",
-            Item : req.body.userData
+            Item : userData
         }
-        console.log({homeput:req.body.userData.settings})
+        console.log("puthome");
         db.dbput(userDataSave).then(function(){
             console.log({put:"put userData"});
         });
@@ -32,6 +42,7 @@ function home(req, res) {
 
     db.dbget(getData, function(data){
         var apiKeys = Object.keys(apidata);
+        console.log({getHOME:data.Item.settings})
         return res.render('home', {userData: data.Item, gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
     });
          

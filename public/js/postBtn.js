@@ -8,15 +8,15 @@ function postBtnOnclick(x,textareaId){
         
         let postWords = document.getElementById(textareaId).value;
         console.log("----------"+postWords+"$");
-        postWords = postWords.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g,"&#039;").replace(/\n/g,"\\n");
-        
+        postWords = postWords.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g,"&#039;");
+        postWords = JSON.stringify(postWords).replace(/\"/g,'');
         let size = xId.split('_')[0];
         let title = xId.split('~')[0];
         postsPut(title,postWords);
 
         document.getElementById(textareaId).style.display = "none";
         document.getElementById(elementId + '~div').style.display = "block";
-        document.getElementById(elementId + '~div').querySelector('pre').innerHTML = postWords.replace(/\\n/g,"\n");
+        document.getElementById(elementId + '~div').querySelector('pre').innerHTML = JSON.parse("\"" + postWords + "\"");
         document.getElementById(xId).innerHTML = "Edit";
     }
     if(inner == "Edit"){
