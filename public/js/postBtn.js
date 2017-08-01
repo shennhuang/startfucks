@@ -2,12 +2,9 @@ function postBtnOnclick(x,textareaId){
     let xId = x.id;
     let elementId = xId.split("~")[0];
     let inner = x.innerHTML;
-    let textareaValue = document.getElementById(textareaId).value;
-    let divValue = document.getElementById(elementId+"~div").value || "";
     if(inner == "Save"){
         
         let postWords = document.getElementById(textareaId).value;
-        console.log("----------"+postWords+"$");
         postWords = postWords.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g,"&#039;");
         postWords = JSON.stringify(postWords).replace(/\"/g,'');
         let size = xId.split('_')[0];

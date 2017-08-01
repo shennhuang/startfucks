@@ -29,7 +29,6 @@ function postsGet(title,size){
         info.setAttributeNode(infoStyle);
 
         //取代回setting
-        console.log(postValue)
         if(settings[title].postWords){
             settings[title].postWords = JSON.stringify(postValue).replace(/\"/g,'');
             userData.settings = settings;
@@ -52,7 +51,7 @@ function postsPut(title,words){
     let host = 'http://localhost:8080';
     userData.settings[title].postWords = words;
     $.ajax({
-        url: host + '/apis?q=postPosts',
+        url: host + '/home',
         type: 'POST',
         data:{
             userData,

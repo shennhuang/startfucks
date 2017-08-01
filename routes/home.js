@@ -7,11 +7,8 @@ function home(req, res) {
     if(req.method === 'POST'){
         let userData = req.body.userData;
         let keys = Object.keys(userData.settings);
-        console.log({"%%%%%%%%%%":keys})
         for(let key of keys){
-            console.log("~~~~~~~~~~~~~~~~~~~")
             if(key.indexOf('Post(') >= 0 && userData.settings[key].postWords == ""){
-                console.log({key:key})
                 userData.settings[key].postWords = null;
             } 
         }

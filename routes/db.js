@@ -7,8 +7,7 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 function dbput(putData){
     console.log("Adding a new item...");
-
-
+    
     return new Promise(function(resolve, reject){
 
         let putPromise = docClient.put(putData).promise();
