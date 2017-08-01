@@ -122,9 +122,10 @@ main{
     font-size: 100%;
 }
 .smallPostContent{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/6) - 10px);
     padding: 1px;
+    margin: 0  2px;
     text-align: left;
     overflow: scroll;
 }
@@ -134,9 +135,10 @@ main{
     width:inherit;
 }
 .largePostContent{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/3) - 10px);
     padding: 1px;
+    margin: 0 2px;
     text-align: left;
     overflow: scroll;
 }
@@ -146,17 +148,25 @@ main{
     width:inherit;
 }
 .smallPosttextarea{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/6) - 10px);
     font-size: 14px;
+    line-height: 21px;
     padding: 0;
+    margin: 0 2px;
+    overflow: scroll;
+    white-space:nowrap;
     resize:none;
 }
 .largePosttextarea{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/3) - 10px);
     font-size: 14px;
+    line-height: 21px;
     padding: 0;
+    margin: 0 2px;
+    overflow: scroll;
+    white-space:nowrap;
     resize:none;
 }
 .postBtn{

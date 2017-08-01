@@ -22,7 +22,6 @@ function itemDrag(event){
         
 
         let checkItemId = (event.currentTarget.id.split("_"))[0];
-        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
         
         //判斷listType
          if(event.currentTarget.querySelector("select")){

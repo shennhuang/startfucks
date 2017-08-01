@@ -25,8 +25,18 @@ function postsGet(title,size){
         //設定info
         let infoStyle = document.createAttribute("style");
         infoStyle.value = "margin:0";
-        let info = element.querySelector('p[name=info]');
-        info.setAttributeNode(infoStyle);
+        element.querySelector('p[name=info]').setAttributeNode(infoStyle);
+        
+        
+        //設定title scollbar
+        let titleStyle = document.createAttribute("style");
+        titleStyle.value = "width:inherit;overflow: hidden;text-overflow:ellipsis;white-space:nowrap"
+        element.querySelector('p[name=title]').setAttributeNode(titleStyle);
+
+        let titleTitle = document.createAttribute("title");
+        let inner = element.querySelector('p[name=title]').innerHTML;
+        titleTitle.value = inner.substr(8);
+        element.querySelector('p[name=title]').setAttributeNode(titleTitle);
 
         //取代回setting
         if(settings[title].postWords){
@@ -34,11 +44,11 @@ function postsGet(title,size){
             userData.settings = settings;
         }
 
-        if(size == "s"){
+        if(size == "S"){
             element.querySelector('p[name=info]').innerHTML = "<div id = '" + title  + "~div' class = 'smallPostContent' style='display:block;'><pre>" + postValue + "</pre></div><textarea id='" + titleReplace + "'class='smallPosttextarea' style='display:none;'></textarea>";
             return;
         }
-        if(size == "l"){
+        if(size == "L"){
             element.querySelector('p[name=info]').innerHTML = "<div id = '" + title  + "~div' class = 'largePostContent' style='display:block;'><pre>" + postValue + "</pre></div><textarea id='" + titleReplace + "'class='largePosttextarea' style='display:none;'></textarea>";
             return;
         }

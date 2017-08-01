@@ -910,8 +910,8 @@
             }
         }
     },
-    "post(s)":{
-        "title": "Post(s)",
+    "post(S)":{
+        "title": "Post(S)",
         "subtitle": "null",
         "gridItemSize":{"width":1, "height":1},
         "listType":"input",
@@ -919,8 +919,8 @@
             "null" : "nothing"
         }
     },
-    "post(l)":{
-        "title": "Post(l)",
+    "post(L)":{
+        "title": "Post(L)",
         "subtitle": "null",
         "gridItemSize":{"width":2, "height":1},
         "listType":"input",
