@@ -8,7 +8,6 @@ function postsGet(title,size){
         let postValue = "";
         if(settings[title] && settings[title].postWords) {
             postValue = settings[title].postWords;
-            //postValue = postValue.replace(/\n/g,"\\n");
         }
         
         //設定btn
@@ -29,8 +28,12 @@ function postsGet(title,size){
         let info = element.querySelector('p[name=info]');
         info.setAttributeNode(infoStyle);
 
-        //if(postValue.indexOf('\n') >= 0) postsPut(title,postValue.replace(/\n/g,"\\n"));
-        
+        //取代回setting
+        if(settings[title].postWords){
+            settings[title].postWords = JSON.stringify(postValue).replace(/\"/g,'');
+            userData.settings = settings;
+        }
+
         if(size == "s"){
             element.querySelector('p[name=info]').innerHTML = "<div id = '" + title  + "~div' class = 'smallPostContent' style='display:block;'><pre>" + postValue + "</pre></div><textarea id='" + titleReplace + "'class='smallPosttextarea' style='display:none;'></textarea>";
             return;
@@ -39,22 +42,19 @@ function postsGet(title,size){
             element.querySelector('p[name=info]').innerHTML = "<div id = '" + title  + "~div' class = 'largePostContent' style='display:block;'><pre>" + postValue + "</pre></div><textarea id='" + titleReplace + "'class='largePosttextarea' style='display:none;'></textarea>";
             return;
         }
+
+        
            
     }
 }
 function postsPut(title,words){
     let host = 'http://localhost:8080';
-    // if(!words) words = "";
-    console.log(words)
-    settings[title].postWords = words;
-    userData.settings = settings;
+    userData.settings[title].postWords = words;
     $.ajax({
-        url: host + '/apis?q=postPosts',
+        url: host + '/home',
         type: 'POST',
         data:{
             userData,
-            title,
-            words,
             _csrf: $('meta[name="_csrf"]').attr('content')
         },
         error: function(){
