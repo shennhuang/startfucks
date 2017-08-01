@@ -8,6 +8,7 @@
         <script>
             var userData = JSON.parse('<%- JSON.stringify(userData) %>');
             var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
+            console.log({settings:settings});
             var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
         <link rel="stylesheet" type="text/css" href="/css/home.css">
@@ -109,9 +110,6 @@
                                     <p hidden="true" name="info">loading...</p>
                                     <script name="callapi"></script>
                                 <% } %>
-                                
-                                
-                                
                             </div>
                         </td>
                     </tr>

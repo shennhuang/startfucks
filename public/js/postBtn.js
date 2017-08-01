@@ -11,10 +11,8 @@ function postBtnOnclick(x,textareaId){
         postWords = postWords.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;").replace(/'/g,"&#039;").replace(/\n/g,"\\n");
         
         let size = xId.split('_')[0];
-        let title = xId.split('_')[1].split('~')[0];
-        console.log({size:size})
-        if(size == 'Post(s)') postsPut(title,"s",postWords);
-        else if(size == 'Post(l)') postsPut(title,"l",postWords);
+        let title = xId.split('~')[0];
+        postsPut(title,postWords);
 
         document.getElementById(textareaId).style.display = "none";
         document.getElementById(elementId + '~div').style.display = "block";

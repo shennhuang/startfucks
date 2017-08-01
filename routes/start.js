@@ -19,7 +19,6 @@ function start(req, res) {
         return;
     }else if(req.method === 'POST'){
         var act = req.body.act;
-        console.log({run : act})
         if(act == "login"){
             var getUsers = {
                 TableName: "startfucks_users",

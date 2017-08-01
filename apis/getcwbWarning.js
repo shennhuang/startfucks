@@ -43,6 +43,19 @@ function getcwbWarning(req, res){
                     for(let i = keyWordStart; i < keyWordEnd; i++){
                         keyWord += des[i];
                     }
+                }
+                else if(des.indexOf('豪雨')>=0){
+                    des = des.replace(/[\s\t]/g,"");
+                    des = des.replace(/\n/g,"<br><br>");
+                    des = des.replace("豪雨特報","----");
+                    let keyWordStart = des.indexOf("豪雨特報");
+                    let keyWordEnd = des.length;
+
+                    for(let i = keyWordStart; i < keyWordEnd; i++){
+                        keyWord += des[i];
+                    }
+                    keyWord = keyWord.replace(/：/,"：<br>");
+
                 }else{
                     keyWord = des;
                 }

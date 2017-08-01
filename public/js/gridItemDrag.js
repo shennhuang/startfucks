@@ -8,7 +8,6 @@ function allowDrop(event){
 var infoTemp;
 //ondragstart
 function itemDrag(event){
-    console.log({obj:event.currentTarget})
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
     let title = (event.currentTarget.id.split("_"))[0];
     if(title === 'News' && event.currentTarget.querySelector("p[name=info]")){
@@ -42,9 +41,9 @@ function itemDrag(event){
         if(event.currentTarget.querySelector("input")){
             let selectValue = event.currentTarget.querySelector("input").value;
             checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
-            let regexp = /[%<>/\\"']/;
+            let regexp = /[&<>/\\"']/;
             if(regexp.test(selectValue)){
-                alert("The title can not contain the following characters: %<>/\ \" ' ")
+                alert("The title can not contain the following characters: &<>/\ \" ' ")
             }
             if(selectValue == ""){
                 alert("Title can not empty.")
@@ -56,7 +55,6 @@ function itemDrag(event){
                 return;
             }
         }
-//console.log(checkItemId)
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
@@ -134,7 +132,6 @@ function dropOnItem(event){
             // scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
             // selectItem.appendChild(scriptElement);
             
-            // if(title.indexOf('Post(') < 0)
             selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
             
             //update settings
@@ -171,19 +168,15 @@ function dropOnHiddenItem(event){
         document.getElementById(selectItemId).appendChild(infoTemp);
         delete infoTemp;
     }
-    console.log({selectItemId:selectItemId})
     if(selectItemId && selectItemId !== event.currentTarget.id) {
 
         let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
         
         //save selectItem in temp
         let selectItem = document.getElementById(selectItemId);
-        console.log({selectItempp:selectItem})
+
         //add item
-        console.log({settinghas : settings.hasOwnProperty(selectItemId)})
-        console.log({setting:settings}  )
         if(!settings.hasOwnProperty(selectItemId)){
-            console.log("addonitem")
             
             let title = (selectItem.id.split("_"))[0];
             let subtitle = "null";
@@ -205,7 +198,6 @@ function dropOnHiddenItem(event){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
             }else if(selectItem.querySelector("input")){
-                console.log("input")
                 subtitle = selectItem.querySelector("input").value;
                 
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
