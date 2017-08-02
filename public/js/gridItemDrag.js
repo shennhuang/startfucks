@@ -8,6 +8,7 @@ function allowDrop(event){
 var infoTemp;
 //ondragstart
 function itemDrag(event){
+    //event.stopPropagation();
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
     let title = (event.currentTarget.id.split("_"))[0];
     if(title === 'News' && event.currentTarget.querySelector("p[name=info]")){
@@ -126,11 +127,6 @@ function dropOnItem(event){
             }else{
                 selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace(/_/g,"-");
             }
-
-            // 用append方式產生callapi(已棄用)
-            // let scriptElement = document.createElement("script");
-            // scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
-            // selectItem.appendChild(scriptElement);
             
             selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
             
@@ -221,9 +217,6 @@ function dropOnHiddenItem(event){
                 selectItem.querySelector("p[name=title]").innerHTML = selectItem.id.replace(/_/g,"-");
             }
 
-            // let scriptElement = document.createElement("script");
-            // scriptElement.innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
-            // selectItem.appendChild(scriptElement);
             selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
 
 

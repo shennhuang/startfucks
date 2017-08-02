@@ -39,7 +39,7 @@ function home(req, res) {
 
     db.dbget(getData, function(data){
         var apiKeys = Object.keys(apidata);
-        console.log({getHOME:data.Item.settings})
+        //console.log({getHOME:data.Item.settings})
         return res.render('home', {userData: data.Item, gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys});
     });
          

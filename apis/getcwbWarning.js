@@ -44,18 +44,22 @@ function getcwbWarning(req, res){
                         keyWord += des[i];
                     }
                 }
-                else if(des.indexOf('豪雨')>=0){
+                else if(des.indexOf('豪雨')>=0 || des.indexOf('大雨')>=0){
                     des = des.replace(/[\s\t]/g,"");
                     des = des.replace(/\n/g,"<br><br>");
                     des = des.replace("豪雨特報","----");
-                    let keyWordStart = des.indexOf("豪雨特報");
+                    des = des.replace("大雨特報","----");
+                    let keyWordStart = (des.indexOf("豪雨特報")>=0)?des.indexOf("豪雨特報"):des.indexOf("大雨特報");
                     let keyWordEnd = des.length;
 
                     for(let i = keyWordStart; i < keyWordEnd; i++){
                         keyWord += des[i];
                     }
-                    keyWord = keyWord.replace(/：/,"：<br>");
+                    keyWord = keyWord.replace(/：/g,"：<br>");
 
+                }else if(des.indexOf('大雷雨')>=0){
+                    keyWord = des;
+                    keyWord = keyWord.replace(/。/g, "。<br><br>");
                 }else{
                     keyWord = des;
                 }

@@ -86,10 +86,10 @@
                         </td>
                         <td class="blockListItem">
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-                                
+
                                 <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
-                                <% if(v.listType == "select") { %>
-                                    <% if(v.subtitle) { %>
+                                <% if(v.listType == "select") {
+                                    if(v.subtitle) { %>
                                     <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
                                         <% listKeys = Object.keys(v.list);
                                         for (var j = 0 ; j < listKeys.length ; j ++){ %>
@@ -97,11 +97,11 @@
                                         <% } %>
                                         <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                     </select>
+                                    <% } %>
                                     <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
                                     <p hidden="true" name="title" class="itemTitle"></p>
                                     <p hidden="true" name="info">loading...</p>
                                     <script name="callapi"></script>
-                                    <% } %>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
                                     <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
