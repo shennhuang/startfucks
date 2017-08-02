@@ -32,7 +32,7 @@
         <script type="text/javascript" src="/js/editName.js"></script>
         <script type="text/javascript" src="/js/logout.js"></script>
         <script type="text/javascript" src="/js/postBtn.js"></script>
-        <script type="text/javascript" src="/js/createSelectOptions.js"></script>
+        <script type="text/javascript" src="/js/teachPage.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
         <script type="text/javascript" src="/js/ubike.js"></script>
@@ -165,9 +165,18 @@
             </div>
         </div>
         <!--modal-->
-
-        <!--<script>createSelectOptions();</script>-->
-
+        
+        <script>console.log('<%= newhand %>')</script>
+        <!--teachPage-->
+        <% if(newhand){ %>
+        <div class = "teachPage" style="display:block;background-image:url('/img/teachPage/Welcome.png');">
+            <button class = "prePage" onclick = "prePage()" style = "display:none">Previous</button>
+            <button class = "nextPage" onclick="nextPage()">Next</button>
+            <button class = "startBtn" onclick="startBtn()" style = "display:none">Start</button>
+            <button class = "skipBtn" onclick="skipBtn()" >Skip</button>
+        </div>
+        <% } %>
+        <!--teachPage-->
     </body>
 
 </html>

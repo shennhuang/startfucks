@@ -2,7 +2,7 @@ function allowDrop(event){
     event.preventDefault();
     document.getElementsByTagName("header")[0].removeAttribute("hidden");
 
-    hiddenBlockList();
+    // hiddenBlockList();
     hiddenSettingList();
 }
 var infoTemp;

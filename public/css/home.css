@@ -229,3 +229,16 @@ main{
     padding: 20px;
 }
 /*setting*/
+
+/*teachPage*/
+.teachPage{
+    position: fixed;
+    top:0;
+    left:0;
+    width : 100%;
+    height: 100%;
+    background-color:#FFF;
+    background-image:url('/img/teachPage/Welcome.jpg');
+    background-repeat:no-repeat;
+}
+/*teachPage*/
