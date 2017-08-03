@@ -1,6 +1,7 @@
 function ubikeNTP(stationName){
 
-    let host = 'http://localhost:8080';
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
     let element = document.getElementById('Ubike(新北)_'+stationName);
 
     if(element){
@@ -14,7 +15,7 @@ function ubikeNTP(stationName){
             },
             error: function(){
                 //alert('您的頁面已經過期,請重新登入！');
-                window.open(host + '/start', '_self');
+                window.open(host + port + '/start', '_self');
             },
             success: function(result) {
                 if(result) {

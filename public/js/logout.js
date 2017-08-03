@@ -1,4 +1,6 @@
 function logout(){
     settingListBtnOnclick();
-    document.location.href="http://localhost:8080/start";
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
+    document.location.href=host+port;
 }

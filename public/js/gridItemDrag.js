@@ -61,6 +61,7 @@ function itemDrag(event){
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
+            document.getElementsByTagName("header")[0].removeAttribute("hidden");
             return;
         }
     }
