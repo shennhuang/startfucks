@@ -1,7 +1,6 @@
 :root{
     --gridColNum: 6;
     --gridRowNum: 10;
-
 }
 html{
     width: 100%;/**1440px;*/

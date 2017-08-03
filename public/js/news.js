@@ -59,6 +59,9 @@ function openImg(event, articleUrl){
                 target.style.display = 'none';
             }
             target.src = result.articleImg;
+            target.style.width = "50%";
+            target.style.height = "50%";
+            target.removeAttribute("onclick");
         }
     });
 }

@@ -216,7 +216,7 @@ function appledaily(req, res, newsSite, subSite){
         Promise
         .all(promiseGroup)
         .then(()=>{
-            console.log('-appledaily promiseGroup success.');
+            //console.log('-appledaily promiseGroup success.');
             return res.status(200).send(result);
         })
         .catch(reason => { 
