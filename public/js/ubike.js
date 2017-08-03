@@ -25,8 +25,8 @@ function ubike(stationName){
             }
         });
 
-        setTimeout(function(){
-            ubike(stationName);
-        },300000);
+        // setTimeout(function(){
+        //     ubike(stationName);
+        // },300000);
     }
 }

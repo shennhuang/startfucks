@@ -119,6 +119,7 @@ function dropOnItem(event){
 
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("i[name=reload]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -208,6 +209,7 @@ function dropOnHiddenItem(event){
             
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("i[name=reload]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 

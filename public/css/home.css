@@ -47,15 +47,29 @@ main{
     grid-template-rows: repeat(1,1fr);
 }
 .tagRemove{
-    margin: 5px 2px;
-    width: 5px;
+    margin: 6px 3px;
+    float:left;
+    width: 3px;
+    font-size: 18px;
     padding: 0;
-    text-align: left;
     line-height: 0;
     color: #FFF;
 }
 .tagRemove:hover{
     color: #F00;
+}
+.tagReload{
+    margin: 8px 6px;
+    float:left;
+    width:3px;
+    font-size: 2px;
+    font-weight: normal;
+    padding: 0;
+    line-height: 0;
+    color: #FFF;
+}
+.tagReload:hover{
+    color: #0f0;
 }
 .gridHidden{
     width: calc(100 / 6)vw;

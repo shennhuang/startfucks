@@ -28,8 +28,8 @@ function weather(weatherCity, weatherCountry){
                 }
             }
         });
-        setTimeout(function(){
-            weather(weatherCity, weatherCountry);
-        },900000);
+        // setTimeout(function(){
+        //     weather(weatherCity, weatherCountry);
+        // },900000);
     }
 }

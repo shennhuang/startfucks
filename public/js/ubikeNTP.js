@@ -30,8 +30,8 @@ function ubikeNTP(stationName){
             }
         });
 
-        setTimeout(function(){
-            ubikeNTP(stationName);
-        },300000);
+        // setTimeout(function(){
+        //     ubikeNTP(stationName);
+        // },300000);
     }
 }

@@ -10,8 +10,8 @@
             var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
             var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
-        <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" href="/css/jquery-ui.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/js/jquery-ui.min.js"></script>
@@ -41,6 +41,26 @@
         <script type="text/javascript" src="/js/posts.js"></script>
         <script type="text/javascript" src="/js/cwbWarning.js"></script>
         <!--<script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>-->
+        <script>
+            function reloadItem(event){
+                event.preventDefault();
+                
+                let target = event.currentTarget.parentNode;
+                console.log(target.id);
+                let idSplited = target.id.split("_");
+                let title = idSplited[0];
+                let subtitle = idSplited[1];
+                if(idSplited[2]){
+                    subtitle += "_" + idSplited[2];
+                }
+                if(title.indexOf("Post") < 0){
+                    //target.querySelector("p[name=info]").innerHTML = "<i class=\"fa fa-spinner spinner\" aria-hidden=\"true\" name=\"spinner\"></i>";
+                    //target.querySelector("p[name=info]").querySelector("i[name=spinner]").className += " animate";
+                    target.querySelector("p[name=info]").innerHTML = "<img src=\"/img/Rolling.gif\">";
+                    callApi(title, subtitle);
+                }
+            }
+        </script>
 
     </head>
     <body>
@@ -58,7 +78,9 @@
                     let v = userData.settings[key]; 
                     if(+v.gridItemIndex === i) { %>
                     <div id="<%= v.title + "_" + v.subtitle %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-                        <p onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
+                        <!--<i class="fa fa-times tagRemove" aria-hidden="true" onClick="removeItem(event);" name="remove" title="remove"></i>-->
+                        <i class="tagRemove" onClick="removeItem(event);" name="remove" title="remove">x</i>
+                        <i class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
                         <p name="title" class="itemTitle"><%= (v.subtitle!=="null")?(v.title + "-" + v.subtitle.replace("_","-")):(v.title) %></p>
                         <p name="info" class="info">loading...</p>
                         <script>callApi("<%= v.title %>", "<%= v.subtitle %>");</script>
@@ -99,12 +121,14 @@
                                     </select>
                                     <% } %>
                                     <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
+                                    <i hidden="true" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
                                     <p hidden="true" name="title" class="itemTitle"></p>
                                     <p hidden="true" name="info">loading...</p>
                                     <script name="callapi"></script>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
-                                    <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>
+                                    <p hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</p>                                    
+                                    <i hidden="true" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
                                     <p hidden="true" name="title" class="itemTitle"></p>
                                     <p hidden="true" name="info">loading...</p>
                                     <script name="callapi"></script>

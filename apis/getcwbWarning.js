@@ -13,10 +13,10 @@ function getcwbWarning(req, res){
         body = xmlparser.toJson(body,{object: true});
 
         let items = body.rss.channel.item;
-        if(!Array.isArray(items)){
-            items = [items];
-        }
         if(items){
+            if(!Array.isArray(items)){
+                items = [items];
+            }
             let result = [];
             for(let i in items){
                 let des = items[i].description;
