@@ -7,14 +7,14 @@ function weather(weatherCity, weatherCountry){
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=weather',
+            url: host + port + '/apis?q=weather',
             type: 'POST',
             data:{
                 weatherCity,
                 weatherCountry,
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
-            error: function(){
+            error: function(err){
                 //alert('您的頁面已經過期,請重新登入！');
                 window.open(host + port + '/start', '_self');
             },

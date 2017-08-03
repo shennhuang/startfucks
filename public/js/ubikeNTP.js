@@ -7,7 +7,7 @@ function ubikeNTP(stationName){
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=ubikeNTP',
+            url: host + port + '/apis?q=ubikeNTP',
             type: 'POST',
             data:{
                 stationName,
