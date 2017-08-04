@@ -135,9 +135,10 @@ main{
     font-size: 100%;
 }
 .smallPostContent{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/6) - 10px);
     padding: 1px;
+    margin: 0  2px;
     text-align: left;
     overflow: scroll;
 }
@@ -147,9 +148,10 @@ main{
     width:inherit;
 }
 .largePostContent{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/3) - 10px);
     padding: 1px;
+    margin: 0 2px;
     text-align: left;
     overflow: scroll;
 }
@@ -159,17 +161,25 @@ main{
     width:inherit;
 }
 .smallPosttextarea{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/6) - 10px);
     font-size: 14px;
+    line-height: 21px;
     padding: 0;
+    margin: 0 2px;
+    overflow: scroll;
+    white-space:nowrap;
     resize:none;
 }
 .largePosttextarea{
-    height : calc(14vh + 2px);
+    height : calc(17vh + 2px);
     width: calc((100vw/3) - 10px);
     font-size: 14px;
+    line-height: 21px;
     padding: 0;
+    margin: 0 2px;
+    overflow: scroll;
+    white-space:nowrap;
     resize:none;
 }
 .postBtn{
@@ -232,3 +242,64 @@ main{
     padding: 20px;
 }
 /*setting*/
+
+/*teachPage*/
+.teachPageContainer{
+    position: fixed;
+    top:0;
+    left:0;
+    width : 100%;
+    height: 100%;
+    background-color: #FFDDAA;
+}
+.teachPageHeader{
+    height:5%;
+    width:100%;
+}
+.teachPagebody{
+    display:flex;
+    height:75%;
+}
+.imageContainer{
+    flex:8;
+    background-repeat:no-repeat;
+    background-position:center center;
+    position: relative;
+}
+
+.prePageContainer,.nextPageContainer{
+    flex:1;
+    margin:0;
+}
+.prePageDiv,.nextPageDiv{
+    width :100%;
+    text-align: center;
+    position: relative;
+    top:calc(50% - 15px);
+}
+.nextPage,.prePage{
+    font-size: 30px;
+    position: relative;
+}
+.startBtn{
+    font-size: 30px;
+    text-align: center;
+    position: relative;
+    top:50%;
+}
+.skipBtn{
+    font-size: 20px;
+    position: fixed;
+    right:30px;
+    bottom: 30px;
+}
+.footer{
+    width:100%;
+    height:10%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 50px;
+    position: absolute;
+    bottom: 0;
+}
+/*teachPage*/

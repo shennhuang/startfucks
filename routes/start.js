@@ -18,23 +18,27 @@ function start(req, res) {
         res.render('start',{loginErr : "",signupErr : "",csrfToken: req.csrfToken()});
         return;
     }else if(req.method === 'POST'){
-        var act = req.body.act;
+        let act = req.body.act;
         if(act == "login"){
-            var getUsers = {
+            let getUsers = {
                 TableName: "startfucks_users",
                 Key:{
                     "account": req.body.loginAcc,
                 }
             }
 
-            var hashpwd = hash.saltHashPassword(req.body.loginPwd);
             db.dbget(getUsers,function(data){
-                if(!data.Item || hashpwd != data.Item.pwd){
+                if(!data.Item){
                     console.log("worng!!!")
                     res.render('start',{loginErr : "account or password is wrong", signupErr : "",csrfToken: req.csrfToken()});
                     return;
                 }
-                
+                let hashpwd = hash.saltHashPassword(req.body.loginPwd);
+                if(hashpwd != data.Item.pwd){
+                    console.log("worng!!!")
+                    res.render('start',{loginErr : "account or password is wrong", signupErr : "",csrfToken: req.csrfToken()});
+                    return;
+                }
                 req.session.account = req.body.loginAcc;
                 return res.redirect('/home');
             })
@@ -89,7 +93,8 @@ function start(req, res) {
                 db.dbput(userData).then(function(){
 
                     req.session.account = users.account;
-
+                    
+                    req.session.newhand = true;
                     res.redirect('/home');
 
                 });

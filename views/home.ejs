@@ -10,6 +10,10 @@
             var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
             var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
+<<<<<<< HEAD
+        
+=======
+>>>>>>> 42bb592df0d112b569e872f7cd3226e61ba80aeb
         <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" href="/css/jquery-ui.min.css">
@@ -29,10 +33,9 @@
         <script type="text/javascript" src="/js/toolbar.js"></script>
         <script type="text/javascript" src="/js/removeItem.js"></script>
         <script type="text/javascript" src="/js/callApi.js"></script>
-        <script type="text/javascript" src="/js/editName.js"></script>
-        <script type="text/javascript" src="/js/logout.js"></script>
+        <script type="text/javascript" src="/js/settingsOfTool.js"></script>
         <script type="text/javascript" src="/js/postBtn.js"></script>
-        <script type="text/javascript" src="/js/createSelectOptions.js"></script>
+        <script type="text/javascript" src="/js/teachPage.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
         <script type="text/javascript" src="/js/ubike.js"></script>
@@ -61,7 +64,7 @@
         </script>
 
     </head>
-    <body>
+    <body style="font-family:sans-serif;">
         <header onclick="hiddenBlockList();hiddenSettingList();">
             <p class="hi">Hi!</p>
             <p class = "userName"><%=userData.name %></p>
@@ -103,10 +106,10 @@
                         </td>
                         <td class="blockListItem">
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-
+                                
                                 <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
-                                <% if(v.listType == "select") {
-                                    if(v.subtitle) { %>
+                                <% if(v.listType == "select") { %>
+                                    <% if(v.subtitle) { %>
                                     <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
                                         <% listKeys = Object.keys(v.list);
                                         for (var j = 0 ; j < listKeys.length ; j ++){ %>
@@ -114,12 +117,14 @@
                                         <% } %>
                                         <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                     </select>
+
                                     <% } %>
                                     <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
                                     <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
                                     <p hidden="true" name="title" class="itemTitle"></p>
                                     <p hidden="true" name="info">loading...</p>
                                     <script name="callapi"></script>
+                                    <% } %>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
                                     <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>                                    
@@ -141,11 +146,11 @@
                 <tr>
                     <td>
                         <i class="fa fa-cog" name="toolbarIcon" id = "settingListBtn" aria-hidden="true" onclick="settingListBtnOnclick()"
-                            onmouseover="settingListBtnOnmouseover(this)" onmouseout="settingListBtnOnmouseout(this)" title="Settings"></i> <!--setting-->
+                            onmouseover="settingListBtnOnmouseover(this)" onmouseout="settingListBtnOnmouseout(this)"></i> <!--setting-->
                     </td>
                     <td>
                         <i class="fa fa-th-list" name="toolbarIcon" id = "blockListBtn" aria-hidden="true" onclick="blockListBtnOnclick()"
-                            onmouseover="blockListBtnOnmouseover(this)" onmouseout="blockListBtnOnmouseout(this)" title="Items"></i><!--blockList-->
+                            onmouseover="blockListBtnOnmouseover(this)" onmouseout="blockListBtnOnmouseout(this)"></i><!--blockList-->
                     </td>
                 </tr>
             </table>
@@ -161,6 +166,14 @@
                     </td>
                     <td>
                         <font>Sign out</font>
+                    </td>
+                </tr>
+                <tr onclick="info()">
+                     <td>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i></i>
+                    </td>
+                    <td>
+                       <font>info</font>
                     </td>
                 </tr>
                  <tr onclick="editName()">
@@ -184,7 +197,35 @@
             </div>
         </div>
         <!--modal-->
+        
+        <!--teachPage-->
+        <div class = "teachPageContainer" style="display:none;">
+            <div class = "teachPageHeader"></div>
 
+            <div class = "teachPagebody">
+                <div class = "prePageContainer" >
+                    <div class = "prePageDiv" onclick = "prePage()" style="display:none">
+                        <i class="fa fa-chevron-left prePage" aria-hidden="true" ></i>
+                    </div>
+                </div>
+                <div class = "imageContainer" style="background-image: url('img/teachPage/Welcome.jpg')"></div>
+                <div class = "nextPageContainer">
+                    <div class = "nextPageDiv" onclick = "nextPage()" style="display:block">
+                        <i class="fa fa-chevron-right nextPage" aria-hidden="true"></i>
+                        <div class = "startBtn" onclick="startBtn()" style="display:none"><b>GO!<b></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "footer"> 
+                1/6 step
+            </div>
+            <div class = "skipBtn" onclick="skipBtn()"><b>Skip ▶▶</b></div>
+        </div>
+        <% if(newhand) { %>
+            <script>teachPageOnload()</script>
+        <% } %>
+        <!--teachPage-->
     </body>
 
 </html>

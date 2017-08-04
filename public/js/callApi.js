@@ -5,7 +5,6 @@ function callApi(title, subtitle){
     if(intervalHandlers[title+"_"+subtitle]){
         clearInterval(intervalHandlers[title+"_"+subtitle]);
     }
-
     if(title === "Weather"){
         weather(subtitle, "tw");
         intervalHandlers[title+"_"+subtitle] = setInterval(()=>{weather(subtitle, "tw")}, 900000);
@@ -30,10 +29,10 @@ function callApi(title, subtitle){
         cwbWarning();
         intervalHandlers[title+"_"+subtitle] = setInterval(()=>{cwbWarning()}, 600000);
     }
-    if(title === "Post(s)"){
-        postsGet(subtitle,"s");
+    if(title === "Post(S)"){
+        postsGet(subtitle,"S");
     }
-    if(title === "Post(l)"){
-        postsGet(subtitle,"l");
+    if(title === "Post(L)"){
+        postsGet(subtitle,"L");
     }
 }

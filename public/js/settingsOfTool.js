@@ -1,11 +1,29 @@
+function logout(){
+    hiddenSettingList();
+    document.location.href="http://localhost:8080/start";
+}
+
+function info(){
+    console.log({nowpage:nowPage})
+    nowPage = 0;
+
+    document.getElementsByClassName('prePageDiv')[0].style.display = "none";
+    document.getElementsByClassName('startBtn')[0].style.display = "none";
+    document.getElementsByClassName('teachPageContainer')[0].style.display = "block";
+    document.getElementsByClassName('footer')[0].innerHTML = "1/6 step";
+    document.getElementsByClassName('imageContainer')[0].style.backgroundImage = "url('img/teachPage/Welcome.jpg')";
+    hiddenSettingList()
+
+}
 
 function editName(){
-    settingListBtnOnclick();
+    hiddenSettingList();
     // windowOnclick();
     document.getElementsByClassName('modalContainer')[0].style.display = "block";
     var name = document.getElementsByClassName('userName')[0].innerHTML;
     document.getElementsByClassName('newName')[0].value = name;
 }
+
 function saveName(){
     var newName = document.getElementsByClassName('newName')[0].value;
     if (!newName || newName.length > 20) {
