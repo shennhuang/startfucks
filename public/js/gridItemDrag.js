@@ -26,7 +26,9 @@ function itemDrag(event){
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
         
+
         let checkItemId = title;
+        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
 
         let selectValue = "null";
         
@@ -148,6 +150,7 @@ function dropOnItem(event){
             //delete hidden grid
             let items = document.getElementById("main").children;
             for(let i = items.length-1, n = selectItemWidth; i >= 0 && n > 0; i--){
+                let item = items[i];
                 let itemId = items[i].id;
                 if((/hiddenGrid[0-9]+/).test(itemId)) {
                     document.getElementById('main').removeChild(document.getElementById(itemId));
