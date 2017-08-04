@@ -17,7 +17,11 @@ function getUbikeNTP(req, res){
     };
 
     request(stationOptions, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) console.log(error);
+
+        if(!body){
+            return res.send('');
+        }
 
         let queryStationID = apidata["ubike(新北)"].list[stationName];
         let stationLoc = {};
@@ -30,6 +34,10 @@ function getUbikeNTP(req, res){
 
         request(availabilityOptions, function (error, response, body) {
             if (error) console.log(error);
+
+            if(!body){
+                return res.send('');
+            }
 
             let queryStationID = apidata["ubike(新北)"].list[stationName];
 

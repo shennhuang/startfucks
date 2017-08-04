@@ -27,8 +27,9 @@
         <script type="text/javascript" src="/js/addSubselect.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
         <script type="text/javascript" src="/js/toolbar.js"></script>
-        <script type="text/javascript" src="/js/removeItem.js"></script>
         <script type="text/javascript" src="/js/callApi.js"></script>
+        <script type="text/javascript" src="/js/removeItem.js"></script>
+        <script type="text/javascript" src="/js/reloadItem.js"></script>
         <script type="text/javascript" src="/js/settingsOfTool.js"></script>
         <script type="text/javascript" src="/js/postBtn.js"></script>
         <script type="text/javascript" src="/js/teachPage.js"></script>
@@ -40,25 +41,6 @@
         <script type="text/javascript" src="/js/posts.js"></script>
         <script type="text/javascript" src="/js/cwbWarning.js"></script>
         <!--<script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>-->
-        <script>
-            function reloadItem(event){
-                event.preventDefault();
-                
-                let target = event.currentTarget.parentNode;
-                console.log(target.id);
-                let idSplited = target.id.split("_");
-                let title = idSplited[0];
-                let subtitle = idSplited[1];
-                if(idSplited[2]){
-                    subtitle += "_" + idSplited[2];
-                }
-                if(title.indexOf("Post") < 0){
-                    target.querySelector("p[name=info]").innerHTML = "<img src=\"/img/Rolling.gif\">";
-                    callApi(title, subtitle);
-                }
-            }
-        </script>
-
     </head>
     <body style="font-family:sans-serif;">
         <header onclick="hiddenBlockList();hiddenSettingList();">
