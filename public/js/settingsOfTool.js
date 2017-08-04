@@ -38,9 +38,10 @@ function saveName(){
     
     userData.name = newName;
 
-    let host = 'http://localhost:8080';
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
     $.ajax({
-        url: host + '/home',
+        url: host + port + '/home',
         type: 'POST',
         data:{
             userData,

@@ -5,8 +5,8 @@ function time(timeCountry){
         element.querySelector('p[name=info]').setAttribute("style","font-size:20px");
 
         element.querySelector('p[name=info]').innerHTML = "<br><br>" + new Date().toLocaleString();
-        setTimeout(function(){
-            time(timeCountry);
-        },1000);
+        // setTimeout(function(){
+        //     time(timeCountry);
+        // },1000);
     }
 }

@@ -1,12 +1,13 @@
 function ubike(stationName){
 
-    let host = 'http://localhost:8080';
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
     let element = document.getElementById('Ubike_'+stationName);
 
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=ubike',
+            url: host + port + '/apis?q=ubike',
             type: 'POST',
             data:{
                 stationName,
@@ -14,7 +15,7 @@ function ubike(stationName){
             },
             error: function(){
                 //alert('您的頁面已經過期,請重新登入！');
-                window.open(host + '/start', '_self');
+                window.open(host + port + '/start', '_self');
             },
             success: function(result) {
                 if(result) {
@@ -25,8 +26,8 @@ function ubike(stationName){
             }
         });
 
-        setTimeout(function(){
-            ubike(stationName);
-        },300000);
+        // setTimeout(function(){
+        //     ubike(stationName);
+        // },300000);
     }
 }

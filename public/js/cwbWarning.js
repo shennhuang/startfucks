@@ -1,18 +1,19 @@
 function cwbWarning(){
-    let host = 'http://localhost:8080';
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
     let element = document.getElementById('中央氣象局警、特報_null');
 
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=cwbWarning',
+            url: host + port + '/apis?q=cwbWarning',
             type: 'POST',
             data:{
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
             error: function(){
                 //alert('您的頁面已經過期,請重新登入！');
-                window.open(host + '/start', '_self');
+                window.open(host + port + '/start', '_self');
             },
             success: function(result) {
                 if(result) {

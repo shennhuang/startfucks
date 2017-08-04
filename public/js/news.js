@@ -1,12 +1,13 @@
 function news(newsSite){
 
-    let host = 'http://localhost:8080';
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
     let element = document.getElementById('News_'+newsSite);
 
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=news',
+            url: host + port + '/apis?q=news',
             type: 'POST',
             data:{
                 newsSite,
@@ -14,7 +15,7 @@ function news(newsSite){
             },
             error: function(){
                 //alert('您的頁面已經過期,請重新登入！');
-                window.open(host + '/start', '_self');
+                window.open(host + port + '/start', '_self');
             },
             success: function(result) {
                 if(result) {
@@ -35,17 +36,18 @@ function news(newsSite){
                 element.querySelector('p[name=info]').innerHTML = 'Can not loading or no data :(';
             }
         });
-        setTimeout(function(){
-            news(newsSite);
-        },1800000);
+        // setTimeout(function(){
+        //     news(newsSite);
+        // },1800000);
     }
 }
 function openImg(event, articleUrl){
     let target = event.currentTarget;
     target.alt = "loading...";
-    let host = 'http://localhost:8080';
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
     $.ajax({
-        url: host + '/apis?q=news',
+        url: host + port + '/apis?q=news',
         type: 'POST',
         data:{
             articleUrl,
@@ -59,6 +61,9 @@ function openImg(event, articleUrl){
                 target.style.display = 'none';
             }
             target.src = result.articleImg;
+            target.style.width = "50%";
+            target.style.height = "50%";
+            target.removeAttribute("onclick");
         }
     });
 }

@@ -22,15 +22,16 @@ function itemDrag(event){
     if((event.currentTarget.id.split('_'))[1] === 'default'){
         
 
-        let checkItemId = (event.currentTarget.id.split("_"))[0];
+        let checkItemId = title;
+        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
+
+        let selectValue = "null";
         
         //判斷listType
          if(event.currentTarget.querySelector("select")){
-            let selectValue = "null";
-            if(event.currentTarget.querySelector("select")){
-                selectValue = event.currentTarget.querySelector("select").value;
-            }
-            checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
+            
+            selectValue = event.currentTarget.querySelector("select").value;
+            checkItemId = title + "_" + selectValue;
             
             let subselectValue;
             if(event.currentTarget.querySelector("select[id=subselect]")){
@@ -38,9 +39,9 @@ function itemDrag(event){
                 checkItemId += ("_" + subselectValue);
             }
         }
-        if(event.currentTarget.querySelector("input")){
+        else if(event.currentTarget.querySelector("input")){
             let selectValue = event.currentTarget.querySelector("input").value;
-            checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
+            checkItemId = title + "_" + selectValue;
             let regexp = /[&<>/\\"']/;
             if(regexp.test(selectValue)){
                 alert("The title can not contain the following characters: &<>/\\ \" ' ")
@@ -54,10 +55,13 @@ function itemDrag(event){
                 alert("Title length is between 1 and 20 words")
                 return;
             }
+        }else{
+            checkItemId = title + "_null";
         }
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
+            document.getElementsByTagName("header")[0].removeAttribute("hidden");
             return;
         }
     }
@@ -117,7 +121,8 @@ function dropOnItem(event){
             }
 
             //update item content
-            selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("i[name=reload]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -206,7 +211,8 @@ function dropOnHiddenItem(event){
             }
             
             //update item content
-            selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("i[name=reload]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 

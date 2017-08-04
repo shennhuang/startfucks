@@ -1,21 +1,22 @@
 function weather(weatherCity, weatherCountry){
 
-    let host = 'http://localhost:8080';
+    let host = "http://" + window.location.hostname;
+    let port = ":" + window.location.port;
     let element = document.getElementById('Weather_'+weatherCity);
 
     if(element){
 
         $.ajax({
-            url: host + '/apis?q=weather',
+            url: host + port + '/apis?q=weather',
             type: 'POST',
             data:{
                 weatherCity,
                 weatherCountry,
                 _csrf: $('meta[name="_csrf"]').attr('content')
             },
-            error: function(){
+            error: function(err){
                 //alert('您的頁面已經過期,請重新登入！');
-                window.open(host + '/start', '_self');
+                window.open(host + port + '/start', '_self');
             },
             success: function(result) {
                 if(result) {
@@ -28,8 +29,8 @@ function weather(weatherCity, weatherCountry){
                 }
             }
         });
-        setTimeout(function(){
-            weather(weatherCity, weatherCountry);
-        },900000);
+        // setTimeout(function(){
+        //     weather(weatherCity, weatherCountry);
+        // },900000);
     }
 }

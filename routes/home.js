@@ -6,18 +6,20 @@ function home(req, res) {
 
     if(req.method === 'POST'){
         let userData = req.body.userData;
-        let keys = Object.keys(userData.settings);
-        for(let key of keys){
-            if(key.indexOf('Post(') >= 0 && userData.settings[key].postWords == ""){
-                userData.settings[key].postWords = null;
-            } 
+        if(userData.settings){
+            let keys = Object.keys(userData.settings);
+            for(let key of keys){
+                if(key.indexOf('Post(') >= 0 && userData.settings[key].postWords == ""){
+                    userData.settings[key].postWords = null;
+                } 
+            }
         }
 
         var userDataSave = {
             TableName: "users_data",
             Item : userData
         }
-        console.log("puthome");
+        //console.log("puthome");
         db.dbput(userDataSave).then(function(){
             console.log({put:"put userData"});
         });

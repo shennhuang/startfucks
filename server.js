@@ -17,6 +17,8 @@ var route = require('./route');
 
 var csrf = require('csurf');
 
+var config = require('./config.json')
+
 app.use(session({
     secret : 'key',
     cookie: { maxAge: 12 * 60 * 60 * 1000 },
@@ -29,6 +31,6 @@ app.use(compression());
 
 app.use('/', csrf({ cookie: false }) , route);
 
-app.listen(8080, function(){
-    console.log('server start at localhost:8080 - ' + new Date());
+app.listen(config.port, function(){
+    console.log('server start at  ' + config.host + ':' + config.port + ' - ' + new Date());
 });
