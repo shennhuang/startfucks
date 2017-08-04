@@ -10,10 +10,6 @@
             var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
             var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
-<<<<<<< HEAD
-        
-=======
->>>>>>> 42bb592df0d112b569e872f7cd3226e61ba80aeb
         <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" href="/css/jquery-ui.min.css">
@@ -108,8 +104,8 @@
                             <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                                 
                                 <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
-                                <% if(v.listType == "select") { %>
-                                    <% if(v.subtitle) { %>
+                                <% if(v.listType == "select") {
+                                    if(v.subtitle) { %>
                                     <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
                                         <% listKeys = Object.keys(v.list);
                                         for (var j = 0 ; j < listKeys.length ; j ++){ %>
@@ -117,22 +113,15 @@
                                         <% } %>
                                         <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                     </select>
-
-                                    <% } %>
-                                    <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
-                                    <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
-                                    <p hidden="true" name="title" class="itemTitle"></p>
-                                    <p hidden="true" name="info">loading...</p>
-                                    <script name="callapi"></script>
                                     <% } %>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
-                                    <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>                                    
-                                    <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
-                                    <p hidden="true" name="title" class="itemTitle"></p>
-                                    <p hidden="true" name="info">loading...</p>
-                                    <script name="callapi"></script>
                                 <% } %>
+                                <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
+                                <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
+                                <p hidden="true" name="title" class="itemTitle"></p>
+                                <p hidden="true" name="info">loading...</p>
+                                <script name="callapi"></script>
                             </div>
                         </td>
                     </tr>
