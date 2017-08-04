@@ -27,14 +27,18 @@ function start(req, res) {
                 }
             }
 
-            let hashpwd = hash.saltHashPassword(req.body.loginPwd);
             db.dbget(getUsers,function(data){
-                if(!data.Item || hashpwd != data.Item.pwd){
+                if(!data.Item){
                     console.log("worng!!!")
                     res.render('start',{loginErr : "account or password is wrong", signupErr : "",csrfToken: req.csrfToken()});
                     return;
                 }
-                req.session.newhand = true; //測試用 未來要拿掉
+                let hashpwd = hash.saltHashPassword(req.body.loginPwd);
+                if(hashpwd != data.Item.pwd){
+                    console.log("worng!!!")
+                    res.render('start',{loginErr : "account or password is wrong", signupErr : "",csrfToken: req.csrfToken()});
+                    return;
+                }
                 req.session.account = req.body.loginAcc;
                 return res.redirect('/home');
             })

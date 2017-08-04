@@ -14,11 +14,11 @@ function getUbike(req, res){
 
     let ubikeList = apidata.ubike.list;
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) console.log(error);
 
         
         var item = ubikeList[stationName];
-        if(body.retVal[item].act == "0"){
+        if(!body || body.retVal[item].act == "0"){
             return res.send('');
         }
         return res.send({sbi : body.retVal[item].sbi,bemp : body.retVal[item].bemp});

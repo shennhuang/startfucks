@@ -20,6 +20,7 @@ function postBtnOnclick(x,textareaId){
         document.getElementById(textareaId).style.display = "block";
         document.getElementById(elementId + '~div').style.display = "none";
         let textValue = document.getElementById(elementId + '~div').querySelector('pre').innerHTML;
+        //處理特殊字元
         textValue = textValue.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"").replace(/&#039;/g,"'");
         document.getElementById(textareaId).value = textValue;
         document.getElementById(xId).innerHTML = "Save";

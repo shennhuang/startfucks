@@ -1,4 +1,4 @@
-function callApi(title, subtitle){
+    function callApi(title, subtitle){
     if(title === "Weather"){
         weather(subtitle, "tw");
     }

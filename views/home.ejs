@@ -10,8 +10,9 @@
             var settings = JSON.parse('<%- JSON.stringify(userSettings) %>');
             var apidata = JSON.parse('<%- JSON.stringify(apidata) %>');
         </script>
-        <link rel="stylesheet" type="text/css" href="/css/home.css">
+        
         <link rel="stylesheet" type="text/css" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/home.css">
         <link rel="stylesheet" href="/css/jquery-ui.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/js/jquery-ui.min.js"></script>
@@ -29,8 +30,7 @@
         <script type="text/javascript" src="/js/toolbar.js"></script>
         <script type="text/javascript" src="/js/removeItem.js"></script>
         <script type="text/javascript" src="/js/callApi.js"></script>
-        <script type="text/javascript" src="/js/editName.js"></script>
-        <script type="text/javascript" src="/js/logout.js"></script>
+        <script type="text/javascript" src="/js/settingsOfTool.js"></script>
         <script type="text/javascript" src="/js/postBtn.js"></script>
         <script type="text/javascript" src="/js/teachPage.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
@@ -144,6 +144,14 @@
                         <font>Sign out</font>
                     </td>
                 </tr>
+                <tr onclick="info()">
+                     <td>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i></i>
+                    </td>
+                    <td>
+                       <font>info</font>
+                    </td>
+                </tr>
                  <tr onclick="editName()">
                      <td>
                         <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -166,15 +174,32 @@
         </div>
         <!--modal-->
         
-        <script>console.log('<%= newhand %>')</script>
         <!--teachPage-->
-        <% if(newhand){ %>
-        <div class = "teachPage" style="display:block;background-image:url('/img/teachPage/Welcome.png');">
-            <button class = "prePage" onclick = "prePage()" style = "display:none">Previous</button>
-            <button class = "nextPage" onclick="nextPage()">Next</button>
-            <button class = "startBtn" onclick="startBtn()" style = "display:none">Start</button>
-            <button class = "skipBtn" onclick="skipBtn()" >Skip</button>
+        <div class = "teachPageContainer" style="display:none;">
+            <div class = "teachPageHeader"></div>
+
+            <div class = "teachPagebody">
+                <div class = "prePageContainer" >
+                    <div class = "prePageDiv" onclick = "prePage()" style="display:none">
+                        <i class="fa fa-chevron-left prePage" aria-hidden="true" ></i>
+                    </div>
+                </div>
+                <div class = "imageContainer" style="background-image: url('img/teachPage/Welcome.jpg')"></div>
+                <div class = "nextPageContainer">
+                    <div class = "nextPageDiv" onclick = "nextPage()" style="display:block">
+                        <i class="fa fa-chevron-right nextPage" aria-hidden="true"></i>
+                        <div class = "startBtn" onclick="startBtn()" style="display:none"><b>GO!<b></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "footer"> 
+                1/6 step
+            </div>
+            <div class = "skipBtn" onclick="skipBtn()"><b>Skip ▶▶</b></div>
         </div>
+        <% if(newhand) { %>
+            <script>teachPageOnload()</script>
         <% } %>
         <!--teachPage-->
     </body>

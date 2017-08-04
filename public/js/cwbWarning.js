@@ -18,7 +18,7 @@ function cwbWarning(){
                 if(result) {
                     element.querySelector('p[name=info]').innerHTML = "";
                     for(let i in result){
-                        element.querySelector('p[name=info]').innerHTML += '<a href="' + result[i].link +'"  target="_blank">' + result[i].title + '</a><br><br>' + result[i].description + (result[i].title.indexOf('颱風')>=0 ?'<a href="http://www.cwb.gov.tw/V7/prevent/typhoon/Data/PTA_NEW/index.htm" target="_blank">颱風消息</a>':'') + '<br>Update: ' + new Date(result[i].date).toLocaleString() + '<br>-----<br><br>';
+                        element.querySelector('p[name=info]').innerHTML += '<a href="' + result[i].link +'"  target="_blank">' + result[i].title + '</a><br><br>' + result[i].description + (result[i].title.indexOf('颱風')>=0 ?'<a href="http://www.cwb.gov.tw/V7/prevent/typhoon/Data/PTA_NEW/index.htm" target="_blank">颱風消息</a>':'') + '<br><br>Update: ' + new Date(result[i].date).toLocaleString() + '<br>-----<br><br>';
                     }
                     return;
                 }

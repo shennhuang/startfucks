@@ -62,8 +62,22 @@
                         document.getElementsByClassName("loginErr")[0].innerHTML = err;
                         return;
                     }
+                    //check loginpwd length > 256
+                    if(loginPwd.length > 256){
+                        err = "account or password is wrong"
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
+                        return;
+                    }
+                    //check loginAcc length > 50
+                    if(loginAcc.length >= 50){
+                        err = "account or password is wrong"
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
+                        return;
+                    }
+                    
                     document.getElementsByName("loginForm")[0].submit();
                     this.disabled = true;
+                    
 
                 })                
                     
@@ -121,8 +135,7 @@
                     var pwd = document.getElementsByName("signipPwd")[0].value
                     var cpwd = document.getElementsByName("cpwd")[0].value
                     var err = "";
-
-                    // check acc,pwd,cpwd is empty
+                    //check acc,pwd,cpwd is empty
                     if(signupAcc == ""){
                         err = "account can not empty";
                         document.getElementsByClassName("signupErr")[0].innerHTML = err;
@@ -134,9 +147,21 @@
                         return;
                     }
 
-                    //check pwd length 4-50
-                    if(pwd.length < 4 || pwd.length > 50) {
-                        err = "Password length is between 4 and 50 words"
+                    //check signupAcc length > 50
+                    if(signupAcc.length >= 50){
+                        err = "account is too long"
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
+                        return;
+                    }
+                    //check pwd length < 4
+                    if(pwd.length < 4) {
+                        err = "Password is too short"
+                        document.getElementsByClassName("signupErr")[0].innerHTML = err;
+                        return;
+                    }
+                    //check pwd length > 256
+                    if(pwd.length > 256){
+                        err = "Password is too long"
                         document.getElementsByClassName("signupErr")[0].innerHTML = err;
                         return;
                     }
