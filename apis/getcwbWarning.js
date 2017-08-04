@@ -60,6 +60,15 @@ function getcwbWarning(req, res){
                 }else if(des.indexOf('大雷雨')>=0){
                     keyWord = des;
                     keyWord = keyWord.replace(/。/g, "。<br><br>");
+                }else if(des.indexOf('即時訊息')>=0){
+                    des = des.replace(/[\s\t]/g,"");
+                    des = des.replace("即時訊息","----");
+                    let keyWordStart = des.indexOf("即時訊息");
+                    let keyWordEnd = des.length;
+                    for(let i = keyWordStart; i < keyWordEnd; i++){
+                        keyWord += des[i];
+                    }
+                    keyWord = keyWord.replace(/：/g,"：<br>");
                 }else{
                     keyWord = des;
                 }

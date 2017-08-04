@@ -28,7 +28,7 @@ function callApi(title, subtitle){
     }
     if(title === "中央氣象局警、特報"){
         cwbWarning();
-        intervalHandlers[title+"_"+subtitle] = setInterval(()=>{cwbWarning()}, 1800000);
+        intervalHandlers[title+"_"+subtitle] = setInterval(()=>{cwbWarning()}, 600000);
     }
     if(title === "Post(s)"){
         postsGet(subtitle,"s");

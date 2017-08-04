@@ -1,4 +1,8 @@
 function allowDrop(event){
+    //target: main
+    if(event.clientX <= 10 || event.clientX >= window.innerWidth-10 || event.clientY <= 10 || event.clientY >= window.innerHeight-10){   
+        alert("Out of range!");
+    }
     event.preventDefault();
     document.getElementsByTagName("header")[0].removeAttribute("hidden");
 
@@ -10,6 +14,7 @@ var infoTemp;
 function itemDrag(event){
     //event.stopPropagation();
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
+
     let title = (event.currentTarget.id.split("_"))[0];
     if(title === 'News' && event.currentTarget.querySelector("p[name=info]")){
         infoTemp = event.currentTarget.querySelector("p[name=info]");

@@ -6,7 +6,7 @@ var compression = require('compression');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true ,limit:'50mb'}));
 
 var ejs = require('ejs');
 app.set('view engine', 'ejs');
