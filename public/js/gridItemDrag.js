@@ -1,4 +1,8 @@
 function allowDrop(event){
+    //target: main
+    if(event.clientX <= 10 || event.clientX >= window.innerWidth-10 || event.clientY <= 10 || event.clientY >= window.innerHeight-10){   
+        alert("Out of range!");
+    }
     event.preventDefault();
     document.getElementsByTagName("header")[0].removeAttribute("hidden");
 
@@ -10,6 +14,7 @@ var infoTemp;
 function itemDrag(event){
     //event.stopPropagation();
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
+
     let title = (event.currentTarget.id.split("_"))[0];
     if(title === 'News' && event.currentTarget.querySelector("p[name=info]")){
         infoTemp = event.currentTarget.querySelector("p[name=info]");
@@ -20,7 +25,6 @@ function itemDrag(event){
 
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
-        
 
         let checkItemId = (event.currentTarget.id.split("_"))[0];
 
@@ -116,6 +120,7 @@ function dropOnItem(event){
 
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("p[name=load]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -205,6 +210,7 @@ function dropOnHiddenItem(event){
             
             //update item content
             selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
+            selectItem.querySelector("p[name=load]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 

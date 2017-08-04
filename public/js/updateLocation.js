@@ -16,6 +16,8 @@ function updateLocation() {
                 hiddenGrid.setAttribute("class","gridHidden");
                 document.getElementById("main").insertBefore(hiddenGrid,document.getElementById(itemId));
                 removeNum++;
+                i++;
+                items = document.getElementById("main").children;
             }
 
             settings[itemId].gridItemIndex = i+j;
@@ -26,7 +28,6 @@ function updateLocation() {
                 removeNum--;
             }
         }
-        
     }
     userData.settings = settings;
 
