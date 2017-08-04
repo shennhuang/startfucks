@@ -117,22 +117,15 @@
                                         <% } %>
                                         <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
                                     </select>
-
-                                    <% } %>
-                                    <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
-                                    <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
-                                    <p hidden="true" name="title" class="itemTitle"></p>
-                                    <p hidden="true" name="info">loading...</p>
-                                    <script name="callapi"></script>
                                     <% } %>
                                 <% }else if(v.listType == "input") { %>
                                     <input></input>
-                                    <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>                                    
-                                    <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
-                                    <p hidden="true" name="title" class="itemTitle"></p>
-                                    <p hidden="true" name="info">loading...</p>
-                                    <script name="callapi"></script>
                                 <% } %>
+                                <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
+                                <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
+                                <p hidden="true" name="title" class="itemTitle"></p>
+                                <p hidden="true" name="info">loading...</p>
+                                <script name="callapi"></script>
                             </div>
                         </td>
                     </tr>

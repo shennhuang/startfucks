@@ -2,7 +2,7 @@ function allowDrop(event){
     event.preventDefault();
     document.getElementsByTagName("header")[0].removeAttribute("hidden");
 
-    // hiddenBlockList();
+    hiddenBlockList();
     hiddenSettingList();
 }
 var infoTemp;
@@ -22,16 +22,13 @@ function itemDrag(event){
     if((event.currentTarget.id.split('_'))[1] === 'default'){
         
 
-        let checkItemId = title;
-        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
+        let checkItemId = (event.currentTarget.id.split("_"))[0];
 
-        let selectValue = "null";
-        
-        //判斷listType
          if(event.currentTarget.querySelector("select")){
-            
-            selectValue = event.currentTarget.querySelector("select").value;
-            checkItemId = title + "_" + selectValue;
+            let selectValue = "null";
+            if(event.currentTarget.querySelector("select")) selectValue = event.currentTarget.querySelector("select").value;
+               
+            checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
             
             let subselectValue;
             if(event.currentTarget.querySelector("select[id=subselect]")){
@@ -39,9 +36,9 @@ function itemDrag(event){
                 checkItemId += ("_" + subselectValue);
             }
         }
-        else if(event.currentTarget.querySelector("input")){
+        if(event.currentTarget.querySelector("input")){
             let selectValue = event.currentTarget.querySelector("input").value;
-            checkItemId = title + "_" + selectValue;
+            checkItemId = (event.currentTarget.id.split("_"))[0] + "_" + selectValue;
             let regexp = /[&<>/\\"']/;
             if(regexp.test(selectValue)){
                 alert("The title can not contain the following characters: &<>/\\ \" ' ")
@@ -55,13 +52,10 @@ function itemDrag(event){
                 alert("Title length is between 1 and 20 words")
                 return;
             }
-        }else{
-            checkItemId = title + "_null";
         }
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
             alert('The item has exist');
-            document.getElementsByTagName("header")[0].removeAttribute("hidden");
             return;
         }
     }
@@ -69,7 +63,7 @@ function itemDrag(event){
     event.dataTransfer.setData("text", event.currentTarget.id);
 
 }
-var n = 60; // 不明生物
+var n = 60;
 function dropOnItem(event){ 
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
@@ -121,8 +115,7 @@ function dropOnItem(event){
             }
 
             //update item content
-            selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
-            selectItem.querySelector("i[name=reload]").style.display = "block";
+            selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -211,8 +204,7 @@ function dropOnHiddenItem(event){
             }
             
             //update item content
-            selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
-            selectItem.querySelector("i[name=reload]").style.display = "block";
+            selectItem.querySelector("p[name=remove]").removeAttribute("hidden");
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -255,7 +247,7 @@ function dropOnHiddenItem(event){
         for(let i = 0; i < selectItemWidth-1; i++) {
             let divElements = document.getElementsByTagName('div');
             for(let j = 0; j < divElements.length; j++){
-                
+                 
                 if(divElements[j].id === event.currentTarget.id){
                     
                     if(j-1 >= 0 && (/hiddenGrid[0-9]+/).test(divElements[j-1].id) && divElements[j].offsetLeft > 10){
