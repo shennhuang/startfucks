@@ -6,13 +6,13 @@ function allowDrop(event){
     event.preventDefault();
     document.getElementsByTagName("header")[0].removeAttribute("hidden");
 
-    // hiddenBlockList();
+    hiddenBlockList();
     hiddenSettingList();
 }
 var infoTemp;
 //ondragstart
 function itemDrag(event){
-    //event.stopPropagation();
+
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
 
     let title = (event.currentTarget.id.split("_"))[0];
@@ -26,17 +26,14 @@ function itemDrag(event){
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
         
-
         let checkItemId = title;
         let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
-
-        let selectValue = "null";
         
         //判斷listType
          if(event.currentTarget.querySelector("select")){
             
-            selectValue = event.currentTarget.querySelector("select").value;
-            checkItemId = title + "_" + selectValue;
+            let selectValue = event.currentTarget.querySelector("select").value;
+            checkItemId += ("_" + selectValue);
             
             let subselectValue;
             if(event.currentTarget.querySelector("select[id=subselect]")){
@@ -45,23 +42,23 @@ function itemDrag(event){
             }
         }
         else if(event.currentTarget.querySelector("input")){
-            let selectValue = event.currentTarget.querySelector("input").value;
-            checkItemId = title + "_" + selectValue;
+            let inputValue = event.currentTarget.querySelector("input").value;
+            checkItemId += ("_" + inputValue);
             let regexp = /[&<>/\\"']/;
-            if(regexp.test(selectValue)){
+            if(regexp.test(inputValue)){
                 alert("The title can not contain the following characters: &<>/\\ \" ' ")
             }
-            if(selectValue == ""){
+            if(inputValue == ""){
                 alert("Title can not empty.")
                 return;
             }
-            let len = selectValue.length;
+            let len = inputValue.length;
             if(len > 20 || len < 1){
                 alert("Title length is between 1 and 20 words")
                 return;
             }
         }else{
-            checkItemId = title + "_null";
+            checkItemId += "_null";
         }
         //確認拖曳的item是否已經存在
         if(settings.hasOwnProperty(checkItemId)){
