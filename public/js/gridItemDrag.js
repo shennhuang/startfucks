@@ -12,7 +12,6 @@ function allowDrop(event){
 var infoTemp;
 //ondragstart
 function itemDrag(event){
-
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
 
     let title = (event.currentTarget.id.split("_"))[0];
@@ -25,14 +24,12 @@ function itemDrag(event){
 
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
-        
+
         let checkItemId = title;
-        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
-        
-        //判斷listType
+
          if(event.currentTarget.querySelector("select")){
-            
             let selectValue = event.currentTarget.querySelector("select").value;
+               
             checkItemId += ("_" + selectValue);
             
             let subselectValue;
@@ -41,7 +38,7 @@ function itemDrag(event){
                 checkItemId += ("_" + subselectValue);
             }
         }
-        else if(event.currentTarget.querySelector("input")){
+        if(event.currentTarget.querySelector("input")){
             let inputValue = event.currentTarget.querySelector("input").value;
             checkItemId += ("_" + inputValue);
             let regexp = /[&<>/\\"']/;
@@ -71,7 +68,7 @@ function itemDrag(event){
     event.dataTransfer.setData("text", event.currentTarget.id);
 
 }
-var n = 60; // 不明生物
+var n = 60;
 function dropOnItem(event){ 
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
@@ -124,7 +121,7 @@ function dropOnItem(event){
 
             //update item content
             selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
-            selectItem.querySelector("i[name=reload]").style.display = "block";
+            selectItem.querySelector("i[name=load]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -214,7 +211,7 @@ function dropOnHiddenItem(event){
             
             //update item content
             selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
-            selectItem.querySelector("i[name=reload]").style.display = "block";
+            selectItem.querySelector("i[name=load]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -257,7 +254,7 @@ function dropOnHiddenItem(event){
         for(let i = 0; i < selectItemWidth-1; i++) {
             let divElements = document.getElementsByTagName('div');
             for(let j = 0; j < divElements.length; j++){
-                
+                 
                 if(divElements[j].id === event.currentTarget.id){
                     
                     if(j-1 >= 0 && (/hiddenGrid[0-9]+/).test(divElements[j-1].id) && divElements[j].offsetLeft > 10){
