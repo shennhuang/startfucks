@@ -64,9 +64,11 @@ function saveName(){
 }
 
 window.onclick = function(event) {
-    let modal = document.getElementsByClassName('modalContainer')[0];
-
-    if (event.target == modal) {
-        modal.style.display = "none";
+    let modals = document.querySelectorAll(".modalContainer");
+    for(let modal of modals){
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
+
 }

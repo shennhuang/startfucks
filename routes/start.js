@@ -87,6 +87,13 @@ function start(req, res) {
                                 gridItemSize: {width: 1, height: 1},
                                 gridItemIndex: 0,
                             }
+                        },
+                        colors: {
+                            headColor:"#3a170f",
+                            nameColor:"#f0ffff",
+                            fontColor:"#000000",
+                            itemColor:"#c6ecf6",
+                            backColor:"#f0ffff"
                         }
                     }
                 }
