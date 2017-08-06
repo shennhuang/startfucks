@@ -121,7 +121,7 @@ function dropOnItem(event){
 
             //update item content
             selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
-            selectItem.querySelector("i[name=load]").style.display = "block";
+            selectItem.querySelector("i[name=reload]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
@@ -211,7 +211,7 @@ function dropOnHiddenItem(event){
             
             //update item content
             selectItem.querySelector("i[name=remove]").removeAttribute("hidden");
-            selectItem.querySelector("i[name=load]").style.display = "block";
+            selectItem.querySelector("i[name=reload]").style.display = "block";
             selectItem.querySelector("p[name=title]").removeAttribute("hidden");
             selectItem.querySelector("p[name=info]").removeAttribute("hidden");
 
