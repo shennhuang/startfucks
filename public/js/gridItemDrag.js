@@ -1,8 +1,9 @@
 function allowDrop(event){
     //target: main
-    if(event.clientX <= 10 || event.clientX >= window.innerWidth-10 || event.clientY <= 10 || event.clientY >= window.innerHeight-10){   
-        alert("Out of range!");
-    }
+    // if(event.clientX <= 10 || event.clientX >= window.innerWidth-10 || event.clientY <= 10 || event.clientY >= window.innerHeight-10){   
+    //     alert("Out of range!");
+    //     return;
+    // }
     event.preventDefault();
     document.getElementsByTagName("header")[0].removeAttribute("hidden");
 
@@ -27,7 +28,6 @@ function itemDrag(event){
     if((event.currentTarget.id.split('_'))[1] === 'default'){
         
         let checkItemId = title;
-        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
         
         //判斷listType
          if(event.currentTarget.querySelector("select")){
@@ -46,7 +46,8 @@ function itemDrag(event){
             checkItemId += ("_" + inputValue);
             let regexp = /[&<>/\\"']/;
             if(regexp.test(inputValue)){
-                alert("The title can not contain the following characters: &<>/\\ \" ' ")
+                alert("The title can not contain the following characters: &<>/\\ \" ' ");
+                return;
             }
             if(inputValue == ""){
                 alert("Title can not empty.")
