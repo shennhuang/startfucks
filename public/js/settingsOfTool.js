@@ -24,7 +24,6 @@ function editName(){
 }
 
 function saveName(){
-    console.log("saveName")
     var newName = document.getElementsByClassName('newName')[0].value;
     if (!newName || newName.length > 20) {
         document.getElementsByClassName('newName')[0].value = 
@@ -33,7 +32,6 @@ function saveName(){
         return;
     }
     let regexp = /[&<>/\\"']/;
-    console.log(regexp.test(newName))
     if(regexp.test(newName)) {
         alert('不能好好取名字膩？(ﾒ ﾟ皿ﾟ)ﾒ')
         return;

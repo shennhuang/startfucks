@@ -27,24 +27,26 @@ function itemDrag(event){
     if((event.currentTarget.id.split('_'))[1] === 'default'){
 
         let checkItemId = title;
-         if(event.currentTarget.querySelector("select")){
+        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
+
+        //判斷listType
+        if(event.currentTarget.querySelector("select")){
+
             let selectValue = event.currentTarget.querySelector("select").value;
-               
             checkItemId += ("_" + selectValue);
-            
+
             let subselectValue;
             if(event.currentTarget.querySelector("select[id=subselect]")){
                 subselectValue = event.currentTarget.querySelector("select[id=subselect]").value;
                 checkItemId += ("_" + subselectValue);
             }
         }
-        if(event.currentTarget.querySelector("input")){
+        else if(event.currentTarget.querySelector("input")){
             let inputValue = event.currentTarget.querySelector("input").value;
             checkItemId += ("_" + inputValue);
             let regexp = /[&<>/\\"']/;
             if(regexp.test(inputValue)){
-                alert("The title can not contain the following characters: &<>/\\ \" ' ");
-                return;
+                alert("The title can not contain the following characters: &<>/\\ \" ' ")
             }
             if(inputValue == ""){
                 alert("Title can not empty.")
@@ -107,7 +109,8 @@ function dropOnItem(event){
                 if(selectItem.querySelector("select[id=subselect]")){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
-            }else if(selectItem.querySelector("input")){
+            }
+            else if(selectItem.querySelector("input")){
                 subtitle = selectItem.querySelector("input").value;
                 console.log({sub : subtitle})
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
