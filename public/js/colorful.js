@@ -25,35 +25,31 @@ function loadColors(){
 }
 function changeColors(event){
     let picker = event.target;
+    let docElement = document.documentElement;
     if(picker.name === "headColorPicker"){
-        return document.querySelector("header").style["background-color"] = picker.value;
+        docElement.style.setProperty("--headColor", picker.value);
     }
     if(picker.name === "nameColorPicker"){
-        document.querySelector(".hi").style["color"] = picker.value;
-        document.querySelector(".userName").style["color"] = picker.value;
-        return;
-    }
-
-    let gridItems = document.querySelectorAll(".gridItem");
-    let property = "background-color";
-    if(picker.name === "backColorPicker"){
-        gridItems = document.querySelectorAll(".gridHidden");
+        docElement.style.setProperty("--nameColor", picker.value);
     }
     if(picker.name === "fontColorPicker"){
-        property = "color";
+        docElement.style.setProperty("--fontColor", picker.value);
     }
-    for(let item of gridItems){
-        item.style[property] = picker.value;
+    if(picker.name === "itemColorPicker"){
+        docElement.style.setProperty("--itemColor", picker.value);
     }
-
+    if(picker.name === "backColorPicker"){
+        docElement.style.setProperty("--backColor", picker.value);
+    }
 }
 function setPickerInitColor(){
     let modal = document.getElementsByClassName('modalContainer')[1];
-    modal.querySelector("input[name=headColorPicker]").value = userData.colors.headColor;
-    modal.querySelector("input[name=nameColorPicker]").value = userData.colors.nameColor;
-    modal.querySelector("input[name=fontColorPicker]").value = userData.colors.fontColor;
-    modal.querySelector("input[name=itemColorPicker]").value = userData.colors.itemColor;
-    modal.querySelector("input[name=backColorPicker]").value = userData.colors.backColor;
+    let docElement = document.documentElement;
+    modal.querySelector("input[name=headColorPicker]").value = docElement.style.getPropertyValue("--headColor");
+    modal.querySelector("input[name=nameColorPicker]").value = docElement.style.getPropertyValue("--nameColor");
+    modal.querySelector("input[name=fontColorPicker]").value = docElement.style.getPropertyValue("--fontColor");
+    modal.querySelector("input[name=itemColorPicker]").value = docElement.style.getPropertyValue("--itemColor");
+    modal.querySelector("input[name=backColorPicker]").value = docElement.style.getPropertyValue("--backColor");
 }
 function editColors(){
     hiddenSettingList();
@@ -68,6 +64,8 @@ function saveColors(){
     userData.colors.fontColor = modal.querySelector("input[name=fontColorPicker]").value;
     userData.colors.itemColor = modal.querySelector("input[name=itemColorPicker]").value;
     userData.colors.backColor = modal.querySelector("input[name=backColorPicker]").value;
+
+    loadColors();
 
     //post userData to backend for save
     let host = "http://" + window.location.hostname;
@@ -90,18 +88,6 @@ function saveColors(){
     });
 }
 function reColors(){
-    document.querySelector("header").style["background-color"] = userData.colors.headColor;
-    document.querySelector(".hi").style["color"] = userData.colors.nameColor;
-    document.querySelector(".userName").style["color"] = userData.colors.nameColor;
-
-    let gridItems = document.querySelectorAll(".gridItem");
-    for(let item of gridItems){
-        item.style["color"] = userData.colors.fontColor;
-        item.style["background-color"] = userData.colors.itemColor;
-    }
-    gridItems = document.querySelectorAll(".gridHidden");
-    for(let item of gridItems){
-        item.style["background-color"] = userData.colors.backColor;
-    }
+    loadColors();
     setPickerInitColor();
 }
