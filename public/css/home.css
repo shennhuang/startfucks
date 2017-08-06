@@ -1,6 +1,11 @@
 :root{
     --gridColNum: 6;
     --gridRowNum: 10;
+    --headColor:#3a170f;
+    --nameColor:#f0ffff;
+    --fontColor:#000000;
+    --itemColor:#c6ecf6;
+    --backColor:#f0ffff;
 }
 html{
     width: 100%;/**1440px;*/
@@ -11,21 +16,21 @@ body{
 }
 header{
     font-size: 25px;
-    background-color: #3a170f; /** #33CCFF; */
+    background-color: var(--headColor);
     width: 100vw;
     height: 50px;
     position:fixed;
     top :0px
 }
 .hi{
-    color: #F0FFFF;
+    color: var(--nameColor);
     padding: 0 0 0 20px;
     margin:0;
     line-height: 50px;
     display: inline-block;
 }
 .userName{
-    color: #F0FFFF;
+    color: var(--nameColor);
     margin : 0;
     display: inline-block;
 }
@@ -76,16 +81,17 @@ main{
     grid-column: span 1;
     grid-row: span 1;
     margin: 2px;
-    background-color: #F0FFFF;
+    background-color: var(--backColor);
 }
 .gridItem{
+    color: var(--fontColor);
     width: calc(100 / 6)vw;
     height: 30vh;
-    background-color: #c6ecf6;  /**#CCDDFF;*/
+    background-color: var(--itemColor);
     margin: 2px;
     text-align: center;
     line-height: 3vh;
-    overflow: scroll;
+    overflow: auto;
 }
 .itemTitle{
     font-weight:bold;
@@ -117,7 +123,7 @@ main{
     right:0px;
     border:3px #f6c6ec solid;
     opacity:1.0;
-    overflow: scroll;
+    overflow: auto;
 }
 .optionsContainer{
     width:720px;
@@ -140,7 +146,7 @@ main{
     padding: 1px;
     margin: 0  2px;
     text-align: left;
-    overflow: scroll;
+    overflow: auto;
 }
 .smallPostContent pre{
     font-size: 14px;
@@ -153,7 +159,7 @@ main{
     padding: 1px;
     margin: 0 2px;
     text-align: left;
-    overflow: scroll;
+    overflow: auto;
 }
 .largePostContent pre{
     font-size: 14px;
@@ -167,7 +173,7 @@ main{
     line-height: 21px;
     padding: 0;
     margin: 0 2px;
-    overflow: scroll;
+    overflow: auto;
     white-space:nowrap;
     resize:none;
 }
@@ -178,7 +184,7 @@ main{
     line-height: 21px;
     padding: 0;
     margin: 0 2px;
-    overflow: scroll;
+    overflow: auto;
     white-space:nowrap;
     resize:none;
 }
@@ -203,7 +209,7 @@ main{
     border: 1px solid #888;
     background-color: #fff;
 }
-.modalTitle,.newName,.saveName{
+.modalTitle,.newName,.save{
     margin: 0;
     display: inline-block;
 }

@@ -23,6 +23,7 @@
             });
         </script>
         <script type="text/javascript">document.documentElement.style.setProperty("--gridRowNum", "<%= gridRowNum %>");</script>
+        <script type="text/javascript" src="/js/colorful.js"></script>
         <script type="text/javascript" src="/js/updateLocation.js"></script>
         <script type="text/javascript" src="/js/addSubselect.js"></script>
         <script type="text/javascript" src="/js/gridItemDrag.js"></script>
@@ -117,11 +118,11 @@
                 <tr>
                     <td>
                         <i class="fa fa-cog" name="toolbarIcon" id = "settingListBtn" aria-hidden="true" onclick="settingListBtnOnclick()"
-                            onmouseover="settingListBtnOnmouseover(this)" onmouseout="settingListBtnOnmouseout(this)"></i> <!--setting-->
+                            onmouseover="settingListBtnOnmouseover(this)" onmouseout="settingListBtnOnmouseout(this)" title="Settings"></i> <!--setting-->
                     </td>
                     <td>
                         <i class="fa fa-th-list" name="toolbarIcon" id = "blockListBtn" aria-hidden="true" onclick="blockListBtnOnclick()"
-                            onmouseover="blockListBtnOnmouseover(this)" onmouseout="blockListBtnOnmouseout(this)"></i><!--blockList-->
+                            onmouseover="blockListBtnOnmouseover(this)" onmouseout="blockListBtnOnmouseout(this)" title="Items"></i><!--blockList-->
                     </td>
                 </tr>
             </table>
@@ -140,19 +141,27 @@
                     </td>
                 </tr>
                 <tr onclick="info()">
-                     <td>
+                    <td>
                         <i class="fa fa-question-circle" aria-hidden="true"></i></i>
                     </td>
                     <td>
-                       <font>info</font>
+                        <font>info</font>
                     </td>
                 </tr>
-                 <tr onclick="editName()">
-                     <td>
+                <tr onclick="editName()">
+                    <td>
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </td>
                     <td>
                        <font>Change name</font>
+                    </td>
+                </tr>
+                <tr onclick="editColors()">
+                    <td>
+                        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                       <font>Change color</font>
                     </td>
                 </tr>
             </table>
@@ -164,10 +173,32 @@
             <div class = "modal">
                 <h3 class="modalTitle">change name:</h3>
                 <input class="newName" type = "text"></input>
-                <button class="saveName" onclick="saveName()">save</button>
+                <button class="save" onclick="saveName()">Save</button>
             </div>
         </div>
         <!--modal-->
+
+        <div class="modalContainer">
+            <div class="modal">
+                <h3 class="modalTitle">標題列:</h3>
+                <input name="headColorPicker" type="color" onchange="changeColors(event)"/>
+                &emsp;
+                <h3 class="modalTitle">姓名字:</h3>
+                <input name="nameColorPicker" type="color" onchange="changeColors(event)"/>
+                <br> 
+                <h3 class="modalTitle">預設字:</h3>
+                <input name="fontColorPicker" type="color" onchange="changeColors(event)"/>
+                &emsp;
+                <h3 class="modalTitle">資訊格:</h3>
+                <input name="itemColorPicker" type="color" onchange="changeColors(event)"/>
+                &emsp;
+                <h3 class="modalTitle">背景格:</h3>
+                <input name="backColorPicker" type="color" onchange="changeColors(event)"/>
+                <br><br>
+                <button class="save" onclick="saveColors()">儲存</button>
+                <button class="save" onclick="reColors()">回復</button>
+            </div>
+        </div>
         
         <!--teachPage-->
         <div class = "teachPageContainer" style="display:none;">

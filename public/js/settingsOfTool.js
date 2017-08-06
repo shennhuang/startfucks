@@ -24,6 +24,7 @@ function editName(){
 }
 
 function saveName(){
+    console.log("saveName")
     var newName = document.getElementsByClassName('newName')[0].value;
     if (!newName || newName.length > 20) {
         document.getElementsByClassName('newName')[0].value = 
@@ -31,8 +32,9 @@ function saveName(){
         alert('不能好好取名字膩？(ﾒ ﾟ皿ﾟ)ﾒ')
         return;
     }
-    let reg = /&\\<>\'/i;
-    if(reg.test(newName)) {
+    let regexp = /[&<>/\\"']/;
+    console.log(regexp.test(newName))
+    if(regexp.test(newName)) {
         alert('不能好好取名字膩？(ﾒ ﾟ皿ﾟ)ﾒ')
         return;
     }
@@ -64,9 +66,11 @@ function saveName(){
 }
 
 window.onclick = function(event) {
-    let modal = document.getElementsByClassName('modalContainer')[0];
-
-    if (event.target == modal) {
-        modal.style.display = "none";
+    let modals = document.querySelectorAll(".modalContainer");
+    for(let modal of modals){
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
+
 }
