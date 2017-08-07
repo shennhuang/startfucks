@@ -33,8 +33,8 @@ function saveName(){
         alert('不能好好取名字膩？(ﾒ ﾟ皿ﾟ)ﾒ')
         return;
     }
-    let reg = /&\\<>\'/i;
-    if(reg.test(newName)) {
+    let regexp = /[&<>/\\"']/;
+    if(regexp.test(newName)) {
         alert('不能好好取名字膩？(ﾒ ﾟ皿ﾟ)ﾒ')
         return;
     }

@@ -13,7 +13,6 @@ function allowDrop(event){
 var infoTemp;
 //ondragstart
 function itemDrag(event){
-
     let selectItemWidth = parseInt((event.currentTarget.style.cssText.split(' '))[5]);
 
     let title = (event.currentTarget.id.split("_"))[0];
@@ -26,15 +25,16 @@ function itemDrag(event){
 
     //判斷要不要新增，用id是否有default來判斷
     if((event.currentTarget.id.split('_'))[1] === 'default'){
-        
+
         let checkItemId = title;
-        
+        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
+
         //判斷listType
-         if(event.currentTarget.querySelector("select")){
-            
+        if(event.currentTarget.querySelector("select")){
+
             let selectValue = event.currentTarget.querySelector("select").value;
             checkItemId += ("_" + selectValue);
-            
+
             let subselectValue;
             if(event.currentTarget.querySelector("select[id=subselect]")){
                 subselectValue = event.currentTarget.querySelector("select[id=subselect]").value;
@@ -46,8 +46,7 @@ function itemDrag(event){
             checkItemId += ("_" + inputValue);
             let regexp = /[&<>/\\"']/;
             if(regexp.test(inputValue)){
-                alert("The title can not contain the following characters: &<>/\\ \" ' ");
-                return;
+                alert("The title can not contain the following characters: &<>/\\ \" ' ")
             }
             if(inputValue == ""){
                 alert("Title can not empty.")
@@ -72,7 +71,7 @@ function itemDrag(event){
     event.dataTransfer.setData("text", event.currentTarget.id);
 
 }
-var n = 60; // 不明生物
+var n = 60;
 function dropOnItem(event){ 
     event.preventDefault();
     let selectItemId = event.dataTransfer.getData("text");
@@ -110,7 +109,8 @@ function dropOnItem(event){
                 if(selectItem.querySelector("select[id=subselect]")){
                     selectItem.removeChild(selectItem.querySelector("select[id=subselect]"));
                 }
-            }else if(selectItem.querySelector("input")){
+            }
+            else if(selectItem.querySelector("input")){
                 subtitle = selectItem.querySelector("input").value;
                 console.log({sub : subtitle})
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
@@ -258,7 +258,7 @@ function dropOnHiddenItem(event){
         for(let i = 0; i < selectItemWidth-1; i++) {
             let divElements = document.getElementsByTagName('div');
             for(let j = 0; j < divElements.length; j++){
-                
+                 
                 if(divElements[j].id === event.currentTarget.id){
                     
                     if(j-1 >= 0 && (/hiddenGrid[0-9]+/).test(divElements[j-1].id) && divElements[j].offsetLeft > 10){
