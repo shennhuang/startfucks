@@ -19,9 +19,7 @@ function dbput(putData){
             console.log(err);
         });
 
-    });
-    
-
+    }); 
 }
 
 function dbget(getData,fn){
@@ -34,10 +32,6 @@ function dbget(getData,fn){
     }).catch(function(err) {
         console.log(err);
     });
-    
-    // docClient.get(getData , function(err, data) { 
-    //     fn(data);
-    // });
 }
 module.exports = {
     dbput,

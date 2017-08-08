@@ -1,9 +1,5 @@
 function allowDrop(event){
     //target: main
-    // if(event.clientX <= 10 || event.clientX >= window.innerWidth-10 || event.clientY <= 10 || event.clientY >= window.innerHeight-10){   
-    //     alert("Out of range!");
-    //     return;
-    // }
     event.preventDefault();
     document.getElementsByTagName("header")[0].removeAttribute("hidden");
 

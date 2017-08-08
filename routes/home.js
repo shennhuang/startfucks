@@ -19,7 +19,6 @@ function home(req, res) {
             TableName: "users_data",
             Item : userData
         }
-        //console.log("puthome");
         db.dbput(userDataSave).then(function(){
             console.log({put:"put userData"});
         });

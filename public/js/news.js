@@ -36,9 +36,6 @@ function news(newsSite){
                 element.querySelector('p[name=info]').innerHTML = 'Can not loading or no data :(';
             }
         });
-        // setTimeout(function(){
-        //     news(newsSite);
-        // },1800000);
     }
 }
 function openImg(event, articleUrl){

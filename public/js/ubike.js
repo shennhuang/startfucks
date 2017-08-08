@@ -25,9 +25,5 @@ function ubike(stationName){
                 element.querySelector('p[name=info]').innerHTML = 'No Service. <br><br><br>Update: ' + new Date().toLocaleString();
             }
         });
-
-        // setTimeout(function(){
-        //     ubike(stationName);
-        // },300000);
     }
 }

@@ -27,10 +27,6 @@ function blockListBtnOnmouseout(x){
     if(document.getElementsByClassName("blockList")[0].style.display == "none" )
         x.style.opacity = 0.5;
 }
-// function listBtnOnMouseOver(){
-//     document.getElementsByClassName("blockList")[0].style.display = "block";
-// }
-
 function settingListBtnOnclick(){
     hiddenBlockList();
 

@@ -51,10 +51,7 @@ function postsGet(title,size){
         if(size == "L"){
             element.querySelector('p[name=info]').innerHTML = "<div id = '" + title  + "~div' class = 'largePostContent' style='display:block;'><pre>" + postValue + "</pre></div><textarea id='" + titleReplace + "'class='largePosttextarea' style='display:none;'></textarea>";
             return;
-        }
-
-        
-           
+        }  
     }
 }
 function postsPut(title,words){

@@ -32,9 +32,5 @@ function ubikeNTP(stationName){
                 return element.querySelector('p[name=info]').innerHTML = 'No service.';
             }
         });
-
-        // setTimeout(function(){
-        //     ubikeNTP(stationName);
-        // },300000);
     }
 }

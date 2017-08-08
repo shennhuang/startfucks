@@ -27,9 +27,5 @@ function cwbWarning(){
 
             }
         });
-
-        setTimeout(function(){
-            cwbWarning();
-        },1800000);
     }
 }
