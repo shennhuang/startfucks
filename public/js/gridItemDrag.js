@@ -23,7 +23,6 @@ function itemDrag(event){
     if((event.currentTarget.id.split('_'))[1] === 'default'){
 
         let checkItemId = title;
-        let checkItemListType = apidata[checkItemId.toLowerCase()].listType;
 
         //判斷listType
         if(event.currentTarget.querySelector("select")){
