@@ -87,7 +87,7 @@ function udn(req, res, newsSite, subSite){
             if(imgTagIndex >= 0){
                 for(let i = imgTagIndex+9; i < des.length; i++){
                     articleImg += des[i];
-                    if(des[i] === '\"' && des[i+1] === '>'){
+                    if(des[i] === '\'' && des[i+1] === '>'){
                         break;
                     }
                 }
