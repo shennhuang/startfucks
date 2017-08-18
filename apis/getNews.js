@@ -40,7 +40,10 @@ function newsOrg(req, res, newsSite ,subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.send('');
+        }
         let result = [];
         let articles = body.articles;
         for(let i in articles){
@@ -108,7 +111,10 @@ function bbcchinese(req, res, newsSite, subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.send('');
+        }
 
         try {
             body = xmlparser.toJson(body,{object: true});
@@ -141,7 +147,10 @@ function etnews(req, res, newsSite, subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.send('');
+        }
 
         try {
             body = xmlparser.toJson(body,{object: true});
@@ -182,7 +191,10 @@ function appledaily(req, res, newsSite, subSite){
     };
 
     request(options, function(error, response, body){
-        if(error) throw new Error(error);
+        if(error) {
+            console.log(error);
+            return res.send('');
+        }
 
         try {
             body = xmlparser.toJson(body,{object: true});
@@ -216,7 +228,6 @@ function appledaily(req, res, newsSite, subSite){
         Promise
         .all(promiseGroup)
         .then(()=>{
-            //console.log('-appledaily promiseGroup success.');
             return res.status(200).send(result);
         })
         .catch(reason => { 
@@ -228,7 +239,10 @@ function appledaily(req, res, newsSite, subSite){
 }
 function getImg(req, res){
     request({method:'GET',url:req.body.articleUrl},function(error, response, body){
-        if(error) console.log(error);
+        if(error) {
+            console.log(error);
+            return res.send({articleImg:""});
+        }
 
         let articleImg = "";
         try {

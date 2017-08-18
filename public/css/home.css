@@ -13,6 +13,7 @@ html{
 }
 body{
     margin: 0px;
+    font-family:sans-serif,"微軟正黑體";
 }
 header{
     font-size: 25px;
@@ -142,11 +143,10 @@ main{
 }
 .smallPostContent{
     height : calc(17vh + 2px);
-    width: calc((100vw/6) - 10px);
+    width: calc((100vw/6) - 12px);
     padding: 1px;
     margin: 0  2px;
     text-align: left;
-    overflow: auto;
 }
 .smallPostContent pre{
     font-size: 14px;
@@ -155,11 +155,10 @@ main{
 }
 .largePostContent{
     height : calc(17vh + 2px);
-    width: calc((100vw/3) - 10px);
+    width: calc((100vw/3) - 12px);
     padding: 1px;
     margin: 0 2px;
     text-align: left;
-    overflow: auto;
 }
 .largePostContent pre{
     font-size: 14px;
@@ -168,7 +167,7 @@ main{
 }
 .smallPosttextarea{
     height : calc(17vh + 2px);
-    width: calc((100vw/6) - 10px);
+    width: calc((100vw/6) - 12px);
     font-size: 14px;
     line-height: 21px;
     padding: 0;
@@ -179,7 +178,7 @@ main{
 }
 .largePosttextarea{
     height : calc(17vh + 2px);
-    width: calc((100vw/3) - 10px);
+    width: calc((100vw/3) - 12px);
     font-size: 14px;
     line-height: 21px;
     padding: 0;

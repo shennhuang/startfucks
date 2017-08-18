@@ -8,7 +8,10 @@ function getcwbWarning(req, res){
         url
     };
     return request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.send('');
+        }
 
         body = xmlparser.toJson(body,{object: true});
 
