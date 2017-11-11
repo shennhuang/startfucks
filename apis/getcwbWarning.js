@@ -13,7 +13,12 @@ function getcwbWarning(req, res){
             return res.send('');
         }
 
-        body = xmlparser.toJson(body,{object: true});
+        try {
+            body = xmlparser.toJson(body,{object: true});
+        } catch (error) {
+            console.log(error);
+            return res.send('');
+        }
 
         let items = body.rss.channel.item;
         if(items){
