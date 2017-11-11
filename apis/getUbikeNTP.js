@@ -36,7 +36,7 @@ function getUbikeNTP(req, res){
 
             let queryStationID = apidata["ubike(新北)"].list[stationName];
             let stationLoc = {};
-            console.log(body);
+
             for(let v of body){
                 if(v.StationID === queryStationID){
                     stationLoc = v.StationPosition;
