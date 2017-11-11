@@ -3,7 +3,7 @@ var request = require('request');
 var apidata = require('../public/data/apidata.json');
 function getUbikeNTP(req, res){
     let stationName = req.body.stationName;
-    let availabilityUrl = "http://ptx.transportdata.tw/MOTC/v2/Bike/Availability/NewTaipei?&$format=JSON";
+    let availabilityUrl = "http://ptx.transportdata.tw/MOTC/v2/Bike/Availability/NewTaipei";
     let stationUrl = "http://ptx.transportdata.tw/MOTC/v2/Bike/Station/NewTaipei";
     let availabilityOptions = { 
         method: 'GET',
