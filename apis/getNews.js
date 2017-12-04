@@ -183,7 +183,7 @@ function etnews(req, res, newsSite, subSite){
 }
 function appledaily(req, res, newsSite, subSite){
     let newsSiteId = apidata.news.sublist[newsSite][subSite];
-    let url = "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/" + newsSiteId;
+    let url = "https://tw.appledaily.com/rss/newcreate/kind/rnews/type/" + newsSiteId;
     let options = { 
         method: 'GET',
         url,
@@ -199,6 +199,7 @@ function appledaily(req, res, newsSite, subSite){
         try {
             body = xmlparser.toJson(body,{object: true});
         } catch (error) {
+            console.log(error);
             return res.send('');
         }
 
@@ -246,10 +247,10 @@ function getImg(req, res){
 
         let articleImg = "";
         try {
-            let imgTagIndex = body.indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
+            let imgTagIndex = body.indexOf("<img src=\"https://img.appledaily.com.tw/images/ReNews");
 
             if(imgTagIndex >= 0){
-                for(let i = imgTagIndex+12; i < body.length; i++){
+                for(let i = imgTagIndex+10; i < body.length; i++){
                     articleImg += body[i];
                     if(body[i+1] === '\"'){
                         break;
