@@ -1,0 +1,46 @@
+{  
+    "time":{
+        "title":"時間",
+        "time":{
+            "title": "Time",
+            "enable": true
+        }
+    },
+    "weather":{
+        "title":"氣象局",
+        "weather":{
+            "title": "Weather",
+            "enable": true
+        },
+        "中央氣象局警、特報":{
+            "title": "中央氣象局警、特報",
+            "enable": true
+        }
+    },
+    "ubike":{
+        "title":"Ubike",
+        "ubike":{
+            "title": "Ubike",
+            "enable": true
+        },
+        "ubike(新北)":{
+            "title": "Ubike(新北)",
+            "enable": true
+        }
+    },
+    "tools":{
+        "title":"小工具",
+        "news":{
+            "title": "News",
+            "enable": true
+        },
+        "post(S)":{
+            "title": "Post(S)",
+            "enable": true
+        },
+        "post(L)":{
+            "title": "Post(L)",
+            "enable": true
+        }
+    }
+}
