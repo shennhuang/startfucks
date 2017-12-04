@@ -1,5 +1,6 @@
 var express = require('express');
 var apidata = require('../public/data/apidata.json');
+var sheetList = require('../public/data/sheetList.json');
 var db = require('./db');
 
 function home(req, res) {
@@ -39,8 +40,9 @@ function home(req, res) {
     };
 
     db.dbget(getData, function(data){
-        var apiKeys = Object.keys(apidata);
-        res.render('home', {userData: data.Item, gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys,newhand:req.session.newhand});
+        apiKeys = Object.keys(apidata);
+        sheetList = JSON.parse(JSON.stringify(sheetList));
+        res.render('home', {userData: data.Item, gridRowNum:10, csrfToken: req.csrfToken(),apidata,apiKeys,sheetList,newhand:req.session.newhand});
         req.session.newhand = undefined;
         return;
     });

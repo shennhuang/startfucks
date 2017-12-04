@@ -77,41 +77,62 @@
 
         <!--blockList-->
         <div ondragover="allowDrop(event);" class = "blockList" style = "display:none">
-            <table class = "optionsContainer" border= '1'>
-                <% for(let i = 0 ; i < apiKeys.length ; i++) { %>
-                    <tr>
-                        <%  let v = apidata[apiKeys[i]]; %>
-                        <td >
-                            <font><%= v.title %>:</font>
-                        </td>
-                        <td class="blockListItem">
-                            <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
-                                
-                                <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
-                                <% if(v.listType == "select") {
-                                    if(v.subtitle) { %>
-                                    <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
-                                        <% listKeys = Object.keys(v.list);
-                                        for (var j = 0 ; j < listKeys.length ; j ++){ %>
-                                            <option><%= listKeys[j] %></option>
-                                        <% } %>
-                                        <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
-                                    </select>
-                                    <% } %>
-                                <% }else if(v.listType == "input") { %>
-                                    <input></input>
-                                <% } %>
-                                <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
-                                <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
-                                <p hidden="true" name="title" class="itemTitle"></p>
-                                <p hidden="true" name="info">loading...</p>
-                                <script name="callapi"></script>
-                            </div>
-                        </td>
-                    </tr>
+            <div class = "sheetContainer">
+                <li class = "chooseSheet" name = "sheet0" onclick = "switchSheet(0)">時間</li>
+                <li class = "sheet" name = "sheet1" onclick = "switchSheet(1)">氣象局</li>
+                <li class = "sheet" name = "sheet2" onclick = "switchSheet(2)">Ubike</li>
+                <li class = "sheet" name = "sheet3" onclick = "switchSheet(3)">小工具</li>
+            </div>
+
+            <% 
+            let sheetListKeys = Object.keys(sheetList);
+            for (let sheetNum = 0; sheetNum < sheetListKeys.length; sheetNum++) { 
+                if (sheetNum == 0) { %>
+                    <table class = "optionsContainer" name = "optionsContainer<%= sheetNum %>" border= '1' >
+                <% } else { %>
+                    <table class = "optionsContainerHide" name = "optionsContainer<%= sheetNum %>" border= '1' >
                 <% } %>
-            </table>
+                
+                    <% 
+                    let sheetKeys = Object.keys(sheetList[sheetListKeys[sheetNum]]);
+                    console.log(sheetKeys)
+                    for(let i = 1 ; i < sheetKeys.length ; i++) { %>
+                        <tr>
+                            <%  let v = apidata[sheetKeys[i]]; %>
+                            <td class ="optionName" >
+                                <font><%= v.title %>:</font>
+                            </td>
+                            <td class="blockListItem">
+                                <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
+                                    
+                                    <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
+                                    <% if(v.listType == "select") {
+                                        if(v.subtitle) { %>
+                                        <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
+                                            <% listKeys = Object.keys(v.list);
+                                            for (var j = 0 ; j < listKeys.length ; j ++){ %>
+                                                <option><%= listKeys[j] %></option>
+                                            <% } %>
+                                            <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
+                                        </select>
+                                        <% } %>
+                                    <% }else if(v.listType == "input") { %>
+                                        <input></input>
+                                    <% } %>
+                                    <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
+                                    <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>
+                                    <p hidden="true" name="title" class="itemTitle"></p>
+                                    <p hidden="true" name="info">loading...</p>
+                                    <script name="callapi"></script>
+                                </div>
+                            </td>
+                        </tr>
+                    <% } %>
+                </table>
+            <% } %>
+            
         </div>
+        <!--blockList-->
 
         <!--toolbar-->
         <div class = "toolbarContainer">
@@ -228,6 +249,21 @@
             <script>teachPageOnload()</script>
         <% } %>
         <!--teachPage-->
-    </body>
 
+        <script>
+            function switchSheet(n){
+                for (let i = 0 ; i < $(".sheetContainer").children("li").length; i++){
+                    if (i == n) {
+                        $('li[name=sheet' + i +']').attr('class', 'chooseSheet');
+                        $('table[name=optionsContainer' + i +']').attr('class', 'optionsContainer');
+                    } else {
+                        $('li[name=sheet' + i +']').attr('class', 'sheet');
+                        $('table[name=optionsContainer' + i +']').attr('class', 'optionsContainerHide');
+                    }
+                    
+                }
+            }
+            
+        </script>
+    </body>
 </html>
