@@ -10,8 +10,11 @@ var ejs = require('ejs');
 app.set('view engine', 'ejs');
 
 var db = require("./db");
+var config = require('../config.json');
 
 function start(req, res) {
+    var usersTableName = config.aws.dynamodb.usersTableName;
+    var usersDataTableName = config.aws.dynamodb.usersDataTableName;
 
     if(req.method === 'GET'){
         req.session.account = "";
@@ -21,7 +24,7 @@ function start(req, res) {
         let act = req.body.act;
         if(act == "login"){
             let getUsers = {
-                TableName: "startfucks_users",
+                TableName: usersTableName,
                 Key:{
                     "account": req.body.loginAcc,
                 }
@@ -51,7 +54,7 @@ function start(req, res) {
             }
 
             var getData = {
-                TableName: "startfucks_users",
+                TableName: usersTableName,
                 Key:{
                     account:users.account,
                 }
@@ -65,7 +68,7 @@ function start(req, res) {
                 //新增使用者帳號
                 var hashpwd = hash.saltHashPassword(users.pwd);// pwd add salt and hash
                 var userAcc = {
-                    TableName: "startfucks_users",
+                    TableName: usersTableName,
                     Item : {
                         account:users.account,
                         pwd:hashpwd,
@@ -76,7 +79,7 @@ function start(req, res) {
 
                 //新使用者預設資料
                 let userData = {
-                    TableName: "users_data",
+                    TableName: usersDataTableName,
                     Item: {
                         account: users.account,
                         name: users.account,

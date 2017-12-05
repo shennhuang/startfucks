@@ -1,0 +1,12 @@
+{
+    "host":"localhost",
+    "port":"3000",
+    "weatherApiKey":"Your Key",
+    "aws":{
+        "region":"us-west-2",
+        "dynamodb":{
+            "usersTableName": "startfucks_users",
+            "usersDataTableName": "users_data"
+        }
+    }
+}

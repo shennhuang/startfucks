@@ -1,5 +1,6 @@
+var config = require("../config.json");
 var AWS = require("aws-sdk");
-AWS.config.update({region:"us-west-2"});
+AWS.config.update({region: config.aws.region});
 AWS.config.paramValidation = false;
 AWS.config.setPromisesDependency(null);
 var dynamodb = new AWS.DynamoDB();
