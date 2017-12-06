@@ -2,29 +2,26 @@
 function blockListBtnOnclick(){
     hiddenSettingList()
     
-    let status = document.getElementsByClassName("blockList")[0].style.display;
+    let status = document.getElementsByClassName("modalContainer")[2].style.display 
+    console.log("status:"+status)
     if(status == "none"){
         // open
-        document.getElementsByClassName("blockList")[0].style.display = "block"
+        document.getElementsByClassName("modalContainer")[2].style.display = "block"
         document.getElementById('blockListBtn').style.opacity = 1;
         return;
     }
-    // close
-    hiddenBlockList();
 }
 
 function hiddenBlockList(){
-    document.getElementsByClassName("blockList")[0].style.display = "none";    
+    document.getElementsByClassName("modalContainer")[2].style.display = "none";    
     document.getElementById('blockListBtn').style.opacity = 0.5;
 }
 
 function blockListBtnOnmouseover(x){
-    if(document.getElementsByClassName("blockList")[0].style.display == "none" )
         x.style.opacity = 1;
 }
 
 function blockListBtnOnmouseout(x){
-    if(document.getElementsByClassName("blockList")[0].style.display == "none" )
         x.style.opacity = 0.5;
 }
 function settingListBtnOnclick(){

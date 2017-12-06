@@ -116,7 +116,7 @@ main{
     height:calc(75vh + 33px);
     position: fixed;
     bottom:55px;
-    right:0px;
+    right:calc((100vw - 720px)/2);
     border:3px #f6c6ec solid;
     background-color: #ecf6c6;
     opacity:1.0;
@@ -128,8 +128,6 @@ main{
     margin:0;
     border:3px #ecf6c6 solid;
     background-color: #ecf6c6;
-    overflow-x: auto;
-    overflow-y: hidden;
     letter-spacing: -.4em;
     white-space: nowrap;  
 }
@@ -354,3 +352,12 @@ main{
     bottom: 0;
 }
 /*teachPage*/
+
+/* test */
+.blockTest{
+
+    width:calc(100vw / 2);
+    height:calc(100vh /2);
+    background-color: red;
+    margin:0px auto;
+}
