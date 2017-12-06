@@ -40,7 +40,10 @@ function newsOrg(req, res, newsSite ,subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.send('');
+        }
         let result = [];
         let articles = body.articles;
         for(let i in articles){
@@ -108,7 +111,10 @@ function bbcchinese(req, res, newsSite, subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.send('');
+        }
 
         try {
             body = xmlparser.toJson(body,{object: true});
@@ -141,7 +147,10 @@ function etnews(req, res, newsSite, subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.send('');
+        }
 
         try {
             body = xmlparser.toJson(body,{object: true});
@@ -174,7 +183,7 @@ function etnews(req, res, newsSite, subSite){
 }
 function appledaily(req, res, newsSite, subSite){
     let newsSiteId = apidata.news.sublist[newsSite][subSite];
-    let url = "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/" + newsSiteId;
+    let url = "https://tw.appledaily.com/rss/newcreate/kind/rnews/type/" + newsSiteId;
     let options = { 
         method: 'GET',
         url,
@@ -182,11 +191,15 @@ function appledaily(req, res, newsSite, subSite){
     };
 
     request(options, function(error, response, body){
-        if(error) throw new Error(error);
+        if(error) {
+            console.log(error);
+            return res.send('');
+        }
 
         try {
             body = xmlparser.toJson(body,{object: true});
         } catch (error) {
+            console.log(error);
             return res.send('');
         }
 
@@ -216,7 +229,6 @@ function appledaily(req, res, newsSite, subSite){
         Promise
         .all(promiseGroup)
         .then(()=>{
-            //console.log('-appledaily promiseGroup success.');
             return res.status(200).send(result);
         })
         .catch(reason => { 
@@ -228,14 +240,17 @@ function appledaily(req, res, newsSite, subSite){
 }
 function getImg(req, res){
     request({method:'GET',url:req.body.articleUrl},function(error, response, body){
-        if(error) console.log(error);
+        if(error) {
+            console.log(error);
+            return res.send({articleImg:""});
+        }
 
         let articleImg = "";
         try {
-            let imgTagIndex = body.indexOf("<link href=\"http://img.appledaily.com.tw/images/ReNews");
+            let imgTagIndex = body.indexOf("<img src=\"https://img.appledaily.com.tw/images/ReNews");
 
             if(imgTagIndex >= 0){
-                for(let i = imgTagIndex+12; i < body.length; i++){
+                for(let i = imgTagIndex+10; i < body.length; i++){
                     articleImg += body[i];
                     if(body[i+1] === '\"'){
                         break;

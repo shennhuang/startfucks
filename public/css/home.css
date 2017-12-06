@@ -13,6 +13,7 @@ html{
 }
 body{
     margin: 0px;
+    font-family:sans-serif,"微軟正黑體";
 }
 header{
     font-size: 25px;
@@ -45,11 +46,7 @@ main{
     width:50%;
     height:50%;
 }
-.blockListItem{
-    display: grid;
-    grid-template-columns: repeat(2,calc((100vw - 12px) / 6));
-    grid-template-rows: repeat(1,1fr);
-}
+
 .tagRemove{
     margin: 6px 3px;
     float:left;
@@ -116,24 +113,72 @@ main{
     background-color: #3a170f;
 }
 .blockList{
-    width:50vw;
     height:calc(75vh + 33px);
     position: fixed;
     bottom:55px;
-    right:0px;
+    right:calc((100vw - 720px)/2);
     border:3px #f6c6ec solid;
+    background-color: #ecf6c6;
     opacity:1.0;
     overflow: auto;
 }
+.sheetContainer{
+    width:720px;
+    padding:0;
+    margin:0;
+    border:3px #ecf6c6 solid;
+    background-color: #ecf6c6;
+    letter-spacing: -.4em;
+    white-space: nowrap;  
+}
+.sheet,.chooseSheet{
+    width:50px;
+    margin:10px 0;
+    padding:5px 10px;
+    display:inline-block;
+    text-align: center;
+    border-left:solid 2px gray;
+    letter-spacing:normal;
+    list-style-type:none;
+}
+
+.sheet {
+    background-color:inherit
+}
+
+.chooseSheet{
+    background-color: rgba(0,0,0, 0.4);
+}
+
+.sheet:hover{
+    background-color: rgba(0,0,0, 0.2);
+}
+
 .optionsContainer{
     width:720px;
     height:25vh;
     text-align:center;
     vertical-align:middle;
-    background-color:#FFF;
     border:3px #ecf6c6 solid;
     background-color: #ecf6c6;
 }
+
+.optionsContainerHide{
+    display: none;
+}
+
+.optionName{
+    width:calc(100vw / 6);
+    border: 1px gray solid;
+}
+
+.blockListItem{
+    border: 1px gray solid;
+    display: grid;
+    grid-template-columns: repeat(2,calc((100vw - 12px) / 6));
+    grid-template-rows: repeat(1,1fr);
+}
+
 #select{
     font-size: 100%;
 }
@@ -142,11 +187,10 @@ main{
 }
 .smallPostContent{
     height : calc(17vh + 2px);
-    width: calc((100vw/6) - 10px);
+    width: calc((100vw/6) - 12px);
     padding: 1px;
     margin: 0  2px;
     text-align: left;
-    overflow: auto;
 }
 .smallPostContent pre{
     font-size: 14px;
@@ -155,11 +199,10 @@ main{
 }
 .largePostContent{
     height : calc(17vh + 2px);
-    width: calc((100vw/3) - 10px);
+    width: calc((100vw/3) - 12px);
     padding: 1px;
     margin: 0 2px;
     text-align: left;
-    overflow: auto;
 }
 .largePostContent pre{
     font-size: 14px;
@@ -168,18 +211,18 @@ main{
 }
 .smallPosttextarea{
     height : calc(17vh + 2px);
-    width: calc((100vw/6) - 10px);
+    width: calc((100vw/6) - 12px);
     font-size: 14px;
     line-height: 21px;
     padding: 0;
     margin: 0 2px;
-    overflow: auto;
+    overflow: scroll;
     white-space:nowrap;
     resize:none;
 }
 .largePosttextarea{
     height : calc(17vh + 2px);
-    width: calc((100vw/3) - 10px);
+    width: calc((100vw/3) - 12px);
     font-size: 14px;
     line-height: 21px;
     padding: 0;
@@ -309,3 +352,12 @@ main{
     bottom: 0;
 }
 /*teachPage*/
+
+/* test */
+.blockTest{
+
+    width:calc(100vw / 2);
+    height:calc(100vh /2);
+    background-color: red;
+    margin:0px auto;
+}
