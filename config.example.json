@@ -1,6 +1,11 @@
 {
     "host":"localhost",
     "port":"3000",
+    "https":{
+        "enable":false,
+        "port":"8443",
+        "forceHttps":false
+    },
     "weatherApiKey":"Your Key",
     "aws":{
         "region":"us-west-2",

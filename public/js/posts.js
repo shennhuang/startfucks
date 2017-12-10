@@ -55,11 +55,10 @@ function postsGet(title,size){
     }
 }
 function postsPut(title,words){
-    let host = "http://" + window.location.hostname;
-    let port = ":" + window.location.port;
+
     userData.settings[title].postWords = words;
     $.ajax({
-        url: host + port + '/home',
+        url: '/home',
         type: 'POST',
         data:{
             userData,
@@ -67,7 +66,7 @@ function postsPut(title,words){
         },
         error: function(){
             //alert('您的頁面已經過期,請重新登入！');
-            window.open(host + port + '/start', '_self');
+            window.open('/start', '_self');
         },
         success: function(result) {
             if(result) {

@@ -15,4 +15,6 @@ Project. Now no title
 * 天氣資訊是使用 [OpenWeatherMap](https://openweathermap.org/api)，可以註冊一個帳號獲取API KEY
 * 資料庫是使用AWS DynamoDB，可以執行專案內的dynamodb/createtable.js 建立新的table
 * 你可能會需要先建立[AWS configure http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html]
+* 啟用https需要在ssl資料夾下放入私鑰和證書，自行認證可以參考[ssl/README.md](ssl/README.md)
+* 啟用forceHttps表示會強制跳轉使用https
 * npm start 啟動伺服器 (預設使用nodemon啟動，可以在package.json中修改)

@@ -19,6 +19,9 @@ var csrf = require('csurf');
 
 var config = require('./config.json')
 
+var https = require('https');
+var ssl = require('./ssl/ssl.js');
+
 app.use(session({
     secret : 'key',
     cookie: { maxAge: 12 * 60 * 60 * 1000 },
@@ -31,6 +34,15 @@ app.use(compression());
 
 app.use('/', csrf({ cookie: false }) , route);
 
-app.listen(config.port, function(){
-    console.log('server start at  ' + config.host + ':' + config.port + ' - ' + new Date());
+var host = config.host;
+var port = config.port;
+var httpsPort = config.https.port;
+app.listen(port, function(){
+    console.log('server(http ) start at ' + host + ':' + port + ' - ' + new Date());
 });
+
+if (config.https.enable) {
+    https.createServer(ssl.options, app).listen(httpsPort, function() {
+        console.log('server(https) start at ' + host + ':' + httpsPort + ' - ' + new Date());
+    });
+}

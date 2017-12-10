@@ -1,13 +1,11 @@
 function weather(weatherCity, weatherCountry){
 
-    let host = "http://" + window.location.hostname;
-    let port = ":" + window.location.port;
     let element = document.getElementById('Weather_'+weatherCity);
 
     if(element){
 
         $.ajax({
-            url: host + port + '/apis?q=weather',
+            url: '/apis?q=weather',
             type: 'POST',
             data:{
                 weatherCity,
@@ -16,7 +14,7 @@ function weather(weatherCity, weatherCountry){
             },
             error: function(err){
                 //alert('您的頁面已經過期,請重新登入！');
-                window.open(host + port + '/start', '_self');
+                window.open('/start', '_self');
             },
             success: function(result) {
                 if(result) {

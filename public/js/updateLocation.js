@@ -32,10 +32,8 @@ function updateLocation() {
     userData.settings = settings;
 
     //send settings to server for save
-    let host = "http://" + window.location.hostname;
-    let port = ":" + window.location.port;
     $.ajax({
-        url: host + port + '/home',
+        url: '/home',
         type: 'POST',
         data:{
             userData,
