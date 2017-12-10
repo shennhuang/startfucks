@@ -10,7 +10,7 @@ var config = require('./config.json');
 // force use https if config set useHttps
 router.all('*', function(req, res, next) {
     if (!req.secure && config.https.enable && config.https.forceHttps) {
-        return res.redirect('https://' + req.hostname + ':' + config.httpsPort + req.url);
+        return res.redirect('https://' + req.hostname + ':' + config.https.port + req.url);
     }
     return next();
 });
