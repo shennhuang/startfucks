@@ -13,6 +13,10 @@ function callApi(title, subtitle){
         time(subtitle);
         intervalHandlers[title+"_"+subtitle] = setInterval(()=>{time(subtitle)}, 1000);
     }
+    if(title === "Work1O4"){
+        workTime(subtitle);
+        intervalHandlers[title+"_"+subtitle] = setInterval(()=>{workTime(subtitle)}, 1000);
+    }
     if(title === "Ubike"){
         ubike(subtitle);
         intervalHandlers[title+"_"+subtitle] = setInterval(()=>{ubike(subtitle)}, 300000);

@@ -4,6 +4,10 @@
         "time":{
             "title": "Time",
             "enable": true
+        },
+        "Work1O4":{
+            "title" : "work1O4",
+            "enable": true
         }
     },
     "weather":{

@@ -107,11 +107,13 @@ function dropOnItem(event){
             }
             else if(selectItem.querySelector("input")){
                 subtitle = selectItem.querySelector("input").value;
-                console.log({sub : subtitle})
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
                 selectItem.removeChild(selectItem.querySelector("input"));
                 selectItem.id = title + "_" + subtitle;
                 selectItem.removeChild(selectItem.querySelector("font"));
+            }
+            else if(selectItem.querySelector("time")){
+
             }else{                
                 selectItem = document.getElementById(selectItemId).cloneNode(true);
                 selectItem.id = title + "_" + subtitle;
@@ -166,13 +168,13 @@ function dropOnHiddenItem(event){
         document.getElementById(selectItemId).appendChild(infoTemp);
         delete infoTemp;
     }
+
     if(selectItemId && selectItemId !== event.currentTarget.id) {
 
         let selectItemWidth = parseInt((document.getElementById(selectItemId).style.cssText.split(' '))[5]);
         
         //save selectItem in temp
         let selectItem = document.getElementById(selectItemId);
-
         //add item
         if(!settings.hasOwnProperty(selectItemId)){
             
@@ -221,7 +223,6 @@ function dropOnHiddenItem(event){
             }
 
             selectItem.querySelector("script[name=callapi]").innerHTML = "callApi(\"" + title + "\",\"" + subtitle + "\")";
-
 
             //update settings
             settings[selectItem.id] = {

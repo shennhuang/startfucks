@@ -38,6 +38,7 @@
         <script type="text/javascript" src="/js/teachPage.js"></script>
         <script type="text/javascript" src="/js/weather.js"></script>
         <script type="text/javascript" src="/js/time.js"></script>
+        <script type="text/javascript" src="/js/workTime.js"></script>
         <script type="text/javascript" src="/js/ubike.js"></script>
         <script type="text/javascript" src="/js/ubikeNTP.js"></script>
         <script type="text/javascript" src="/js/news.js"></script>
@@ -212,6 +213,8 @@
                                             <% } %>
                                         <% }else if(v.listType == "input") { %>
                                             <input></input>
+                                        <% }else if(v.listType == "time") { %>
+                                            <input class = "timeTest" type = "time" value="09:00"></input>
                                         <% } %>
                                         <i hidden="true" onClick="removeItem(event);" name="remove" title="remove" class="tagRemove">x</i>
                                         <i style="display:none;" class="fa fa-repeat tagReload" aria-hidden="true" onClick="reloadItem(event);" name="reload" title="reload"></i>

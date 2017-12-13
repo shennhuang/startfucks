@@ -9,6 +9,13 @@
         }
     },
 
+    "Work1O4":{
+        "title" : "Work1O4",
+        "subtitle": "1",
+        "gridItemSize": {"width": 1, "height": 1},
+        "listType":"time"
+    },
+
     "weather":{
         "title": "Weather",
         "subtitle": "New Taipei City",

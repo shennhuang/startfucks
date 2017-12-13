@@ -3,7 +3,6 @@ function blockListBtnOnclick(){
     hiddenSettingList()
     
     let status = document.getElementsByClassName("modalContainer")[2].style.display 
-    console.log("status:"+status)
     if(status == "none"){
         // open
         document.getElementsByClassName("modalContainer")[2].style.display = "block"
