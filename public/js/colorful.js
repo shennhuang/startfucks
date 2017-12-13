@@ -68,10 +68,8 @@ function saveColors(){
     loadColors();
 
     //post userData to backend for save
-    let host = "http://" + window.location.hostname;
-    let port = ":" + window.location.port;
     $.ajax({
-        url: host + port + '/home',
+        url: '/home',
         type: 'POST',
         data:{
             userData,
