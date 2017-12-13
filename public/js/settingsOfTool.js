@@ -1,8 +1,6 @@
 function logout(){
     hiddenSettingList();
-    let host = "http://" + window.location.hostname;
-    let port = ":" + window.location.port;
-    document.location.href=host+port;
+    window.open('/start', '_self');
 }
 
 function info(){
@@ -44,10 +42,8 @@ function saveName(){
     
     userData.name = newName;
 
-    let host = "http://" + window.location.hostname;
-    let port = ":" + window.location.port;
     $.ajax({
-        url: host + port + '/home',
+        url: '/home',
         type: 'POST',
         data:{
             userData,

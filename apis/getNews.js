@@ -2,7 +2,7 @@ var config = require('../config.json');
 var apidata = require('../public/data/apidata.json')
 var express = require('express');
 var request = require('request');
-var xmlparser = require('xml2json');
+var xmlparser = require('xml2js');
 function getNews(req, res){
 
     if(req.body.articleUrl){
@@ -69,37 +69,36 @@ function udn(req, res, newsSite, subSite){
     };
 
     request(options, function (error, response, body) {
-        if (error) console.log(error);
-        //rss xml to json object
-        try {
-            body = xmlparser.toJson(body,{object: true});
-        } catch (error) {
+        if (error) {
+            console.log(error);
             return res.send('');
         }
-
-        let result = [];
-        let articles = body.rss.channel.item;
-        for(let i in articles){
-            let articleUrl = articles[i].link;
-            let articleTitle = articles[i].title
-            let articleDate = articles[i].pubDate;
-
-            let articleImg = "";
-            let des = articles[i].description;
-            let imgTagIndex = des.indexOf("<img src=");
-            if(imgTagIndex >= 0){
-                for(let i = imgTagIndex+9; i < des.length; i++){
-                    articleImg += des[i];
-                    if(des[i] === '\'' && des[i+1] === '>'){
-                        break;
+        //rss xml to json object
+        xmlparser.parseString(body, (err, resultObj) => {
+            let result = [];
+            let articles = resultObj.rss.channel[0].item;
+            for(let i in articles){
+                let articleUrl = articles[i].link[0];
+                let articleTitle = articles[i].title[0];
+                let articleDate = articles[i].pubDate[0];
+    
+                let articleImg = "";
+                let des = articles[i].description[0];
+                let imgTagIndex = des.indexOf("<img src=");
+                if(imgTagIndex >= 0){
+                    for(let i = imgTagIndex+9; i < des.length; i++){
+                        articleImg += des[i];
+                        if(des[i] === '\'' && des[i+1] === '>'){
+                            break;
+                        }
                     }
                 }
+                des = des.replace(/<[^>]*>/g,'');
+                result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
             }
-            des = des.replace(/<[^>]*>/g,'');
-            result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
-        }
-
-        return res.status(200).send(result);
+    
+            return res.status(200).send(result);
+        });
     });
 }
 function bbcchinese(req, res, newsSite, subSite){
@@ -116,26 +115,23 @@ function bbcchinese(req, res, newsSite, subSite){
             return res.send('');
         }
 
-        try {
-            body = xmlparser.toJson(body,{object: true});
-        } catch (error) {
-            return res.send('');
-        }
-
-        let result = [];
-        let articles = body.rss.channel.item;
-        for(let i in articles){
-            let articleUrl = articles[i].link;
-            let articleTitle = articles[i].title
-            let articleDate = articles[i].pubDate;
-            let des = articles[i].description;
-            let articleImg = "";
-            if(articles[i].hasOwnProperty("media:thumbnail")){
-                articleImg = articles[i]["media:thumbnail"].url;
+        //rss xml to json object
+        xmlparser.parseString(body, (err, resultObj) => {
+            let result = [];
+            let articles = resultObj.rss.channel[0].item;
+            for(let i in articles){
+                let articleUrl = articles[i].link[0];
+                let articleTitle = articles[i].title[0];
+                let articleDate = articles[i].pubDate[0];
+                let des = articles[i].description[0];
+                let articleImg = "";
+                if(articles[i].hasOwnProperty("media:thumbnail")){
+                    articleImg = articles[i]["media:thumbnail"].url;
+                }
+                result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
             }
-            result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
-        }
-        return res.status(200).send(result);
+            return res.status(200).send(result);
+        });
     });
 }
 function etnews(req, res, newsSite, subSite){
@@ -152,33 +148,30 @@ function etnews(req, res, newsSite, subSite){
             return res.send('');
         }
 
-        try {
-            body = xmlparser.toJson(body,{object: true});
-        } catch (error) {
-            return res.send('');
-        }
-
-        let result = [];
-        let articles = body.rss.channel.item;
-        for(let i in articles){
-            let articleUrl = articles[i]["feedburner:origLink"];
-            let articleTitle = articles[i].title
-            let articleDate = articles[i].pubDate;
-
-            let articleImg = "";
-            let des = articles[i].description;
-            let imgTagIndex = des.indexOf("<img src=");
-            let imgUrlEnd = des.indexOf(".jpg\"")+4;
-            if(imgTagIndex >= 0){
-                for(let i = imgTagIndex+9; i < des.length && i <= imgUrlEnd; i++){
-                    articleImg += des[i];
+        //rss xml to json object
+        xmlparser.parseString(body, (err, resultObj) => {
+            let result = [];
+            let articles = resultObj.rss.channel[0].item;
+            for(let i in articles){
+                let articleUrl = articles[i]["feedburner:origLink"][0];
+                let articleTitle = articles[i].title[0];
+                let articleDate = articles[i].pubDate[0];
+    
+                let articleImg = "";
+                let des = articles[i].description[0];
+                let imgTagIndex = des.indexOf("<img src=");
+                let imgUrlEnd = des.indexOf(".jpg\"")+4;
+                if(imgTagIndex >= 0){
+                    for(let i = imgTagIndex+9; i < des.length && i <= imgUrlEnd; i++){
+                        articleImg += des[i];
+                    }
                 }
+                des = des.replace(/<[^>]*>/g,'');
+                des = des.substring(0, des.indexOf('《詳全文...》'));
+                result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
             }
-            des = des.replace(/<[^>]*>/g,'');
-            des = des.substring(0, des.indexOf('《詳全文...》'));
-            result.push({articleUrl, articleTitle, articleImg, articleDate, articleDes: des});
-        }
-        return res.status(200).send(result);
+            return res.status(200).send(result);
+        });
     });
 }
 function appledaily(req, res, newsSite, subSite){
@@ -196,46 +189,41 @@ function appledaily(req, res, newsSite, subSite){
             return res.send('');
         }
 
-        try {
-            body = xmlparser.toJson(body,{object: true});
-        } catch (error) {
-            console.log(error);
-            return res.send('');
-        }
-
-        let result = [];
-        let articles = body.rss.channel.item;
-        if(!articles){
-            return res.status(200).send('');
-        }
-
-        let promiseGroup = [];
-        //新聞顯示篇數
-        let postNum = (articles.length > 20)? 20: articles.length;
-
-        for(let i = 0; i < postNum; i++){
-            let articleUrl = articles[i].link;
-            let articleTitle = articles[i].title;
-            let articleDate = articles[i].pubDate;
-            let des = articles[i].description;
-            des = des.replace(/<[^>]*>/g,'');
-            des = des.substring(0, des.indexOf('詳全文：'));
-
-            promiseGroup[i] = new Promise((resolve, reject)=>{
-                result.push({articleUrl, articleTitle, articleImg:'click', articleDate, articleDes: des});
-                return resolve();
+        //rss xml to json object
+        xmlparser.parseString(body, (err, resultObj) => {
+            let result = [];
+            let articles = resultObj.rss.channel[0].item;
+            if(!articles){
+                return res.status(200).send('');
+            }
+    
+            let promiseGroup = [];
+            //新聞顯示篇數
+            let postNum = (articles.length > 20)? 20: articles.length;
+    
+            for(let i = 0; i < postNum; i++){
+                let articleUrl = articles[i].link[0];
+                let articleTitle = articles[i].title[0];
+                let articleDate = articles[i].pubDate[0];
+                let des = articles[i].description[0];
+                des = des.replace(/<[^>]*>/g,'');
+                des = des.substring(0, des.indexOf('詳全文：'));
+    
+                promiseGroup[i] = new Promise((resolve, reject)=>{
+                    result.push({articleUrl, articleTitle, articleImg:'click', articleDate, articleDes: des});
+                    return resolve();
+                });
+            }
+            Promise
+            .all(promiseGroup)
+            .then(()=>{
+                return res.status(200).send(result);
+            })
+            .catch(reason => { 
+                console.log(reason);
+                return res.send('');
             });
-        }
-        Promise
-        .all(promiseGroup)
-        .then(()=>{
-            return res.status(200).send(result);
-        })
-        .catch(reason => { 
-            console.log(reason);
-            return res.send('');
-        });
-            
+        }); 
     });
 }
 function getImg(req, res){
