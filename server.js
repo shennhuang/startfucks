@@ -19,8 +19,10 @@ var csrf = require('csurf');
 
 var config = require('./config.json')
 
-var https = require('https');
-var ssl = require('./ssl/ssl.js');
+if (config.https.enable) {
+    var https = require('https');
+    var ssl = require('./ssl/ssl.js');
+}
 
 app.use(session({
     secret : 'key',
