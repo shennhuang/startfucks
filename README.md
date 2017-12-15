@@ -1,4 +1,6 @@
-# startfucks
+# 此專案為CD版本用途(GitHub -> AWS CodeDeploy -> AWS EC2)
+
+## startfucks
 
 Project. Now no title
 專題。標題還沒想
@@ -18,8 +20,6 @@ Project. Now no title
 * 你可能會需要先建立[AWS configure](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 * 啟用https需要在ssl資料夾下放入私鑰和證書(預設不啟用)，自行生成認證可以參考[ssl/README.md](ssl/README.md)
 * 啟用forceHttps表示會強制跳轉使用https(預設不啟用)
-* npm start 啟動伺服器 (預設使用nodemon啟動，可以在package.json中修改，或自行改為forever)
+* npm start 啟動伺服器 (預設使用pm2啟動)，請先安裝
 
 --
-
-## 此專案為CD版本用途(GitHub -> AWS CodeDeploy -> AWS EC2)

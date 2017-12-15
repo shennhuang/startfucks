@@ -5,6 +5,5 @@ cp ../settings/config.json ./config.json
 cp ../settings/ssl/private-key.pem ./ssl/private-key.pem
 cp ../settings/ssl/cert.pem ./ssl/cert.pem
 source /home/ec2-user/.bash_profile
-npm i -g forever
+npm i -g pm2
 npm i
-npm start
