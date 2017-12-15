@@ -40,6 +40,7 @@ var httpsPort = config.https.port || 8443;
 var httpsEnable = config.https.enable || false;
 app.listen(port, function(){
     console.log('server(http ) start at ' + host + ':' + port + ' - ' + new Date());
+    console.log('AWS CodeDeploy version test - V2');
 });
 
 if (httpsEnable) {
