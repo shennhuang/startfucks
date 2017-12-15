@@ -1,0 +1,9 @@
+#!/bin/bash
+#Now at target dir
+cp ../settings/config.json ./config.json
+cp ../settings/ssl/private-key.pem ./ssl/private-key.pem
+cp ../settings/ssl/cert.pem ./ssl/cert.pem
+npm i -g nodemon
+npm i
+screen -S startfucks
+npm start

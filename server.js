@@ -34,14 +34,15 @@ app.use(compression());
 
 app.use('/', csrf({ cookie: false }) , route);
 
-var host = config.host;
-var port = config.port;
-var httpsPort = config.https.port;
+var host = config.host || 'localhost';
+var port = config.port || 8080;
+var httpsPort = config.https.port || 8443;
+var httpsEnable = config.https.enable || false;
 app.listen(port, function(){
     console.log('server(http ) start at ' + host + ':' + port + ' - ' + new Date());
 });
 
-if (config.https.enable) {
+if (httpsEnable) {
     https.createServer(ssl.options, app).listen(httpsPort, function() {
         console.log('server(https) start at ' + host + ':' + httpsPort + ' - ' + new Date());
     });
