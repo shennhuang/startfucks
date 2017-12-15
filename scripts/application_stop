@@ -1,2 +1,2 @@
 #!/bin/bash
-screen -X -S startfucks quit
+forever stop startfucks
