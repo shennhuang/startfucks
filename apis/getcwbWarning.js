@@ -86,6 +86,17 @@ function getcwbWarning(req, res) {
                             keyWord += des[i];
                         }
                         keyWord = keyWord.replace(/：/g, "：<br>");
+                    } else if (des.indexOf('低溫特報') >= 0) {
+                        des = des.replace(/[\s\t]/g, "");
+                        des = des.replace(/\n/g, "<br><br>");
+                        des = des.replace("低溫特報", "----");
+                        let keyWordStart = des.indexOf("低溫特報");
+                        let keyWordEnd = des.length;
+    
+                        for (let i = keyWordStart; i < keyWordEnd; i++) {
+                            keyWord += des[i];
+                        }
+                        keyWord = keyWord.replace(/：/g, "：<br>");
                     } else {
                         keyWord = des;
                     }
