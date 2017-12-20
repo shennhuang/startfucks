@@ -9,7 +9,8 @@ var config = require('./config.json');
 
 // force use https if config set useHttps
 router.all('*', function(req, res, next) {
-    if (!req.secure && config.https.enable && config.https.forceHttps) {
+    // use X-Forwarded-Proto to check protocol between user and load balancer
+    if (!req.secure && (req.get('X-Forwarded-Proto') !== 'https') && config.https.enable && config.https.forceHttps) {
         return res.redirect('https://' + req.hostname + ':' + config.https.port + req.url);
     }
     return next();
