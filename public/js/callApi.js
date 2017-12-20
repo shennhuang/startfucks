@@ -39,4 +39,8 @@ function callApi(title, subtitle){
     if(title === "Post(L)"){
         postsGet(subtitle,"L");
     }
+    if(title === "空氣品質指標(AQI)"){
+        cwbAQI(subtitle);
+        intervalHandlers[title+"_"+subtitle] = setInterval(()=>{cwbAQI(subtitle)}, 1800000);
+    }
 }

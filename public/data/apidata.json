@@ -13,7 +13,10 @@
         "title" : "Work1O4",
         "subtitle": "1",
         "gridItemSize": {"width": 1, "height": 1},
-        "listType":"time"
+        "listType":"time",
+        "list":{
+            "null" : "null"
+        }
     },
 
     "weather":{
@@ -923,7 +926,7 @@
         "gridItemSize":{"width":1, "height":1},
         "listType":"input",
         "list":{
-            "null" : "nothing"
+            "null" : "null"
         }
     },
     "post(L)":{
@@ -932,7 +935,7 @@
         "gridItemSize":{"width":2, "height":1},
         "listType":"input",
         "list":{
-            "null" : "nothing"
+            "null" : "null"
         }
     },
     "中央氣象局警、特報":{
@@ -943,5 +946,123 @@
         "list":{
             "null":"null"
         }
+    },
+    "空氣品質指標(aqi)":{
+        "title":"空氣品質指標(AQI)",
+        "subtitle":"北部",
+        "gridItemSize":{"width":2, "height":1},
+        "listType":"select",
+        "list":{
+            "北部":"North",
+            "竹苗":"Chu-Miao",
+            "中部":"Central",
+            "雲嘉南":"Yun-Chia-Nan",
+            "高屏":"KaoPing",
+            "宜蘭":"Yilan",
+            "花東":"Hua-Tung",
+            "離島":"Island",
+            "監測車":"Mobile"
+        },
+        "sublist":{
+            "北部":{
+                "富貴角":"FugueiCape",
+                "陽明":"Yangming",
+                "萬里":"Wanli",
+                "淡水":"Tamsui",
+                "基隆":"Keelung",
+                "士林":"Shilin",
+                "林口":"Linkou",
+                "三重":"Sanchong",
+                "菜寮":"Cailiao",
+                "汐止":"Xizhi",
+                "大同":"Datong",
+                "中山":"Zhongshan",
+                "大園":"Dayuan",
+                "松山":"Songshan",
+                "萬華":"Wanhua",
+                "新莊":"Xinzhuang",
+                "觀音":"Guanyin",
+                "古亭":"Guting",
+                "永和":"Yonghe",
+                "板橋":"Banqiao",
+                "桃園":"Taoyuan",
+                "土城":"Tucheng",
+                "新店":"Xindian",
+                "平鎮":"Pingzhen",
+                "中壢":"Zhongli",
+                "龍潭":"Longtan"
+            },
+            "竹苗":{
+                "湖口":"Hukou",
+                "新竹":"Hsinchu",
+                "竹東":"Zhudong",
+                "頭份":"Toufen",
+                "苗栗":"Miaoli",
+                "三義":"Sanyi",
+                "豐原":"Fengyuan"
+            },
+            "中部":{
+                "沙鹿":"Shalu",
+                "西屯":"Xitun",
+                "忠明":"Zhongming",
+                "線西":"Xianxi",
+                "大里":"Dali",
+                "彰化":"Changhua",
+                "埔里":"Puli",
+                "二林":"Erlin",
+                "南投":"Nantou",
+                "竹山":"Zhushan"
+            },
+            "雲嘉南":{
+                "崙背":"Lunbei",
+                "麥寮":"Mailiao",
+                "臺西":"Taixi",
+                "斗六":"Douliu",
+                "新港":"Xingang",
+                "朴子":"Puzi",
+                "嘉義":"Chiayi",
+                "新營":"Xinying",
+                "善化":"Shanhua",
+                "安南":"Annan",
+                "臺南":"Tainan"
+            },
+            "高屏":{
+                "美濃":"Meinong",
+                "橋頭":"Qiaotou",
+                "楠梓":"Nanzi",
+                "仁武":"Renwu",
+                "左營":"Zuoying",
+                "屏東":"Pingtung",
+                "前金":"Qianjin",
+                "鳳山":"Fengshan",
+                "復興":"Fuxing",
+                "前鎮":"Qianzhen",
+                "小港":"Xiaogang",
+                "大寮":"Daliao",
+                "潮州":"Chaozhou",
+                "林園":"Linyuan",
+                "恆春":"Hengchun"
+            },
+            "宜蘭":{
+                "宜蘭":"Yilan",
+                "冬山":"Dongshan"
+            },
+            "花東":{
+                "花蓮":"Hualien",
+                "關山":"Guanshan",
+                "臺東":"Taitung"
+            },
+            "離島":{
+                "馬祖":"Matsu",
+                "金門":"Kinmen",
+                "馬公":"Magong"
+            },
+            "監測車":{
+                "彰化(大城)":"Car2",
+                "屏東(琉球)":"Car4"
+            }
+            
+        }
+
     }
 }

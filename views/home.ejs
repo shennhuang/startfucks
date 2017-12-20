@@ -44,6 +44,7 @@
         <script type="text/javascript" src="/js/news.js"></script>
         <script type="text/javascript" src="/js/posts.js"></script>
         <script type="text/javascript" src="/js/cwbWarning.js"></script>
+        <script type="text/javascript" src="/js/cwbAQI.js"></script>
         
         <!--<script>console.log('%c看屁 (ﾒ ﾟ皿ﾟ)ﾒ', 'color: #f00; font-size: 90px;');</script>-->
     </head>
@@ -193,7 +194,7 @@
                         let sheetKeys = Object.keys(sheetList[sheetListKeys[sheetNum]]);
                         for(let i = 1 ; i < sheetKeys.length ; i++) { %>
                             <tr>
-                                <%  let v = apidata[sheetKeys[i]]; %>
+                                <%  let v = apidata[sheetKeys[i]];%>
                                 <td class ="optionName" >
                                     <font><%= v.title %>:</font>
                                 </td>
@@ -201,16 +202,18 @@
                                     <div id="<%= v.title + "_default" %>" name="<%= v.title %>" ondrop="dropOnItem(event);" draggable="true" ondragstart="itemDrag(event);" class="gridItem" style="grid-column:span <%= v.gridItemSize.width %>; grid-row:span <%= v.gridItemSize.height %>;">
                                         
                                         <font name="selectTitle" class="itemTitle"><%= (v.subtitle)?(v.title + "-"):(v.title) %></font>
+
                                         <% if(v.listType == "select") {
                                             if(v.subtitle) { %>
-                                            <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= apiKeys[i] %>Select" >
+                                            <select id="select" name="select" onchange="addSubselect(event)"  class = "<%= sheetKeys[i] %>Select" >
                                                 <% listKeys = Object.keys(v.list);
                                                 for (var j = 0 ; j < listKeys.length ; j ++){ %>
                                                     <option><%= listKeys[j] %></option>
                                                 <% } %>
-                                                <script>addSubselect({currentTarget : document.getElementsByClassName("<%= apiKeys[i] %>" + "Select")[0]});</script>
+                                                <script>addSubselect({currentTarget : document.getElementsByClassName("<%= sheetKeys[i] %>" + "Select")[0]});</script>
                                             </select>
                                             <% } %>
+                                            
                                         <% }else if(v.listType == "input") { %>
                                             <input></input>
                                         <% }else if(v.listType == "time") { %>

@@ -235,6 +235,26 @@ main{
     margin: 0 auto;
 }
 
+/* AQI */
+.AQIValueDiv{
+    height: 5vh;
+    width:70%;
+    margin:10px auto;
+    font-size: 25px;
+    line-height:6vh;
+    vertical-align: center;
+     
+}
+.PM25ValueDiv{
+    height: 5vh;
+    width:70%;
+    margin:10px auto;
+    font-size: 25px;
+    line-height:5vh;
+    vertical-align: center;
+}
+/* AQI */
+
 /*modal*/
 .modalContainer{
     width:100%;

@@ -16,18 +16,16 @@ function workTime(onWorkTime){
 
             onWorkTime = new Date(nowDate.toLocaleDateString() + " " + onWorkTime).getTime();
             let nodTime = new Date(nowDate.toLocaleDateString() + " " + "12:0:0").getTime();
-            let toNodTime = onWorkTime - nodTime;
             let offWorkTime = new Date(onWorkTime + 9*60*60*1000).getTime();
             let nowTime = Date.now();
-
             if(1 <= today && today <= 5){
-                if(onWorkTime < nowTime && nowTime < toNodTime){
+                if(onWorkTime < nowTime && nowTime < nodTime){
                     element.querySelector('p[name=info]').innerHTML += "距離午休剩餘:" 
-                    diffTime = toNodTime - nowTime;
-                }else if(toNodTime <= nowTime && nowTime < toNodTime + 60*60*1000){
+                    diffTime = nodTime - nowTime;
+                }else if(nodTime <= nowTime && nowTime < nodTime + 60*60*1000){
                     element.querySelector('p[name=info]').innerHTML += "距離午休結束:"
-                    diffTime = toNodTime + 60*60*1000 - nowTime;
-                }else if(toNodTime + 60*60*1000 <= nowTime && nowTime < offWorkTime){
+                    diffTime = nodTime + 60*60*1000 - nowTime;
+                }else if(nodTime + 60*60*1000 <= nowTime && nowTime < offWorkTime){
                     //星期五距離下班改為距離放假
                     if(today == 5){
                         element.querySelector('p[name=info]').innerHTML += "距離放假剩餘:";

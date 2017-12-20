@@ -1,11 +1,13 @@
-var express = require('express');
-var getWeather = require('../apis/getWeather');
-var getUbike = require('../apis/getUbike');
-var getUbikeNTP = require('../apis/getUbikeNTP');
-var getNews = require('../apis/getNews');
-var getcwbWarning = require('../apis/getcwbWarning');
+let express = require('express');
+let getWeather = require('../apis/getWeather');
+let getUbike = require('../apis/getUbike');
+let getUbikeNTP = require('../apis/getUbikeNTP');
+let getNews = require('../apis/getNews');
+let getcwbWarning = require('../apis/getcwbWarning');
+let getcwbAQI = require('../apis/getcwbAQI');
 
 function apis(req, res){
+    
     if(req.query.q === 'weather'){     
         return getWeather(req, res);
     }
@@ -20,6 +22,9 @@ function apis(req, res){
     }
     if(req.query.q === 'cwbWarning'){
         return getcwbWarning(req, res);
+    }
+    if(req.query.q === 'AQI'){
+        return getcwbAQI(req, res);
     }
 }
 
